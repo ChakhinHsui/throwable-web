@@ -18,10 +18,10 @@ import org.nutz.ioc.loader.annotation.IocBean;
 public class ApiDirUtil {
 
 	@Inject
-	private PropertiesProxy apiConfig;
+	private PropertiesProxy config;
 
 	public String getValue(String key) {
-		String val = apiConfig.get(key);
+		String val = config.get(key);
 		return val == null ? "" : val;
 	}
 }

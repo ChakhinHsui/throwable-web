@@ -19,5 +19,5 @@ var ioc = {
 			maxIdle : "50",
 			maxActive : "60"
 		}
-	},
+	}
 };

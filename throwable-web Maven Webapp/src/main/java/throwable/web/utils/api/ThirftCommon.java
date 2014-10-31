@@ -26,7 +26,7 @@ public class ThirftCommon {
 	public static final String GET_USER_INFO = "user.getUserInfo";//获取用户信息
 	public static final String USER_LOGIN = "user.login"; //用户登陆
 	public static final String USER_REGISTER = "user.register";  //用户注册
-	
+	public static final String QUESTION_GET_QUESTION = "question.getQuestion";
 
 	/**
 	 * 根据传递参数 组织成 thrift需要的参数 MAP， 省去每次都写一个初始化MAP的工作
