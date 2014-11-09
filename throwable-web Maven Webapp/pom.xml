@@ -36,7 +36,7 @@
          <scope>system</scope>  
          <systemPath>${project.basedir}/src/main/lib/throwable-framework.jar</systemPath>  
     </dependency>
-    <dependency>
+ 	   <dependency>
     	<groupId>org.nutz</groupId>
     	<artifactId>nutz</artifactId>
     	<version>1.b.50</version>

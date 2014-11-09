@@ -11,7 +11,7 @@ import org.nutz.mvc.annotation.Param;
 @At("/question")
 @IocBean
 public class QuestionController {
-//
+
 	@Inject
 	private QuestionService questionService;
 	

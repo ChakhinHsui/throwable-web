@@ -27,11 +27,6 @@ public class QuestionService {
 	private ThirftCommon thirftCommon;
 	
 	public Map<String, String> getQuestion(int id){
-		try {
-			return thirftCommon.getResult(thriftPools, ThirftCommon.QUESTION_GET_QUESTION, thirftCommon.initParams("id", 100), 100).getRetMap();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return null;
 	}
 }

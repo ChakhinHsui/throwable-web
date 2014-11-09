@@ -1,5 +1,6 @@
 package throwable.web;
 
+import org.nutz.ioc.Ioc;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
 import org.nutz.mvc.annotation.IocBy;
@@ -34,7 +35,11 @@ import org.nutz.mvc.ioc.provider.ComboIocProvider;
 @SetupBy(MainModule.class)
 public class MainModule implements Setup{
 	
-	public void init(NutConfig arg0) {
+	private Ioc ioc;
+	
+	public void init(NutConfig config) {
+		ioc = config.getIoc();
+		ioc.get(WebConf.class).run(ioc);
 	}
 
 	public void destroy(NutConfig arg0) {

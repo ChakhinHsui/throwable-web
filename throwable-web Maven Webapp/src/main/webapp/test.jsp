@@ -23,12 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script>
 	$(document).ready(function(){
-			alert("oookk");
-			$.post("question/getQuestion", {id: 1000}, function(result){
+		/*	$.post("question/getQuestion", {id: 1000}, function(result){
 				alert("oookk");
 				alert(result);
 				$("#test").html(result.Hello + " <br>" + result.id);
-				}, "json");
+				}, "json");*/
 	});
 	</script>
 
@@ -36,6 +35,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     This is my JSP page. <br><br>
-    <div id="test"></div>
+    <div id="test">
+    	<form action="user/register" method="post">
+    		用户名: <input type="text" id="username" name="username" />
+    		<br>
+    		邮箱: <input type="text" id="email" name="email" />
+    		<br>
+    		昵称: <input type="text" id="nickname" name="nickname" />
+    		<br>
+    		密码: <input type="password" id="password" name="password" />
+    		<br>
+    		<input type="submit" value="注册" /> 
+    	</form>
+    </div>
   </body>
 </html>
