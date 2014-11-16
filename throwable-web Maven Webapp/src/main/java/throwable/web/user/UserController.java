@@ -46,6 +46,4 @@ public class UserController {
 		}
 		return userService.userLogin(username, password, email, nickname, AddressUtil.getIpAddr(req));
 	}
-	
-	
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <title>questionAdd.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link rel="Bookmark" href="favicon.ico" >
+	<link rel="Shortcut Icon" href="faviconte.ico" />
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<link href="umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="umeditor/third-party/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="umeditor/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="umeditor/umeditor.min.js"></script>
+    <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+	
+  </head>
+  
+  <body>
+  		<form id="question">
+  			问题名称:<br>
+  			<input type="text" id="name" style="width: 600px;" /><br>
+  			问题描述：<br>
+  			<script type="text/plain" id="myEditor" style="width:728px;height:240px;">
+
+			</script>
+			<br>
+  			问题类型:<select id="type">
+  						<option value="1">公开</option>
+  						<option value="2">私有</option>
+  					</select>
+  					<br>
+  			分类id:<input type="text" id="kind_id" /><br>
+  			用户id:<input type="text" id="user_id" /><br>
+			<button>添加问题</button>  		
+  		</form>
+  		
+  		<script type="text/javascript">
+  		
+  		$("#question").submit(function(){
+  			alert(UM.getEditor('myEditor').getContent());
+  			var jsonObject = {
+  					question_name:$("#name").val(),
+  					question_description:UM.getEditor('myEditor').getContent(),
+  					question_type:$("#type").val(),
+  					kind_id:$("#kind_id").val(),
+  					user_id:$("#user_id").val()
+  			};
+  			$.ajax({
+  				type: "post",
+  				url: "question/addQuestion",
+  				data: jsonObject,
+  				success: function(data){
+  					alert(data);
+  				}
+  			});
+  		    return false;
+  		});
+	
+	var um = UM.getEditor('myEditor',{
+		 toolbar:[
+          'source | undo redo | bold italic underline strikethrough | forecolor backcolor | removeformat |',
+           'insertorderedlist insertunorderedlist ',
+           '| justifyleft justifycenter justifyright justifyjustify |',
+           'link unlink | emotion image',
+           '| horizontal preview fullscreen',
+       ]
+		});
+	
+	</script>
+  </body>
+</html>
