@@ -29,7 +29,7 @@
 <header class="header">
   <nav class="mainnav cl">
     <ul class="cl">
-      <li class="current"><a href="#">首页</a></li>
+      <li class="current"><a href="index.html">首页</a></li>
       <li><a href="#">核心</a></li>
       <li><a href="#">扩展</a></li>
       <li><a href="#">案例</a></li>
@@ -59,99 +59,11 @@
     <div class="span-15">
       <div id="tab_demo" class="HuiTab">
         <div class="tabBar cl"><span>最新的</span><span>最热的</span><span>等你的</span></div>
-        <div class="tabCon"> 
+        <div class="tabCon" id="latest_list"> 
           
           <!--问题重复的部分--开始-->
-          <div class="bk-gray-xm">
-            <div class="main-all-list-item">
-              <div class="main-left-3thing">
-                <div class="main-left-inside text-c">1<br/>
-                  赞同</div>
-                <div class="main-left-inside text-c box-shadow answer-color">4<br/>
-                  回答</div>
-                <div class="main-left-inside text-c">13<br/>
-                  浏览</div>
-              </div>
-              <div class="main-right">
-                <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title">使用 sbt 的 eclipse 插件配置开发环境碰到的问题</div>
-                  <a href="#"><span class="main-right-bottom-tag ml-10">java</span></a> 
-                  <a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a> </div>
-                <div class="main-right-same">
-                  <div class="main-right-top-left f-13 c-gray">xpf</div>
-                  <div class="main-right-top-left pl-10 f-13 c-gray">1分钟前回答</div>
-                </div>
-              </div>
-            </div>
-          </div>
           <!--问题重复的部分--结束-->
           
-          <div class="bk-gray-xm">
-            <div class="main-all-list-item">
-              <div class="main-left-3thing">
-                <div class="main-left-inside text-c">10<br/>
-                  赞同</div>
-                <div class="main-left-inside text-c box-shadow answer-color">20<br/>
-                  回答</div>
-                <div class="main-left-inside text-c">35<br/>
-                  浏览</div>
-              </div>
-              <div class="main-right">
-                <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title">求推荐PHP框架，本人有一定PHP基础。</div>
-                  <a href="#"><span class="main-right-bottom-tag ml-10">php</span></a> 
-                  <a href="#"><span class="main-right-bottom-tag ml-10">框架</span></a> </div>
-                <div class="main-right-same">
-                  <div class="main-right-top-left f-13 c-gray">xiaomo</div>
-                  <div class="main-right-top-left pl-10 f-13 c-gray">12分钟前回答</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bk-gray-xm">
-            <div class="main-all-list-item">
-              <div class="main-left-3thing">
-                <div class="main-left-inside text-c">11<br/>
-                  赞同</div>
-                <div class="main-left-inside text-c box-shadow answer-color">12<br/>
-                  回答</div>
-                <div class="main-left-inside text-c">13<br/>
-                  浏览</div>
-              </div>
-              <div class="main-right">
-                <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title">如何从本机传送一个目录到docker image中</div>
-                  <a href="#"><span class="main-right-bottom-tag ml-10">docker</span></a> 
-                  <a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a> </div>
-                <div class="main-right-same">
-                  <div class="main-right-top-left f-13 c-gray">xiaomo</div>
-                  <div class="main-right-top-left pl-10 f-13 c-gray">12分钟前回答</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bk-gray-xm">
-            <div class="main-all-list-item">
-              <div class="main-left-3thing">
-                <div class="main-left-inside text-c">10<br/>
-                  赞同</div>
-                <div class="main-left-inside text-c box-shadow answer-color">2<br/>
-                  回答</div>
-                <div class="main-left-inside text-c">3<br/>
-                  浏览</div>
-              </div>
-              <div class="main-right">
-                <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title">使用 sbt 的 eclipse 插件配置开发环境碰到的问题</div>
-                  <a href="#"><span class="main-right-bottom-tag ml-10">java</span></a> 
-                  <a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a> </div>
-                <div class="main-right-same">
-                  <div class="main-right-top-left f-13 c-gray">xiaomo</div>
-                  <div class="main-right-top-left pl-10 f-13 c-gray">12分钟前回答</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <!--最新--结束-->
         <div class="tabCon">内容二</div>
@@ -246,21 +158,29 @@
 <script type="text/javascript">
 	$(function(){
 		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
-		$.ajax({
-			type: "post",
-			url: "question/getPublicQuestion",
-			data: {},
-			success: function(data){
-				var obj = eval('(' + data + ')');
-				alert(obj.questions.length);
-			}
-		});
-		
 		$.post("question/getPublicQuestion", 
 			{}, 
 			function(result){
-				var obj = eval('(' + result.questions + ')')
-				alert(JSON.stringify(obj));
+				var obj = eval('(' + result.questions + ')');
+				$("#latest_list").empty();
+				for(var i = 0; i < obj.length; i++){
+					var str = '<div class="bk-gray-xm">';
+					str += '<div class="main-all-list-item">';
+					str += '<div class="main-left-3thing">';
+					str += '<div class="main-left-inside text-c">'+obj[i].agrees+'<br/>赞同</div>';
+					str += '<div class="main-left-inside text-c box-shadow answer-color">'+obj[i].answers+'<br/>回答</div>';
+					str += '<div class="main-left-inside text-c">'+obj[i].viewers+'<br/>浏览</div>';
+					str += ' </div>';
+					str += ' <div class="main-right">';
+					str += ' <div class="main-right-same">';
+					str += '<div class="f-16 main-right-bottom-title"><a href="details.html?qid='+obj[i].id+'">'+obj[i].question_name+'</a></div>';
+					str += '<a href="#"><span class="main-right-bottom-tag ml-10">java</span></a>';
+					str += '<a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a> </div>';
+					str += '<div class="main-right-same">';
+					str += '<div class="main-right-top-left f-13 c-gray">'+obj[i].username+'</div>';
+					str += '<div class="main-right-top-left pl-10 f-13 c-gray">'+obj[i].create_time+'提问</div></div></div></div></div>';
+					$("#latest_list").append(str);
+				}
 			}, "json");
 		
 	}); 

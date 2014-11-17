@@ -27,10 +27,15 @@ public class QuestionService {
 	@Inject
 	private ThirftCommon thirftCommon;
 	
-	public Map<String, String> getQuestion(int id){
-		return null;
-	}
-	
+	/**
+	 * 添加问题
+	 * @param question_name          问题名称
+	 * @param question_description   问题具体描述
+	 * @param question_type          问题类型(1公开 0私有)
+	 * @param kind_id                分类id
+	 * @param user_id                用户id
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	public Map addQuestion(String question_name,
 			String question_description,
@@ -54,11 +59,37 @@ public class QuestionService {
 		return map;
 	}
 	
+	/**
+	 * 获得所有的公开的问题 用于首页显示
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	public Map getPublicQuestion(){
 		Map map = null;
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_ALL_QUESTION, thirftCommon.initParams("question_type", 1), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 根据问题id获得问题  用于详细页显示
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map getOneQuestion(int questionId){
+		System.out.println(questionId);
+		Map map = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_ONE_QUESTION, thirftCommon.initParams("id", questionId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
 			}else{

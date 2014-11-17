@@ -35,7 +35,7 @@
 <header class="header">
   <nav class="mainnav cl">
     <ul class="cl">
-      <li class="current"><a href="#">首页</a></li>
+      <li class="current"><a href="index.html">首页</a></li>
       <li><a href="#">核心</a></li>
       <li><a href="#">扩展</a></li>
       <li><a href="#">案例</a></li>
@@ -53,13 +53,13 @@
       <!--以下为面包导航--end-->
       <div class="span-15 mt-5"> 
         <!--以下为问题的标题--start-->
-        <h3><a href="#">PHPer成长路上的一些困惑</a></h3>
+        <h3><a href="#" id="question_title">PHPer成长路上的一些困惑</a></h3>
         <!--  <a href="#"><span class="main-right-bottom-tag ml-10 l">php</span></a> 
             <a href="#"><span class="main-right-bottom-tag ml-10 l">框架</span></a> </div>--> 
         <!--以下为问题的标题--end-->
-        <p class="c-green l">xiaomo</p>
+        <p class="c-green l" id="question_author">xiaomo</p>
         <p class="l pl-10"><strong>24</strong></p>
-        <p class="l pl-10 c-999">3天前提问</p>
+        <p class="l pl-10 c-999" id="question_time">3天前提问</p>
       </div>
       <div class="span-5 mt-5"> 
         <!--以下为右边的按钮--start-->
@@ -88,7 +88,7 @@
           <a href="#">
           <div class="upordown-down box-shadow"></div>
           </a> </div>
-        <div class="pl-50">
+        <div class="pl-50" id="question_description">
           <p> 今天开始使用框架来进行开发，框架的手册也看了很大一部分，感觉没什么难度的！
             但是当我创建一个应用后，我想写一个用户登录的页面的时候，我竟然迷茫了……不知所措！
             
@@ -270,15 +270,34 @@
     var um = UM.getEditor('myEditor',{
 		 toolbar:[
            'source | undo redo | bold italic underline strikethrough | forecolor backcolor | removeformat |',
-            'insertorderedlist insertunorderedlist ',
+            'insertorderedlist insertunorderedlist',
             '| justifyleft justifycenter justifyright justifyjustify |',
             'link unlink | emotion image',
             '| horizontal preview fullscreen',
         ]
 		});
+ 
+    (function($){
+    	$.getUrlParam= function(name){
+    		var reg = new RegExp("(^|&)" + name +"=([^&]*)(&|$)");
+    		var r = window.location.search.substr(1).match(reg);
+    		if (r!=null) return unescape(r[2]); return null;
+    	};
+    })(jQuery);
 
-$(function(){
-	$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+	$(function(){
+		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		var jsonObject = {
+				questionId:$.getUrlParam("qid")
+		};
+		$.post("question/getOneQuestion", 
+				jsonObject, 
+				function(result){
+					$("#question_title").html(result.question_name);
+					$("#question_description").html(result.question_description);
+					$("#question_author").html(result.username);
+					$("#question_time").html(result.create_time);
+				}, "json");
 	}); 
 </script>
 </body>

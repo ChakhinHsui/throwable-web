@@ -27,6 +27,16 @@ public class QuestionController {
 	
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
+	@At("/getOneQuestion")
+	public Map getOneQuestion(@Param("questionId") int questionId){
+		if(questionId < 0){
+			return BackTool.errorInfo("0200", "问题id不合法");
+		}
+		return questionService.getOneQuestion(questionId);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
 	@At("/addQuestion")
 	public Map addQuestion(@Param("question_name") String question_name,
 			@Param("question_description") String question_description,

@@ -31,6 +31,10 @@ public class ThirftCommon {
 	/********************** 问题相关接口 ***************************/
 	public static final String Q_ADD_QUESTION = "question.addQuestion";   //添加问题
 	public static final String Q_GET_ALL_QUESTION = "question.getQuestions";  //查询所有公开的问题
+	public static final String Q_GET_ONE_QUESTION = "question.getOneQuestion"; //根据id查询问题 用户详细页显示
+	
+	/********************** 答案相关接口 ***************************/
+	public static final String A_ADD_ANSWER = "answer.addAnswer";  //添加答案
 	
 	
 	/**
