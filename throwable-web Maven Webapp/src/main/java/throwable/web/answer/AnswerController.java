@@ -39,4 +39,14 @@ public class AnswerController {
 		}
 		return answerService.addAnswer(question_id, answer_abstract, answer_description, user_id);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getAnswers")
+	public Map getAnswerByQuestionId(@Param("questionId") int questionId){
+		if(questionId < 0){
+			return BackTool.errorInfo("030201", "问题id不合法");
+		}
+		return answerService.getAnswerByQuestionId(questionId);
+	}
 }

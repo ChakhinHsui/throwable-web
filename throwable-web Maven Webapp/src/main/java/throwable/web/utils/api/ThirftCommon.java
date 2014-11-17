@@ -35,7 +35,7 @@ public class ThirftCommon {
 	
 	/********************** 答案相关接口 ***************************/
 	public static final String A_ADD_ANSWER = "answer.addAnswer";  //添加答案
-	
+	public static final String A_GET_ANSWER = "answer.getAnswer";  //根据问题id获得answer 用于详细页显示
 	
 	/**
 	 * 根据传递参数 组织成 thrift需要的参数 MAP， 省去每次都写一个初始化MAP的工作

@@ -86,7 +86,6 @@ public class QuestionService {
 	 */
 	@SuppressWarnings("rawtypes")
 	public Map getOneQuestion(int questionId){
-		System.out.println(questionId);
 		Map map = null;
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_ONE_QUESTION, thirftCommon.initParams("id", questionId), 100);

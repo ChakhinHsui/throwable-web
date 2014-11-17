@@ -120,59 +120,9 @@
       </div>
       <!--问题部分--end--> 
       <!--答案部分--start-->
-      <div class="bk-gray-bottom pt-20">
-        <div class="upordown box-shadow l"> <a href="#">
-          <div class="upordown-up box-shadow"></div>
-          </a>
-          <div class="upordown-middle text-c">2</div>
-          <a href="#">
-          <div class="upordown-down box-shadow"></div>
-          </a> </div>
-        <div class="l pl-10">
-          <p class="c-green l">zengw</p>
-          <p class="l pl-10"><strong>54</strong></p>
-          <p class="l pl-10 c-999">2天前回答</p>
-        </div>
-        <div class="pl-50  pt-40">
-          <p> 你这傻B，学个屁php呀，还跟学java吧！！登录的部分：
-            表单用post提交用户名和密码，先假设你在数据存的密码是通过用户名和密码MD5后得来的，把表单提交过来的用户名和密码MD5后和数据库对比，如果一样，就成功啦，然后创建一个session在所有的页面来维持登录状态，Session关掉页面就没有了，这时候就可以用cookie了，用法就不说了。
-            
-            看错了，关于文件组织的，看你用的什么框架应该有文档，都是MVC,八九不离十就是控制器，模型，视图，这些英文单词也很清楚啦 </p>
-        </div>
+      <div id="answer_area">
       </div>
-	  
-	  
-	  
-	        <div class="bk-gray-bottom pt-20">
-        <div class="upordown box-shadow l"> <a href="#">
-              <div class="upordown-up box-shadow"></div>
-              </a>
-              <div class="upordown-middle text-c">29</div>
-              <a href="#">
-              <div class="upordown-down box-shadow"></div>
-              </a> 
-          <!--官方认定的答案--start-->
-          <div class="accept"></div>
-          <!--官方认定的答案--end-->
-          </div>
-          
-        <div class="l pl-10">
-          <p class="c-green l">xpf</p>
-          <p class="l pl-10"><strong>214</strong></p>
-          <p class="l pl-10 c-999">1天前回答</p>
-          <p class="l pl-10 c-red"><strong>该答案已被提问者采纳</strong></p>
-          
-        </div>
-        <div class="pl-50  pt-40">
-          <p> 你这傻B，学个屁php呀，还跟学java吧！！登录的部分：
-            表单用post提交用户名和密码，先假设你在数据存的密码是通过用户名和密码MD5后得来的，把表单提交过来的用户名和密码MD5后和数据库对比，如果一样，就成功啦，然后创建一个session在所有的页面来维持登录状态，Session关掉页面就没有了，这时候就可以用cookie了，用法就不说了。
-            你这傻B，学个屁php呀，还跟学java吧！！登录的部分：
-            表单用post提交用户名和密码，先假设你在数据存的密码是通过用户名和密码MD5后得来的，把表单提交过来的用户名和密码MD5后和数据库对比，如果一样，就成功啦，然后创建一个session在所有的页面来维持登录状态，Session关掉页面就没有了，这时候就可以用cookie了，用法就不说了。
-            
-            看错了，关于文件组织的，看你用的什么框架应该有文档，都是MVC,八九不离十就是控制器，模型，视图，这些英文单词也很清楚啦 
-            看错了，关于文件组织的，看你用的什么框架应该有文档，都是MVC,八九不离十就是控制器，模型，视图，这些英文单词也很清楚啦 </p>
-        </div>
-      </div>
+
 <div class="pt-10">  
 <h4>撰写答案</h4>    
 <script type="text/plain" id="myEditor" style="width:728px;height:240px;">
@@ -297,6 +247,32 @@
 					$("#question_description").html(result.question_description);
 					$("#question_author").html(result.username);
 					$("#question_time").html(result.create_time);
+				}, "json");
+		$.post("answer/getAnswers", 
+				jsonObject, 
+				function(result){
+					if(!result.answers){
+						alert("还没答案呢");
+					}
+					$("#answer_area").empty();
+					var obj = eval('(' + result.answers + ')');
+					for(var i = 0; i < obj.length; i++){
+						str = '<div class="bk-gray-bottom pt-20">';
+						str += '<div class="upordown box-shadow l"><a href="#">';
+						str += '<div class="upordown-up box-shadow"></div></a>';
+						str += '<div class="upordown-middle text-c">2</div>';
+						str += '<a href="#"><div class="upordown-down box-shadow"></div></a> </div>';
+						if(obj[i].correct_type == 1){
+							str += ' <div class="accept"></div></div>';
+						}
+						str += '<div class="l pl-10">';
+						str += '<p class="c-green l">'+obj[i].username+'</p>';
+						str += '<p class="l pl-10"><strong>54</strong></p>';
+						str += '<p class="l pl-10 c-999">'+obj[i].answer_time+'回答</p></div>';
+						str += '<div class="pl-50  pt-40">';
+						str += '<p>'+obj[i].answer_description+'</p></div></div>';
+						$("#answer_area").append(str);
+					}
 				}, "json");
 	}); 
 </script>
