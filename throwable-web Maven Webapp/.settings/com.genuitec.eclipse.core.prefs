@@ -1,3 +1,0 @@
-eclipse.preferences.version=1
-validator.Checked=src/main/webapp/umeditor/umeditor.min.js,src/main/webapp/Lib/waterfall.min.js,src/main/webapp/js/jquery.js,src/main/webapp/Lib/respond.min.js,src/main/webapp/kindeditor/examples/jquery-ui/js/jquery-ui-1.9.2.custom.min.js,src/main/webapp/kindeditor/plugins/code/prettify.js,src/main/webapp/js/jquery.min.js,src/main/webapp/static/h-ui/js/H-ui.js,src/main/webapp/umeditor/third-party/mathquill/mathquill.min.js,src/main/webapp/umeditor/third-party/jquery.min.js,src/main/webapp/Lib/handlebars.js,src/main/webapp/umeditor/umeditor.js
-validator.Unchecked=
