@@ -173,12 +173,15 @@
 					str += ' </div>';
 					str += ' <div class="main-right">';
 					str += ' <div class="main-right-same">';
-					str += '<div class="f-16 main-right-bottom-title"><a href="details.html?qid='+obj[i].id+'">'+obj[i].question_name+'</a></div>';
-					str += '<a href="#"><span class="main-right-bottom-tag ml-10">java</span></a>';
-					str += '<a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a> </div>';
+					str += '<div class="f-16 main-right-bottom-title"><a href="details.html?qid='+obj[i].id+'">'+obj[i].question_name+'</a></div></div>';
+					
 					str += '<div class="main-right-same">';
 					str += '<div class="main-right-top-left f-13 c-gray">'+obj[i].username+'</div>';
-					str += '<div class="main-right-top-left pl-10 f-13 c-gray">'+obj[i].create_time+'提问</div></div></div></div></div>';
+					str += '<div class="main-right-top-left pl-10 f-13 c-gray">'+obj[i].create_time+'提问</div>';
+					str += '<a href="#"><span class="main-right-bottom-tag ml-10">java</span></a>';
+					str += '<a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a>';
+					str += '</div></div></div></div>';
+					str += '<div class="clearfix bb"></div>';
 					$("#latest_list").append(str);
 				}
 			}, "json");
