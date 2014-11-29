@@ -32,6 +32,9 @@ public class ThirftCommon {
 	public static final String Q_ADD_QUESTION = "question.addQuestion";   //添加问题
 	public static final String Q_GET_ALL_QUESTION = "question.getQuestions";  //查询所有公开的问题
 	public static final String Q_GET_ONE_QUESTION = "question.getOneQuestion"; //根据id查询问题 用户详细页显示
+	public static final String Q_GET_HOT_QUESTION = "question.getHotQuestions"; //查询所有最热(访问数最多)的问题
+	public static final String Q_GET_MOST_FOCUSED_QUESTION = "question.getMostFocusedQuestions"; //查询被关注最多的问题
+	public static final String Q_GET_NEW_MOST_ANSWER_QUESTION = "question.getNewMostAnswerQuestions"; //查询10条最新回答最多的问题
 	
 	/********************** 答案相关接口 ***************************/
 	public static final String A_ADD_ANSWER = "answer.addAnswer";  //添加答案

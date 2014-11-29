@@ -18,6 +18,10 @@ public class QuestionController {
 	@Inject
 	private QuestionService questionService;
 	
+	/**
+	 * 首页查询最新的问题
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/getPublicQuestion")
@@ -25,6 +29,44 @@ public class QuestionController {
 		return questionService.getPublicQuestion();
 	}
 	
+	/**
+	 * 查询最热问题
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getPublicHotQuestion")
+	public Map getPublicHotQuestion() {
+		return questionService.getPublicHotQuestion();
+	}
+	
+	/**
+	 * 查询关注最多的问题
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getMostFocusQuestion")
+	public Map getMostFocusQuestion() {
+		return questionService.getMostFocusQuestion();
+	}
+	
+	/**
+	 * 查询10条最新回答最多的问题
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getNewMostAnswerQuestion")
+	public Map getNewMostAnswerQuestion() {
+		return questionService.getNewMostAnswerQuestion();
+	}
+	
+	/**
+	 * 详细页 查询问题具体内容
+	 * @param questionId
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/getOneQuestion")
@@ -35,6 +77,15 @@ public class QuestionController {
 		return questionService.getOneQuestion(questionId);
 	}
 	
+	/**
+	 * 添加问题
+	 * @param question_name          问题名
+	 * @param question_description   问题描述
+	 * @param question_type          问题类型 
+	 * @param kind_id                问题所属分类id
+	 * @param user_id                问题所属用户id
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/addQuestion")

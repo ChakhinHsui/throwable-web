@@ -66,8 +66,8 @@
           
         </div>
         <!--最新--结束-->
-        <div class="tabCon">内容二</div>
-        <div class="tabCon">内容三</div>
+        <div class="tabCon" id="hot_list">内容二</div>
+        <div class="tabCon" id="mf_list">内容三</div>
       </div>
     </div>
     <!--以下为左边的主显示板块--结束--> 
@@ -95,41 +95,8 @@
       <div class="line pt-10 mt-10"/>
       <!--最新热门-->
       <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">最新热门</a> </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-orange right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-orange right-hot-title"><a href="#">sqlalchemy 如何调用有返回值的mysql存储过程</a></div>
-          <div class="f-12 c-999 right-hot-title">10&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-orange right-hot-title"><a href="#">MSATA和SATA3的固态硬盘 大家一般用的哪种？</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-orange right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-orange right-hot-title"><a href="#">CABasicAnimation旋转view，设置anchorPoint的，view会向上浮动一段距离再旋转。</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-orange right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
+      <div id="new_ma_list">
+      
       </div>
     </div>
   </div>
@@ -161,32 +128,72 @@
 		$.post("question/getPublicQuestion", 
 			{}, 
 			function(result){
-				var obj = eval('(' + result.questions + ')');
 				$("#latest_list").empty();
-				for(var i = 0; i < obj.length; i++){
-					var str = '<div class="bk-gray-xm">';
-					str += '<div class="main-all-list-item">';
-					str += '<div class="main-left-3thing">';
-					str += '<div class="main-left-inside text-c">'+obj[i].agrees+'<br/>赞同</div>';
-					str += '<div class="main-left-inside text-c box-shadow answer-color">'+obj[i].answers+'<br/>回答</div>';
-					str += '<div class="main-left-inside text-c">'+obj[i].viewers+'<br/>浏览</div>';
-					str += ' </div>';
-					str += ' <div class="main-right">';
-					str += ' <div class="main-right-same">';
-					str += '<div class="f-16 main-right-bottom-title"><a href="details.html?qid='+obj[i].id+'">'+obj[i].question_name+'</a></div></div>';
-					
-					str += '<div class="main-right-same">';
-					str += '<div class="main-right-top-left f-13 c-gray">'+obj[i].username+'</div>';
-					str += '<div class="main-right-top-left pl-10 f-13 c-gray">'+obj[i].create_time+'提问</div>';
-					str += '<a href="#"><span class="main-right-bottom-tag ml-10">java</span></a>';
-					str += '<a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a>';
-					str += '</div></div></div></div>';
-					str += '<div class="clearfix bb"></div>';
-					$("#latest_list").append(str);
-				}
+				var str = appendStr(result);
+				$("#latest_list").append(str);
 			}, "json");
-		
+		$.post("question/getPublicHotQuestion", 
+				{}, 
+				function(result){
+					$("#hot_list").empty();
+					var str = appendStr(result);
+					$("#hot_list").append(str);
+				}, "json");
+		$.post("question/getMostFocusQuestion", 
+				{}, 
+				function(result){
+					$("#mf_list").empty();
+					var str = appendStr(result);
+					$("#mf_list").append(str);
+				}, "json");
+		$.post("question/getNewMostAnswerQuestion", 
+				{}, 
+				function(result){
+					$("#new_ma_list").empty();
+					var str = appendRightStr(result);
+					$("#new_ma_list").append(str);
+				}, "json");
 	}); 
+	
+	function appendStr(result) {
+		var obj = eval('(' + result.questions + ')');
+		var retStr = '';
+		for(var i = 0; i < obj.length; i++){
+			var str = '<div class="bk-gray-xm">';
+			str += '<div class="main-all-list-item">';
+			str += '<div class="main-left-3thing">';
+			str += '<div class="main-left-inside text-c">'+obj[i].agrees+'<br/>赞同</div>';
+			str += '<div class="main-left-inside text-c box-shadow answer-color">'+obj[i].answers+'<br/>回答</div>';
+			str += '<div class="main-left-inside text-c">'+obj[i].viewers+'<br/>浏览</div>';
+			str += ' </div>';
+			str += ' <div class="main-right">';
+			str += ' <div class="main-right-same">';
+			str += '<div class="f-16 main-right-bottom-title"><a href="details.html?qid='+obj[i].id+'">'+obj[i].question_name+'</a></div></div>';
+			
+			str += '<div class="main-right-same">';
+			str += '<div class="main-right-top-left f-13 c-gray">'+obj[i].username+'</div>';
+			str += '<div class="main-right-top-left pl-10 f-13 c-gray">'+obj[i].create_time+'提问</div>';
+			str += '<a href="#"><span class="main-right-bottom-tag ml-10">java</span></a>';
+			str += '<a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a>';
+			str += '</div></div></div></div>';
+			str += '<div class="clearfix bb"></div>';
+			retStr += str;
+		}
+		return retStr;
+	}
+	
+	function appendRightStr(result) {
+		var obj = eval('(' + result.questions + ')');
+		var retStr = '';
+		for(var i = 0; i < obj.length; i++){
+			var str = '<div class="pt-5 pb-5 f-16 mt-5 mb-5">';
+			str += '<div class="c-orange right-hot-title"><a href="details.html?qid='+obj[i].id+'">'+obj[i].question_name+'</a></div>';
+			str += '<div class="f-12 c-999 right-hot-title">'+obj[i].answers+'&nbsp;回应</div>';
+			str += '</div>';
+			retStr += str;
+		}
+		return retStr;
+	}
 	
 </script>
 

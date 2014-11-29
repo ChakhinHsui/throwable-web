@@ -67,7 +67,67 @@ public class QuestionService {
 	public Map getPublicQuestion(){
 		Map map = null;
 		try{
-			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_ALL_QUESTION, thirftCommon.initParams("question_type", 1), 100);
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_ALL_QUESTION, thirftCommon.initParams(), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 查询最热的问题  访问数最多
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map getPublicHotQuestion() {
+		Map map = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_HOT_QUESTION, thirftCommon.initParams(), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 查询关注最多的问题
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map getMostFocusQuestion() {
+		Map map = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_MOST_FOCUSED_QUESTION, thirftCommon.initParams(), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 查询10条最新回答最多的问题
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map getNewMostAnswerQuestion() {
+		Map map = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_NEW_MOST_ANSWER_QUESTION, thirftCommon.initParams(), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
 			}else{
