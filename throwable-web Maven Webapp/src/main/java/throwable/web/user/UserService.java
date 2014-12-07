@@ -1,5 +1,6 @@
 package throwable.web.user;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.nutz.ioc.loader.annotation.Inject;
@@ -20,12 +21,30 @@ public class UserService {
 	private ThirftCommon thirftCommon;
 	
 	@SuppressWarnings("rawtypes")
-	public Map userLogin(String username, String password, String email, String nickname, String ip){
+	public Map userRegister(String username, String password, String email, String nickname, String ip){
 		Map map = null;
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.USER_REGISTER, thirftCommon.initParams("username", username, "password", password, "email", email, "nickname", nickname, "last_active_ip", ip), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map userActive(String key) {
+		Map map = new HashMap();
+		String retMsg = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.USER_ACTIVE, thirftCommon.initParams("key", key), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				retMsg = msg.getRetMsg();
+				map.put("active", retMsg);
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
 			}

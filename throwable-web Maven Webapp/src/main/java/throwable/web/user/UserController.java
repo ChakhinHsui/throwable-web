@@ -44,6 +44,16 @@ public class UserController {
 		if(!StringTool.checkEmail(email)){
 			return BackTool.errorInfo("010105", WebConf.errorMsg);
 		}
-		return userService.userLogin(username, password, email, nickname, AddressUtil.getIpAddr(req));
+		return userService.userRegister(username, password, email, nickname, AddressUtil.getIpAddr(req));
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/activeUser")
+	public Map active(@Param("key") String key) {
+		if(StringTool.isEmpty(key)) {
+			return BackTool.errorInfo("010201", WebConf.errorMsg);
+		}
+		return userService.userActive(key);
 	}
 }

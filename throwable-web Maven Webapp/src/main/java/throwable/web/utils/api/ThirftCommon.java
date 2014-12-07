@@ -25,6 +25,7 @@ public class ThirftCommon {
 	/********************** 用户相关接口 ***************************/
 	public static final String GET_USER_INFO = "user.getUserInfo";//获取用户信息
 	public static final String USER_LOGIN = "user.login"; //用户登陆
+	public static final String USER_ACTIVE = "user.active"; //用户激活 通过邮件的链接激活
 	public static final String USER_REGISTER = "user.register";  //用户注册
 	public static final String Get_All_USER = "user.getAllUserInfo";  //查询所有用户
 	
@@ -77,7 +78,9 @@ public class ThirftCommon {
 	 * @throws Exception
 	 */
 	public ResultMsg getResult(ClientPools thriftPools, String uri, Map<String, String> params, long uid) throws Exception {
-		return thriftPools.call("W" + System.nanoTime(), apiDirUtil.getValue(uri), params);
+		ResultMsg resultMsg = thriftPools.call("W" + System.nanoTime(), apiDirUtil.getValue(uri), params);
+		System.out.println(Json.toJson(resultMsg));
+		return resultMsg;
 	}
 
 	public List<Object> getResultByList(ClientPools thriftPools, String uri, Map<String, String> params, long uid) throws Exception {

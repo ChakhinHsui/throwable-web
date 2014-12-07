@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>active.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			alert(throwalbe_util.url.getUrlParam("key"));
+			var jsonObject = {
+					key:throwalbe_util.url.getUrlParam("key")
+			};
+			$.post("user/activeUser", jsonObject, function(result){
+				if(result.active == "OK") {
+					  window.location.href = "index.html";
+				}
+			}, "json");
+		});
+	</script>
+  </head>
+  
+  <body>
+    
+  </body>
+</html>
