@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.nutz.ioc.impl.PropertiesProxy;
 
+import throwable.web.WebConf;
+
 public class BackTool {
 
 	public static final String msgCode = "msgCode";
@@ -22,6 +24,13 @@ public class BackTool {
 		Map<String, Object> res = new HashMap<String, Object>();
 		res.put(BackTool.msgCode, msgCode);
 		res.put(BackTool.errorMsg, errorMsg.get(msgCode));
+		return res;
+	}
+	
+	public static Map<String, Object> errorInfo(String msgCode) {
+		Map<String, Object> res = new HashMap<String, Object>();
+		res.put(BackTool.msgCode, msgCode);
+		res.put(BackTool.errorMsg, WebConf.errorMsg.get(msgCode));
 		return res;
 	}
 	

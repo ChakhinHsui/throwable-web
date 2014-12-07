@@ -3,6 +3,7 @@ package throwable.web.user;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -21,6 +22,19 @@ public class UserController {
 
 	@Inject
 	private UserService userService;
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/login")
+	public Map login(@Param("username") String username, @Param("password") String password, HttpServletRequest req, HttpSession session) {
+		if(StringTool.isEmpty(username)) {
+			return BackTool.errorInfo("010301", WebConf.errorMsg);
+		}
+		if(StringTool.isEmpty(password)) {
+			return BackTool.errorInfo("010302", WebConf.errorMsg);
+		}
+		return userService.userLogin(username, password, AddressUtil.getIpAddr(req), req, session);
+	}
 	
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
@@ -55,5 +69,9 @@ public class UserController {
 			return BackTool.errorInfo("010201", WebConf.errorMsg);
 		}
 		return userService.userActive(key);
+	}
+	
+	public Map isLogin() {
+		return null;
 	}
 }
