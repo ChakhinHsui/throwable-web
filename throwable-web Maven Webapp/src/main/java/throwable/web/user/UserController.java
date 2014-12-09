@@ -1,5 +1,6 @@
 package throwable.web.user;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.nutz.mvc.annotation.Param;
 import throwable.web.WebConf;
 import throwable.web.utils.AddressUtil;
 import throwable.web.utils.BackTool;
+import throwable.web.utils.LoginTool;
 import throwable.web.utils.StringTool;
 
 @At("/user")
@@ -71,7 +73,16 @@ public class UserController {
 		return userService.userActive(key);
 	}
 	
-	public Map isLogin() {
+	public Map isLogin(@Param("userId") String userId, HttpSession httpSession) {
+		boolean ret = false;
+		if(StringTool.isEmpty(userId)) {
+			ret = LoginTool.isLogin(httpSession);
+		} else {
+			ret = LoginTool.isLogin(httpSession, Integer.parseInt(userId));
+		}
+		if(!ret) {
+			
+		}
 		return null;
 	}
 }
