@@ -1,0 +1,132 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<title>登录Throwable——欢迎来到Throwable</title>
+<meta name="keywords" content="throwaable,seava,error">
+<meta name="description" content="ThrowAble网站！">
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="faviconte.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+<script type="text/javascript" src="http://libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href="static/h-ui/css/H-ui.css" rel="stylesheet" type="text/css" />
+<link href="static/h-ui/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!--[if IE 7]>
+<link href="http://www.bootcss.com/p/font-awesome/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<link href="static/h-ui/css/style.css" rel="stylesheet" type="text/css" />
+<!--自己的样式-->
+<!--[if IE 6]>
+<script type="text/javascript" src="Lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('.pngfix,.icon');</script>
+<![endif]-->
+</head>
+<body>
+<header class="header"> </header>
+<div class="question-title">
+  <div class="wp cl">
+    <div class="row row-980-20 f-14">
+      <div class="span-3"> </div>
+      <div class="span-14"> 
+        <!--这里为Logo和说明文字部分--start-->
+        <div class="text-c  mt-60 c-gray"> <img src="static/h-ui/images/throwable_logo.png"  width="250"/> <br/>
+          <p>欢迎加入到专业的JAVA中文开发者大家庭来</p>
+        </div>
+        <!--这里为Logo和说明文字部分--end--> 
+        <!--这里是主要内容--start-->
+        <div class="register-main mt-30 pt-20" style="height:300px;">
+          <div class="pl-20">
+            <div class="clearfix c-999">
+              <h5 class="l" style="width:210px;">用户名/电子邮箱</h5>
+              <h5 class="l pl-50 ml-50">密码</h5>
+            </div>
+            <div class="clearfix">
+            <form id="login-form">
+            <input type="text" id="uname" placeholder="ThA/ThA@gmail.com" class="input-text input-big radius  mt-5 l" style="width:235px;">
+            <input type="password" id="pword" placeholder="password" type="password" class="input-text input-big radius  mt-5 l ml-20" style="width:235px;">
+            <input class="btn radius btn-success btn-big mt-5 l ml-20"  style="width:100px;height:42px;" type="submit" value="登录">
+            </form>
+            </div>
+          </div>
+           <div class="line clearfix mt-20 pl-20 pr-20"></div>
+           <div>
+           <h5 class="l pl-20  c-999 clearfix ">其他帐号登录</h5>
+           <div class="pt-20 l clearfix">
+           	<img class="ml-5" src="static/h-ui/images/Thirdgithub_logo.gif"/>
+            <img class="ml-5" src="static/h-ui/images/Thirdgoogle_25wht.gif"/>
+           <img class="ml-5" src="static/h-ui/images/Thirdbd_logo.gif"/>
+           <img class="ml-5" src="static/h-ui/images/Thirdweibo.gif"/>
+           <img class="ml-5" src="static/h-ui/images/Thirdyahoo.gif"/>
+           <img class="ml-5" src="static/h-ui/images/Thirdtencent.gif"/>
+           <img class="ml-5" src="static/h-ui/images/Thirdaliyun_logo.gif"/>
+                     
+           </div>
+           
+           </div>
+        </div>
+        <!--这里是主要内容--start--> 
+      </div>
+      <div class="span-3"> </div>
+    </div>
+    <div class="row row-980-20 f-14 mb-40">
+      <div class="span-7"> </div>
+      <div class="span-2"><a href="#">注册帐号</a></div>
+      <div class="span-2"></div>
+      <div class="span-2"><a href="#">找回密码</a></div>
+      <div class="span-7"></div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<footer class="footer cl">
+  <p>Copyright &copy;2013-2014 throwable.com All Rights Reserved. Seava Studio</p>
+  <div class="row row-980-20 c-black">
+    <div class="span-4">本站相关</div>
+    <div class="span-4">1</div>
+    <div class="span-4">1</div>
+    <div class="span-4">1</div>
+    <div class="span-4">1</div>
+  </div>
+</footer>
+<script type="text/javascript" src="Lib/jquery.min.js"></script> 
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="Lib/stickUp.min.js"></script> 
+<script type="text/javascript" src="Lib/bootstrap-modalmanager.js"></script> 
+<script type="text/javascript" src="Lib/bootstrap-modal.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/throwable-base.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		throwable_base.login.isLogin();
+	});
+
+	$("#login-form").submit(function(){
+		if(!throwable_util.checkValue.isEmptyById("uname")) {
+			alert("输入用户名");
+			$("#uname").focus();
+			return false;
+		}
+		if(!throwable_util.checkValue.isEmptyById("pword")) {
+			alert("输入密码");
+			$("#pword").focus();
+			return false;
+		}
+		var jsonObject = {
+				username : $("#uname").val(),
+				password : $("#pword").val()
+		};
+		$.post("user/login", jsonObject, function(result){
+			alert(JSON.stringify(result));
+		}, "json");
+		return false;
+	});
+	
+</script>
+</body>
+</html>
+<!--H-ui前端框架提供前端技术支持 h-ui.net @2014-7-10 -->

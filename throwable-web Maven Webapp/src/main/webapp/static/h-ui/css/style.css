@@ -161,12 +161,12 @@ a:hover, a:focus, .c_main, .c_main a {
 }/*问题背景*/
 /*问题部分左边的支持与反对*/
 .upordown {
-	width: 38px;
+	width: 58px;
 	background-color:#F3F3F3;
 	border:#fff;
 }
 .upordown-up {
-	width: 38px;
+	width: 28px;
 	height:18px;
 	background:url(../images/unslider-arrow-up.png) no-repeat 2px 3px;
 	
@@ -174,18 +174,19 @@ a:hover, a:focus, .c_main, .c_main a {
 .upordown-middle {
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,sans-serif;
 	font-size: 16px;
+	width: 28px;
 	/*color: #888;*/
 
 }
 .upordown-down {
-	width: 38px;
+	width: 28px;
 	height:18px;
 	background:url(../images/unslider-arrow-down.png) no-repeat 2px 3px;
 	
 }
 .accept{
 	width: 38px;
-	height:38px;
+	height:30px;
 	background:url(../images/accept.png) no-repeat;
 	border:hidden;
 	/*border:solid 1px #ddd\9;box-shadow:1px 1px 2px 2px #ddd;behavior: url(ie-css3.htc)*/
@@ -196,7 +197,7 @@ a:hover, a:focus, .c_main, .c_main a {
 top:50%;
 left:50%;
 margin:-100px 0 0 -100px;*/
-width:520px;
+width:auto;
 height:580px;
 background-color:#FFF;
 /**border:1px solid red;*/
@@ -204,4 +205,48 @@ background-color:#FFF;
 .required:after {
     content: " *";
     color: #ED1C24;
+}
+.border-without-top{
+	border:1px solid #eee;border-top:0;
+}
+.border-all{
+		border: 1px solid #DDD;
+}
+.border-bottom{
+	border-bottom:1px solid #eee;
+}
+.contribution{
+	list-style: none outside none;
+	margin: -1px 0px 0px;
+	padding: 3px 3px 3px 3px;
+
+}
+.contribution-inside{
+	display: block;
+	float: left;
+	margin: 1px;
+	width: 15px;
+	height: 15px;
+}
+.bg-0{
+	background-color: #eee;
+}
+.bg-1{
+	background-color: #d6e685;
+}
+.bg-2{
+	background-color: #8cc665;
+}
+.bg-3{
+	background-color: #44a340;
+}
+.bg-4{
+	background-color: #1e6823;
+}
+.tips{
+	background-color: #F1F6FB;
+	color: #244F79;
+	border: 1px solid #D0E5F8;
+	border-radius: 3px;
+	font-size: 14px;
 }

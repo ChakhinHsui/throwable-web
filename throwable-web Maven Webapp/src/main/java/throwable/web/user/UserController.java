@@ -13,6 +13,7 @@ import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
 import throwable.web.WebConf;
+import throwable.web.enums.Right;
 import throwable.web.utils.AddressUtil;
 import throwable.web.utils.BackTool;
 import throwable.web.utils.LoginTool;
@@ -73,6 +74,9 @@ public class UserController {
 		return userService.userActive(key);
 	}
 	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/userIsLogin")
 	public Map isLogin(@Param("userId") String userId, HttpSession httpSession) {
 		boolean ret = false;
 		if(StringTool.isEmpty(userId)) {
@@ -81,8 +85,27 @@ public class UserController {
 			ret = LoginTool.isLogin(httpSession, Integer.parseInt(userId));
 		}
 		if(!ret) {
-			
+			return BackTool.errorInfo("010401");
 		}
-		return null;
+		Map<String, Object> res = BackTool.successInfo();
+		LoginTool.putMap(httpSession, res);
+		return res;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/isAllowed")
+	public Map hasRight(@Param("right") String right, HttpSession httpSession) {
+		if(StringTool.isEmpty(right)) {
+			return BackTool.errorInfo("010501");
+		}
+		Right rights = Right.getRight(right);
+		if(rights == null) {
+			return BackTool.errorInfo("010502");
+		}
+		if(!LoginTool.isAllowed(httpSession, rights)) {
+			return BackTool.errorInfo("010503");
+		}
+		return BackTool.successInfo();
 	}
 }

@@ -36,7 +36,7 @@ public class UserService {
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.USER_LOGIN, thirftCommon.initParams("username", username, "password", password, "ip", ip), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
-				LoginTool.addSession(req, Integer.parseInt(map.get("id").toString()), map.get("username").toString(), map.get("right").toString(), map.get("user_state").toString(), LoginMark.hasLogin.getText());
+				LoginTool.addSession(req, Integer.parseInt(map.get("id").toString()), map.get("username").toString(), map.get("rights").toString(), map.get("user_state").toString(), LoginMark.hasLogin.getText());
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
 			}

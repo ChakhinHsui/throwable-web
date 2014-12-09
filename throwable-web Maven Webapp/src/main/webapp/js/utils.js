@@ -1,4 +1,4 @@
-var throwalbe_util = {
+var throwable_util = {
 	/**
 	 * 检查值的合法性  判断是否为空 是否为null 是否为undefined 是不是数字 是不是email
 	 */

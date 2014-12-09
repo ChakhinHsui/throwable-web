@@ -1,5 +1,7 @@
 package throwable.web.utils;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -120,11 +122,28 @@ public class LoginTool {
 	 * @param httpSession
 	 */
 	public static void deleteSession(HttpSession httpSession) {
-		httpSession.removeAttribute("userId");
-		httpSession.removeAttribute("username");
-		httpSession.removeAttribute("right");
-		httpSession.removeAttribute("user_state");
-		httpSession.removeAttribute("loginMark");
+		if(null != httpSession.getAttribute("userId")) {
+			httpSession.removeAttribute("userId");
+		}
+		if(null != httpSession.getAttribute("username")) {
+			httpSession.removeAttribute("username");
+		}
+		if(null != httpSession.getAttribute("right")) {
+			httpSession.removeAttribute("right");
+		}
+		if(null != httpSession.getAttribute("user_state")) {
+			httpSession.removeAttribute("user_state");
+		}
+		if(null != httpSession.getAttribute("loginMark")) {
+			httpSession.removeAttribute("loginMark");
+		}
 		httpSession.invalidate();
+	}
+	
+	public static void putMap(HttpSession httpSession, Map<String, Object> map) {
+		map.put("userId", httpSession.getAttribute("userId").toString());
+		map.put("username", httpSession.getAttribute("username").toString());
+		map.put("right", httpSession.getAttribute("right").toString());
+		map.put("user_state", httpSession.getAttribute("user_state").toString());
 	}
 }

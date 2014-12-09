@@ -48,7 +48,7 @@ public enum Right {
 		return this.value;
 	}
 	
-	public Right getRight(String value) {
+	public static Right getRight(String value) {
 		if(value.equals(Right.general.getValue())) {
 			return Right.general;
 		} else if(value.equals(Right.context.getValue())) {

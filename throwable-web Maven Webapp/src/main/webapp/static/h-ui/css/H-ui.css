@@ -446,10 +446,10 @@ pre{white-space: pre-wrap}	/*预格式化的文本*/
 	Example:		class="mt-5/mt-10/..."
 	Explain:		.mt表示上边距/.mb表示下边距/.ml表示左边距/.mr表示右边距
 */
-.mt-5{margin-top:5px}.mt-10{margin-top:10px}.mt-15{margin-top:15px}.mt-20{margin-top:20px}.mt-30{margin-top:30px}.mt-40{margin-top:40px}
+.mt-5{margin-top:5px}.mt-10{margin-top:10px}.mt-15{margin-top:15px}.mt-20{margin-top:20px}.mt-30{margin-top:30px}.mt-40{margin-top:40px}.mt-60{margin-top:60px}
 .mb-5{margin-bottom:5px}.mb-10{margin-bottom:10px}.mb-15{margin-bottom:15px}.mb-20{margin-bottom:20px}.mb-30{margin-bottom:30px}.mb-40{margin-bottom:40px}
 .ml-5{margin-left:5px}.ml-10{margin-left:10px}.ml-15{margin-left:15px}.ml-20{margin-left:20px}.ml-30{margin-left:30px}.ml-40{margin-left:40px}
-.mr-5{margin-right:5px}.mr-10{margin-right:10px}.mr-15{margin-right:15px}.mr-20{margin-right:20px}.mr-30{margin-right:30px}.mr-40{margin-right:40px}
+.mr-5{margin-right:5px}.mr-10{margin-right:10px}.mr-15{margin-right:15px}.mr-20{margin-right:20px}.mr-30{margin-right:30px}.mr-40{margin-right:40px}.mr-0{margin-right:0px}
 /*3.1.7 内填充
 	Name:			style_padding
 	Example:		class="pt-5/pt-10/……"
@@ -457,7 +457,7 @@ pre{white-space: pre-wrap}	/*预格式化的文本*/
 */
 .pt-5{padding-top:5px}.pt-10{padding-top:10px}.pt-20{padding-top:20px}.pt-30{padding-top:30px}.pt-40{padding-top:40px}.pt-50{padding-top:50px}
 .pb-5{padding-bottom:5px}.pb-10{padding-bottom:10px}.pb-20{padding-bottom:20px}
-.pl-5{padding-left:5px}.pl-10{padding-left:10px}.pl-20{padding-left:20px}.pl-50{padding-left:50px}
+.pl-5{padding-left:5px}.pl-10{padding-left:10px}.pl-20{padding-left:20px}.pl-50{padding-left:50px}.pl-60{padding-left:60px}.pl-70{padding-left:70px}
 .pr-5{padding-right:5px}.pr-10{padding-right:10px}.pr-20{padding-right:20px}
 .pd-5{padding:5px}.pd-10{padding:10px}.pd-15{padding:15px}.pd-20{padding:20px}.pd-30{padding:30px}.pd-40{padding:40px}
 /*3.1.8 边框，css3圆角
@@ -523,6 +523,9 @@ pre{white-space: pre-wrap}	/*预格式化的文本*/
 
 .c-orange,.c-orange a,a.c-orange{color:orange}
 .c-orange a:hover,a.c-orange:hover{}
+/*add by xiaomo*/
+.c-answer,.c-answer a,a.c-answer{color:#D6E685}
+.c-answer a:hover,a.c-answer:hover{}
 
 /*3.1.14 文字颜色强调
 	Example:		class="text-muted/text-primary/text-warning/text-error/text-danger/text-success/text-info"
@@ -2242,10 +2245,10 @@ box-shadow:0 6px 12px rgba(0,0,0,0.175);}
       <div class="tabCon">内容三</div>
     </div>	
 */
-.tabBar {border-bottom: 2px solid #222}
-.tabBar span {background-color: #e8e8e8;cursor: pointer;display: inline-block;float: left;
+.tabBar {border-bottom: 2px solid #f0f0f0}
+.tabBar span {background-color: #fff;cursor: pointer;display: inline-block;float: left;border:1px solid #eee;border-bottom:0;color:#808080;
 font-weight: bold;height: 30px;line-height: 30px;padding: 0 15px}
-.tabBar span.Current{background-color: #222;color: #fff}
+.tabBar span.Current{background-color: #f0f0f0;color: #000}
 .tabCon {display: none}
 /*4.6 标签与标号
 	Name:			style_label

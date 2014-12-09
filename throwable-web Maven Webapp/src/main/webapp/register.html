@@ -19,8 +19,7 @@
 <![endif]-->
 <link href="static/h-ui/css/style.css" rel="stylesheet" type="text/css" />
 <!--自己的样式-->
-<!--坑爹的html文本编辑器--start-->
-<!--坑爹的html文本编辑器--end-->
+
 <!--[if IE 6]>
 <script type="text/javascript" src="Lib/DD_belatedPNG_0.0.8a-min.js" ></script>
 <script>DD_belatedPNG.fix('.pngfix,.icon');</script>
@@ -93,22 +92,22 @@
 <script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript">
 	$("#register_form").submit(function(){
-		if(!throwalbe_util.checkValue.isEmptyById("username")){
+		if(!throwable_util.checkValue.isEmptyById("username")){
 			alert("用户名不能为空");
 			$("#username").focus();
 			return false;
 		}
-		if(!throwalbe_util.checkValue.isEmptyById("password")){
+		if(!throwable_util.checkValue.isEmptyById("password")){
 			alert("密码不能为空");
 			$("#password").focus();
 			return false;
 		}
-		if(!throwalbe_util.checkValue.isEmptyById("email")){
+		if(!throwable_util.checkValue.isEmptyById("email")){
 			alert("邮箱不能为空");
 			$("#email").focus();
 			return false;
 		}
-		if(!throwalbe_util.checkValue.isEmail($("#email").val())){
+		if(!throwable_util.checkValue.isEmail($("#email").val())){
 			alert("邮箱格式不对");
 			$("#email").focus();
 			return false;
