@@ -4,7 +4,9 @@ var throwable_base = {
 				$.post("user/userIsLogin",
 						{userId: userId},
 						function(result){
-							alert(JSON.stringify(result));
+							if(result.msgCode == 1) {
+								throwable_util.url.location(throwable_base.urls.userInfo);
+							}
 						}, "json");
 			},
 			isAllowed : function(right) {
@@ -20,5 +22,9 @@ var throwable_base = {
 			cu : "context",
 			wu : "web",
 			su : "superU"
+		},
+		urls: {
+			userInfo: "memberinfo.html",
+			userLogin: "login.html"
 		}
 };

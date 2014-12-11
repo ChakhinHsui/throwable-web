@@ -56,6 +56,9 @@ var throwable_util = {
 			var reg = new RegExp("(^|&)" + name +"=([^&]*)(&|$)");
     		var r = window.location.search.substr(1).match(reg);
     		if (r!=null) return unescape(r[2]); return null;
+		},
+		location : function(url) {
+			  window.location.href = url;
 		}
 	}
 };
