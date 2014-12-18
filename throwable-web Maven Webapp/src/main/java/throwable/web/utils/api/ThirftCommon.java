@@ -36,10 +36,13 @@ public class ThirftCommon {
 	public static final String Q_GET_HOT_QUESTION = "question.getHotQuestions"; //查询所有最热(访问数最多)的问题
 	public static final String Q_GET_MOST_FOCUSED_QUESTION = "question.getMostFocusedQuestions"; //查询被关注最多的问题
 	public static final String Q_GET_NEW_MOST_ANSWER_QUESTION = "question.getNewMostAnswerQuestions"; //查询10条最新回答最多的问题
+	public static final String Q_GET_USER_QUESTIONS = "question.getUserQuestions";  //查询用户的问题
+	public static final String Q_GET_USER_FOCUS = "question.getUserFocusQuestion";  //查询用户关注的问题
 	
 	/********************** 答案相关接口 ***************************/
 	public static final String A_ADD_ANSWER = "answer.addAnswer";  //添加答案
 	public static final String A_GET_ANSWER = "answer.getAnswer";  //根据问题id获得answer 用于详细页显示
+	public static final String A_GET_USER_ANSWER = "answer.getUserAnswer";  //查询用户回答过得问题
 	
 	/**
 	 * 根据传递参数 组织成 thrift需要的参数 MAP， 省去每次都写一个初始化MAP的工作

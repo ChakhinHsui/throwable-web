@@ -5,7 +5,11 @@ var throwable_base = {
 						{userId: userId},
 						function(result){
 							if(result.msgCode == 1) {
-								throwable_util.url.location(throwable_base.urls.userInfo);
+								throwable_base.userInfo.id = result.id;
+								throwable_base.userInfo.username = result.username;
+								return true;
+							} else {
+								return false;
 							}
 						}, "json");
 			},
@@ -25,6 +29,14 @@ var throwable_base = {
 		},
 		urls: {
 			userInfo: "memberinfo.html",
-			userLogin: "login.html"
+			userLogin: "login.html",
+			userQuestion : "question/queryUserQuestion",
+			userFocusQuestion : "question/queryUserFocusQuestion",
+			userAnswer : "answer/getUserAnswers"
+		},
+		userInfo : {
+			id : 0,
+			username : null,
+			user_state : 0
 		}
 };

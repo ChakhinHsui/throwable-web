@@ -54,4 +54,21 @@ public class AnswerService {
 		System.out.println(map);
 		return map;
 	}
+	
+	@SuppressWarnings("rawtypes")
+	public Map getUserAnswers(String userId) {
+		Map map = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.A_GET_USER_ANSWER, thirftCommon.initParams("userId", userId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(map);
+		return map;
+	}
 }

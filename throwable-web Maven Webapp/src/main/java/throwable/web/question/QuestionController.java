@@ -103,4 +103,30 @@ public class QuestionController {
 		}
 		return questionService.addQuestion(question_name, question_description, question_type, kind_id, user_id);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/queryUserQuestion")
+	public Map queryUserQuestion(@Param("userId") String userId) {
+		if(StringTool.isEmpty(userId)) {
+			return BackTool.errorInfo("0300", "用户id不能为空");
+		}
+		if(!StringTool.isNumber(userId)) {
+			return BackTool.errorInfo("0301", "用户id必须为数字");
+		}
+		return questionService.getUserQuestion(userId);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/queryUserFocusQuestion")
+	public Map queryUserFocus(@Param("userId") String userId) {
+		if(StringTool.isEmpty(userId)) {
+			return BackTool.errorInfo("0400", "用户id不能为空");
+		}
+		if(!StringTool.isNumber(userId)) {
+			return BackTool.errorInfo("0401", "用户id必须为数字");
+		}
+		return questionService.getUserFocus(userId);
+	}
 }

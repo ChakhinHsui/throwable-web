@@ -159,7 +159,7 @@
         <span>回答</span>
         <span>被赞</span>
         <span>关注</span></div>
-        <div class="tabCon">
+        <div class="tabCon" id="dynamic_news">
         <!--以下为详细信息--start-->
         <div>
         	<p class="c-gray f-16 pt-10 pb-10 border-bottom">
@@ -177,13 +177,13 @@
         </div>
         <!--以下为详细信息--end-->
         </div>
-        <div class="tabCon">222
+        <div class="tabCon" id="user_question">
         </div>
-        <div class="tabCon">3333
+        <div class="tabCon" id="user_answer">
         </div>
         <div class="tabCon">444
         </div>
-        <div class="tabCon">55
+        <div class="tabCon" id="user_focus_question">
         </div>      
      </div>
     </div>
@@ -213,11 +213,17 @@
 <script type="text/javascript" src="Lib/stickUp.min.js"></script> 
 <script type="text/javascript" src="Lib/bootstrap-modalmanager.js"></script> 
 <script type="text/javascript" src="Lib/bootstrap-modal.js"></script> 
+<script type="text/javascript" src="js/memberinfo.js"></script>
+<script type="text/javascript" src="js/throwable-base.js"></script>
 
 <!--三个选择页代码--> 
 <script type="text/javascript">
 $(function(){
-	$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		throwable_base.login.isLogin(11);
+		user_info.getUserAnswer(11);
+		user_info.getUserQuestion(11);
+		user_info.getUserFocusQuestion(11);
 	}); 
 </script>
 </body>

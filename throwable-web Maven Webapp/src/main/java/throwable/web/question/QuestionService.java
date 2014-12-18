@@ -159,4 +159,46 @@ public class QuestionService {
 		}
 		return map;
 	}
+	
+	/**
+	 * 根据用户id获得用户的提问
+	 * @param userId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map getUserQuestion(String userId) {
+		Map map = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_USER_QUESTIONS, thirftCommon.initParams("userId", userId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 根据用户id获得用户关注的问题
+	 * @param userId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map getUserFocus(String userId) {
+		Map map = null;
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_USER_FOCUS, thirftCommon.initParams("userId", userId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
 }

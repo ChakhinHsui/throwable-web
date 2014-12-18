@@ -49,4 +49,17 @@ public class AnswerController {
 		}
 		return answerService.getAnswerByQuestionId(questionId);
 	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getUserAnswers")
+	public Map getUserAnswers(@Param("userId") String userId) {
+		if(StringTool.isEmpty(userId)) {
+			return BackTool.errorInfo("030301", "用户id不能为空");
+		}
+		if(!StringTool.isNumber(userId)) {
+			return BackTool.errorInfo("030302", "用户id必须为数字");
+		}
+		return answerService.getUserAnswers(userId);
+	}
 }
