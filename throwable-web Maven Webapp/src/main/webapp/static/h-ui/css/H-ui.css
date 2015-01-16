@@ -2352,7 +2352,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 .modal-backdrop,.modal-backdrop.fade.in {opacity: 0.7;filter: alpha(opacity=70)}/*遮罩层进入 0.7透明度*/
 
 .modal.container{ width: 980px}/*满页面宽度*/
-.modal {position:absolute;top:50%;left:50%; width:500px;margin-left:-250px;z-index:1050;overflow: visible;background-color: #fff;background-clip: padding-box;
+.modal {position:absolute;top:50%;left:40%; width:750px;margin-left:-250px;z-index:1050;overflow: visible;background-color: #fff;background-clip: padding-box;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
     -webkit-background-clip:padding-box;
     -khtml-background-clip:padding-box;
