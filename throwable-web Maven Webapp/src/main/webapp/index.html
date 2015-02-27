@@ -42,10 +42,13 @@
       <li><a href="#">案例</a></li>
       <li><a href="#">联系我们</a></li>
       <li>
+      	<div style="float: right" id="login_area">
       	
-      
+      	</div>
       </li>
+      
     </ul>
+    
   </nav>
 </header>
 <div class="wp cl mt-15 f-14">
@@ -174,6 +177,13 @@
 var ue = UE.getEditor('myEditor');
 	$(function(){
 		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		throwable_base.login.isLogin("", function(isLogin){
+			if(1 == isLogin) {
+				$("#login_area").html('<a href="memberinfo.html?id='+throwable_base.userInfo.id+'">'+throwable_base.userInfo.username+'</a>');
+			} else {
+				$("#login_area").html('<a href="login.html">登陆</a>');
+			}
+		});
 		$.post("question/getPublicQuestion", 
 			{}, 
 			function(result){

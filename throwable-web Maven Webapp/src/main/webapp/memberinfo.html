@@ -48,7 +48,7 @@
     <!--头像图片区--end-->  
     <!--ID区--start-->  
     <div class="pt-5">
-    	<p><strong><a href="#">JamsGostphi</a></strong></p>
+    	<p><strong><span id="username_area"></span></strong></p>
     </div>
      <!--ID区--end-->
      <div class="line"></div>
@@ -213,6 +213,7 @@
 <script type="text/javascript" src="Lib/stickUp.min.js"></script> 
 <script type="text/javascript" src="Lib/bootstrap-modalmanager.js"></script> 
 <script type="text/javascript" src="Lib/bootstrap-modal.js"></script> 
+<script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript" src="js/memberinfo.js"></script>
 <script type="text/javascript" src="js/throwable-base.js"></script>
 
@@ -220,6 +221,7 @@
 <script type="text/javascript">
 $(function(){
 		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		user_info.getBaseUserInfo(throwable_util.url.getUrlParam("id"));
 		throwable_base.login.isLogin(11);
 		user_info.getUserAnswer(11);
 		user_info.getUserQuestion(11);

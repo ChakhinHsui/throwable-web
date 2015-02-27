@@ -60,6 +60,9 @@ var throwable_util = {
 		},
 		location : function(url) {
 			  window.location.href = url;
+		},
+		refresh : function() {
+			window.location.reload();
 		}
 	}
 };

@@ -1,7 +1,6 @@
 var throwable_details = {
 		addAnswer : function() {
 			throwable_base.login.isLogin("", function(result){
-				console.log(result);
 				if(1 == result) {
 					var description = ue.getContent();
 					var length = description.length > 50 ? 50 : description.length;
@@ -11,13 +10,15 @@ var throwable_details = {
 							answer_description:description,
 							user_id:throwable_base.userInfo.id
 					};
-					console.log(jsonObject);
 					$.ajax({
 							type: "post",
 							url: "answer/addAnswer",
 							data: jsonObject,
 							success: function(data){
-								console.log(data);
+								var obj = eval('(' + data + ')');
+								if(1 == obj.msgCode) {
+									throwable_util.url.refresh();
+								}
 							}
 						});
 				} else {

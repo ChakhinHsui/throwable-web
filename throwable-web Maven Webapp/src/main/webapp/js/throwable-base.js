@@ -34,7 +34,8 @@ var throwable_base = {
 			userLogin: "login.html",
 			userQuestion : "question/queryUserQuestion",
 			userFocusQuestion : "question/queryUserFocusQuestion",
-			userAnswer : "answer/getUserAnswers"
+			userAnswer : "answer/getUserAnswers",
+			userQuestionNumber : "question/queryUserQuestionNum"
 		},
 		userInfo : {
 			id : 0,

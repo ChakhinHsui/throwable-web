@@ -1,5 +1,18 @@
 var user_info = {
 		getBaseUserInfo : function(id) {
+			throwable_base.login.isLogin(id, function(isLogin){
+				if(1 == isLogin) {
+					console.log(isLogin);
+					$("#username_area").html(throwable_base.userInfo.username);
+					console.log(isLogin);
+					$.post(throwable_base.urls.userQuestionNumber, {userId : id}, function(result){
+						console.log("ok");
+						console.log(result);
+					},"json");
+				} else {
+					throwable_util.url.location(throwable_base.urls.userLogin);
+				}
+			});
 		},
 		getUserQuestion : function(id) {
 			$.post(throwable_base.urls.userQuestion, {userId : id}, function(result) {
