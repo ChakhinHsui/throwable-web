@@ -13,7 +13,7 @@ var throwable_util = {
 			return true;
 		},
 		/**
-		 * 判断值是不是为空 为null  为undefined
+		 * 判断值是不是为空'' 为null  为undefined
 		 */
 		isEmpty : function(value) {
 			if(!value) {
@@ -55,7 +55,8 @@ var throwable_util = {
 		getUrlParam : function(name) {
 			var reg = new RegExp("(^|&)" + name +"=([^&]*)(&|$)");
     		var r = window.location.search.substr(1).match(reg);
-    		if (r!=null) return unescape(r[2]); return null;
+    		if (r!=null) return unescape(r[2]); 
+    		return null;
 		},
 		location : function(url) {
 			  window.location.href = url;
