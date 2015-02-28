@@ -1,13 +1,17 @@
 var throwable_base = {
 		login : {
-			isLogin : function(userId, callBack){
+			isLogin : function(userId, callback){
 				$.post("user/userIsLogin",
 						{userId: userId},
 						function(result){
 							if(result.msgCode == 1) {
-								callBack(1);
+								console.log(result);
+								throwable_base.userInfo.id = result.userId;
+								throwable_base.userInfo.username = result.username;
+								console.log(throwable_base.userInfo);
+								callback(1);
 							} else {
-								callBack(0);
+								callback(2);
 							}
 						}, "json");
 			},
@@ -30,7 +34,8 @@ var throwable_base = {
 			userLogin: "login.html",
 			userQuestion : "question/queryUserQuestion",
 			userFocusQuestion : "question/queryUserFocusQuestion",
-			userAnswer : "answer/getUserAnswers"
+			userAnswer : "answer/getUserAnswers",
+			userQuestionNumber : "question/queryUserQuestionNum"
 		},
 		userInfo : {
 			id : 0,

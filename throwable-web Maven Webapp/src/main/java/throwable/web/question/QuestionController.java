@@ -129,4 +129,18 @@ public class QuestionController {
 		}
 		return questionService.getUserFocus(userId);
 	}
+	
+	/**
+	 * 查询用户问题个数
+	 * @param userId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@At("/queryUserQuestionNum")
+	public Map queryUserQuestionNumber(int userId) {
+		if(userId < 1) {
+			return BackTool.errorInfo("0500", "用户id不能为空");
+		}
+		return questionService.getUserQuestionNumber(userId);
+	}
 }

@@ -38,6 +38,7 @@ public class ThirftCommon {
 	public static final String Q_GET_NEW_MOST_ANSWER_QUESTION = "question.getNewMostAnswerQuestions"; //查询10条最新回答最多的问题
 	public static final String Q_GET_USER_QUESTIONS = "question.getUserQuestions";  //查询用户的问题
 	public static final String Q_GET_USER_FOCUS = "question.getUserFocusQuestion";  //查询用户关注的问题
+	public static final String Q_GET_USER_QUESTION_NUM = "question.getUserQuestionNumber";  //查询用户提问的问题数
 	
 	/********************** 答案相关接口 ***************************/
 	public static final String A_ADD_ANSWER = "answer.addAnswer";  //添加答案

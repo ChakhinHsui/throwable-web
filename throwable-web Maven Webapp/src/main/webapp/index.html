@@ -6,6 +6,7 @@
 <title>欢迎来到Throwable</title>
 <meta name="keywords" content="throwaable,seava,error">
 <meta name="description" content="ThrowAble网站！">
+<meta name="content-type" content="text/html; charset=UTF-8">
 <link rel="Bookmark" href="favicon.ico" >
 <link rel="Shortcut Icon" href="faviconte.ico" />
 <!--[if lt IE 9]>
@@ -41,10 +42,13 @@
       <li><a href="#">案例</a></li>
       <li><a href="#">联系我们</a></li>
       <li>
+      	<div style="float: right" id="login_area">
       	
-      
+      	</div>
       </li>
+      
     </ul>
+    
   </nav>
 </header>
 <div class="wp cl mt-15 f-14">
@@ -133,13 +137,11 @@
   						<option value="2">私有</option>
   					</select>
   					<br><br>
-  			用户id<br><input type="text" id="user_id" /><br><br>
   		</form>
-  		
       			</div>
       			<div class="modal-footer">
       				<span id="sure-botton"></span>
-      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="throwable_index.addQuestion();">添加问题</button>
+      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="ask();">添加问题</button>
         			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       			</div>
     		</div><!-- /.modal-content -->
@@ -167,14 +169,21 @@
 <script type="text/javascript" src="Lib/stickUp.min.js"></script> 
 <script type="text/javascript" src="Lib/bootstrap-modalmanager.js"></script> 
 <script type="text/javascript" src="Lib/bootstrap-modal.js"></script> 
-<script type="text/javascript" src="js/throwable-base.js"></script> 
-<script type="text/javascript" src="js/utils.js"></script> 
-<script type="text/javascript" src="js/index.js"></script> 
+<script type="text/javascript" charset="utf-8" src="js/throwable-base.js"></script> 
+<script type="text/javascript" charset="utf-8" src="js/utils.js"></script> 
+<script type="text/javascript" charset="utf-8" src="js/index.js"></script> 
 <!--三个选择页代码--> 
 <script type="text/javascript">
 var ue = UE.getEditor('myEditor');
 	$(function(){
 		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		throwable_base.login.isLogin("", function(isLogin){
+			if(1 == isLogin) {
+				$("#login_area").html('<a href="memberinfo.html?id='+throwable_base.userInfo.id+'">'+throwable_base.userInfo.username+'</a>');
+			} else {
+				$("#login_area").html('<a href="login.html">登陆</a>');
+			}
+		});
 		$.post("question/getPublicQuestion", 
 			{}, 
 			function(result){
@@ -243,6 +252,20 @@ var ue = UE.getEditor('myEditor');
 			retStr += str;
 		}
 		return retStr;
+	}
+	
+	function ask() {
+		var jsonObject = {
+				question_name:$("#name").val(),
+					question_description:ue.getContent(),
+					question_type:$("#type2").val(),
+					kind_id:1,
+					user_id:throwable_base.userInfo.id
+		};
+		console.log(jsonObject);
+		$.post("question/addQuestion", jsonObject, function(result){
+			console.log(result);
+		}, "json");
 	}
 	
 </script>

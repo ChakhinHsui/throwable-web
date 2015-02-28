@@ -4,6 +4,7 @@
  */
 package throwable.web.question;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.nutz.ioc.loader.annotation.Inject;
@@ -193,6 +194,27 @@ public class QuestionService {
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_USER_FOCUS, thirftCommon.initParams("userId", userId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 查询用户的问题数
+	 * @param userId
+	 * @return
+	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map getUserQuestionNumber(int userId) {
+		Map map = new HashMap();
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_USER_QUESTION_NUM, thirftCommon.initParams("userId", userId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map.put("number", msg.retMsg);
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
 			}
