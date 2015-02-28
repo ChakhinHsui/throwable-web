@@ -102,7 +102,11 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
-		throwable_base.login.isLogin();
+		throwable_base.login.isLogin("", function(temp){
+			if(temp == 1) {
+				throwable_util.url.location("index.html");
+			}
+		});
 	});
 
 	$("#login-form").submit(function(){

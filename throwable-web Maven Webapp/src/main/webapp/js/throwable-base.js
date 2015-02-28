@@ -1,15 +1,13 @@
 var throwable_base = {
 		login : {
-			isLogin : function(userId){
+			isLogin : function(userId, callBack){
 				$.post("user/userIsLogin",
 						{userId: userId},
 						function(result){
 							if(result.msgCode == 1) {
-								throwable_base.userInfo.id = result.id;
-								throwable_base.userInfo.username = result.username;
-								return true;
+								callBack(1);
 							} else {
-								return false;
+								callBack(0);
 							}
 						}, "json");
 			},

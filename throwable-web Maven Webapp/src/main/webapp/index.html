@@ -51,7 +51,7 @@
   <div class="row row-980-20"> 
     <!--以下为大标题部分内容--开始-->
     <div class="main-top-question f-24"> 提出你的问题，大家来解决。
-      <button class="btn radius radius btn-info" type="button" onclick="throwable_index.ask();">提问题</button>
+      <input class="btn radius radius btn-info" type="button" value="提问题" onclick="throwable_index.ask();" />
     </div>
     <!--<div class="searchBar">
   			<form class="form-search" method="post" action="">
@@ -139,7 +139,7 @@
       			</div>
       			<div class="modal-footer">
       				<span id="sure-botton"></span>
-      				<button type="button" class="btn btn-default" data-dismiss="modal">添加问题</button>
+      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="throwable_index.addQuestion();">添加问题</button>
         			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       			</div>
     		</div><!-- /.modal-content -->
@@ -243,13 +243,6 @@ var ue = UE.getEditor('myEditor');
 			retStr += str;
 		}
 		return retStr;
-	}
-	
-	function ask() {
-	/*	$("#modal-body-context").load("questionAdd.html", function(response, status, xhr){
-				alert(status);
-		});*/
-		$("#myModal").modal("show");
 	}
 	
 </script>
