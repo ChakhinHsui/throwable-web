@@ -24,6 +24,7 @@ var throwable_index = {
 					$("#name").val("");
 					//清空富文本的内容
 					ue.execCommand('cleardoc');
+					throwable_util.url.refresh();
 				}
 			}, "json");
 			/*$.ajax({

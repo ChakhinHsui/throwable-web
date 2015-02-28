@@ -1,5 +1,6 @@
 package throwable.web.answer;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.nutz.ioc.loader.annotation.Inject;
@@ -62,6 +63,24 @@ public class AnswerService {
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.A_GET_USER_ANSWER, thirftCommon.initParams("userId", userId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		System.out.println(map);
+		return map;
+	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map getUserAnswerNumber(int userId) {
+		Map map = new HashMap();
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.A_GET_USER_ANSWER_NUM, thirftCommon.initParams("userId", userId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.getRetMap();
+				map.put("number", msg.retMsg);
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
 			}

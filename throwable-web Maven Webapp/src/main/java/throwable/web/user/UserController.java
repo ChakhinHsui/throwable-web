@@ -1,6 +1,5 @@
 package throwable.web.user;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,5 +106,25 @@ public class UserController {
 			return BackTool.errorInfo("010503");
 		}
 		return BackTool.successInfo();
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getUserExtendInfo")
+	public Map getUserExtendInfo(int userId) {
+		if(userId < 1) {
+			return BackTool.errorInfo("010501");
+		}
+		return userService.getUserExtendInfo(userId);
+	}
+	
+	public Map saveUserExtend(int userId, String live_address, 
+			String now_job, String graduate_school, String motto,
+			String interest, String goodAt) {
+		if(userId < 1) {
+			return BackTool.errorInfo("010501");
+		}
+		
+		return null;
 	}
 }

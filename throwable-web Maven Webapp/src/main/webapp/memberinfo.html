@@ -54,9 +54,9 @@
      <div class="line"></div>
       <!--三大要素区--start-->  
      <div class="clearfix">
-     	<a href="#"><div class="span-2 text-c border-without-top" style="margin-top: 0px;margin-right: 0px;padding-right: 10px;"><div class="f-30 c-green">1223</div><div class="c-gray">提问</div></div></a>
-        <a href="#"><div class="span-2 text-c border-without-top" style="margin-top: 0px;margin-right: 0px;padding-right: 10px;"><div class="f-30 c-orange">213</div><div class="c-gray">回答</div></div></a>
-        <a href="#"><div class="span-2 text-c border-without-top" style="margin-top: 0px;margin-right: 0px;padding-right: 10px;"><div class="f-30 c-blue">1223</div><div class="c-gray">赞同</div></div></a>
+     	<a href="#"><div class="span-2 text-c border-without-top" style="margin-top: 0px;margin-right: 0px;padding-right: 10px;"><div id="ask_num" class="f-30 c-green">0</div><div class="c-gray">提问</div></div></a>
+        <a href="#"><div class="span-2 text-c border-without-top" style="margin-top: 0px;margin-right: 0px;padding-right: 10px;"><div id="answer_num" class="f-30 c-orange">0</div><div class="c-gray">回答</div></div></a>
+        <a href="#"><div class="span-2 text-c border-without-top" style="margin-top: 0px;margin-right: 0px;padding-right: 10px;"><div id="agree_num" class="f-30 c-blue">0</div><div class="c-gray">赞同</div></div></a>
      </div>
      <!--三大要素区--end--> 
       <!--数据区--start-->   
@@ -139,15 +139,17 @@
     <div class="pt-5 pb-5 pl-5 pr-5 tips">
     	
 	<div style="width:480px;">
-    <p>所在城市：广东省 深圳市</p>
-    <p>现任职位：希瓦科技有限公司 研发工程师</p>
-    <p>院校专业：西南大学 计算机应用技术</p>
-    <p>个人宣言：我跟你什么仇什么怨</p>
-    <p>注册时间：2014年12月11日</p>
+    <p>所在城市：<span id="live_location"></span></p>
+    <p>现任职位：<span id="now_job"></span></p>
+    <p>院校专业：<span id="graduate_school"></span></p>
+    <p>个人宣言：<span id="motto"></span></p>
+    <p>个人兴趣：<span id="interest"></span></p>
+    <p>擅长：<span id="goodAt"></span></p>
+    <p>注册时间：<span id="register_time"></span></p>
     </div>
     
     <div style="margin-left:580px;">
-    	<button class="btn radius radius btn-link" type="button">编辑信息</button>
+    	<button class="btn radius radius btn-link" type="button" onclick="user_info.openEditDialog();">编辑信息</button>
     </div>
 
 
@@ -197,6 +199,38 @@
   </div>
 </div>
 
+<!-- 弹窗代码  begin -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    	<div class="modal-dialog" style="width: 100%;">
+    		<div class="modal-content">	
+    			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        			<h4 class="modal-title" id="myModalLabel">编辑个人信息</h4>
+      			</div>
+      			<div class="modal-body" id="modal-body-context">
+      				
+      				<form id="question">
+  						住址 <input type="text" id="add_live_location" style="width: 100%;" /><br>
+  						职位 <input type="text" id="add_now_job" style="width: 100%;" /><br>
+  						毕业院校<input type="text" id="add_graduate_school" style="width: 100%;" /><br>
+  						座右铭<input type="text" id="add_motto" style="width: 100%;" /><br>
+  						兴趣<input type="text" id="add_interest" style="width: 100%;" /><br>
+  						擅长<input type="text" id="add_goodAt" style="width: 100%;" /><br>
+  					</form>
+      			</div>
+      			<div class="modal-footer">
+      				<span id="sure-botton"></span>
+      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="user_info.saveExtendInfo();">保存信息</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      			</div>
+    		</div><!-- /.modal-content -->
+  		</div>
+    </div>
+    
+    <div id="ajaxModal" class="modal hide fade" tabindex="-1" data-width="700"></div>
+<!-- 弹窗代码  end -->
+
+
 <footer class="footer cl wp">
   <p>Copyright &copy;2013-2014 throwable.com All Rights Reserved. Seava Studio</p>
   <div class="row row-980-20 c-black">
@@ -221,11 +255,19 @@
 <script type="text/javascript">
 $(function(){
 		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
-		user_info.getBaseUserInfo(throwable_util.url.getUrlParam("id"));
-		throwable_base.login.isLogin(11);
-		user_info.getUserAnswer(11);
-		user_info.getUserQuestion(11);
-		user_info.getUserFocusQuestion(11);
+		
+		var id = throwable_util.url.getUrlParam("id");
+		throwable_base.login.isLogin(id, function(isLogin){
+			if(1 == isLogin) {
+				console.log(id);
+				user_info.getBaseUserInfo(id);
+				user_info.getUserAnswer(id);
+				user_info.getUserQuestion(id);
+				//user_info.getUserFocusQuestion(id);
+			} else {
+				throwable_util.url.location(throwable_base.urls.userLogin);
+			}
+		});
 	}); 
 </script>
 </body>

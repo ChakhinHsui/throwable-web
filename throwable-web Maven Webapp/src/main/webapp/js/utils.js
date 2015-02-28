@@ -63,6 +63,9 @@ var throwable_util = {
 		},
 		refresh : function() {
 			window.location.reload();
+		},
+		goPre : function() {
+			 window.location.href = document.referrer; //使用document.referrer
 		}
 	}
 };

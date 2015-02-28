@@ -107,12 +107,9 @@ public class QuestionController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/queryUserQuestion")
-	public Map queryUserQuestion(@Param("userId") String userId) {
-		if(StringTool.isEmpty(userId)) {
+	public Map queryUserQuestion(int userId) {
+		if(userId < 1) {
 			return BackTool.errorInfo("0300", "用户id不能为空");
-		}
-		if(!StringTool.isNumber(userId)) {
-			return BackTool.errorInfo("0301", "用户id必须为数字");
 		}
 		return questionService.getUserQuestion(userId);
 	}
@@ -136,6 +133,7 @@ public class QuestionController {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
+	@Ok("json")
 	@At("/queryUserQuestionNum")
 	public Map queryUserQuestionNumber(int userId) {
 		if(userId < 1) {

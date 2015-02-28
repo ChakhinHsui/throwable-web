@@ -12,7 +12,6 @@ import org.nutz.ioc.loader.annotation.IocBean;
 import throwable.server.framework.client.ClientPools;
 import throwable.server.framework.rpc.ResultCode;
 import throwable.server.framework.rpc.ResultMsg;
-import throwable.web.WebConf;
 import throwable.web.enums.LoginMark;
 import throwable.web.utils.BackTool;
 import throwable.web.utils.LoginTool;
@@ -26,7 +25,7 @@ public class UserService {
 	@Inject
 	private ThirftCommon thirftCommon;
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({"unchecked","rawtypes"})
 	public Map userLogin(String username, String password, String ip, HttpServletRequest req, HttpSession session) {
 		if(LoginTool.isLogin(session)) {
 			return BackTool.errorInfo("010303");
@@ -36,6 +35,7 @@ public class UserService {
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.USER_LOGIN, thirftCommon.initParams("username", username, "password", password, "ip", ip), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
+				map.put("msgCode", 1);
 				LoginTool.addSession(req, Integer.parseInt(map.get("id").toString()), map.get("username").toString(), map.get("rights").toString(), map.get("user_state").toString(), LoginMark.hasLogin.getText());
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
@@ -71,6 +71,46 @@ public class UserService {
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				retMsg = msg.getRetMsg();
 				map.put("active", retMsg);
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	/**
+	 * 获得用户扩展信息
+	 * @param userId
+	 * @return
+	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map getUserExtendInfo(int userId) {
+		Map map = new HashMap();
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.GET_USER_EXTEND, thirftCommon.initParams("userId", userId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.retMap;
+				map.put("msgCode", 1);
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	public Map saveUserExtendInfo(int userId, String live_address, 
+			String now_job, String graduate_school, String motto,
+			String interest, String goodAt) {
+		Map map = new HashMap();
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.GET_USER_EXTEND, thirftCommon.initParams("userId", userId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map = msg.retMap;
+				map.put("msgCode", 1);
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
 			}

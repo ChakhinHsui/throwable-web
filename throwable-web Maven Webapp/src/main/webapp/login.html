@@ -125,7 +125,11 @@
 				password : $("#pword").val()
 		};
 		$.post("user/login", jsonObject, function(result){
-			alert(JSON.stringify(result));
+			var object = JSON.stringify(result);
+			console.log(object);
+			if(object.msgCode && object.msgCode == 1) {
+				throwable_util.url.goPre();
+			}
 		}, "json");
 		return false;
 	});

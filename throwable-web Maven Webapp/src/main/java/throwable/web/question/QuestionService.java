@@ -167,7 +167,7 @@ public class QuestionService {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map getUserQuestion(String userId) {
+	public Map getUserQuestion(int userId) {
 		Map map = null;
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_USER_QUESTIONS, thirftCommon.initParams("userId", userId), 100);

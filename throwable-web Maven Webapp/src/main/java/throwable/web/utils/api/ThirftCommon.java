@@ -28,6 +28,9 @@ public class ThirftCommon {
 	public static final String USER_ACTIVE = "user.active"; //用户激活 通过邮件的链接激活
 	public static final String USER_REGISTER = "user.register";  //用户注册
 	public static final String Get_All_USER = "user.getAllUserInfo";  //查询所有用户
+	public static final String GET_USER_EXTEND = "user.getUserExtendInfo";  //查询用户扩展信息
+	public static final String SAVE_USER_EXTEND = "user.saveUserExtendInfo";  //保存用户扩展信息
+	
 	
 	/********************** 问题相关接口 ***************************/
 	public static final String Q_ADD_QUESTION = "question.addQuestion";   //添加问题
@@ -44,6 +47,7 @@ public class ThirftCommon {
 	public static final String A_ADD_ANSWER = "answer.addAnswer";  //添加答案
 	public static final String A_GET_ANSWER = "answer.getAnswer";  //根据问题id获得answer 用于详细页显示
 	public static final String A_GET_USER_ANSWER = "answer.getUserAnswer";  //查询用户回答过得问题
+	public static final String A_GET_USER_ANSWER_NUM = "answer.getUserAnswerNumber";  //查询用户回答问题的个数
 	
 	/**
 	 * 根据传递参数 组织成 thrift需要的参数 MAP， 省去每次都写一个初始化MAP的工作

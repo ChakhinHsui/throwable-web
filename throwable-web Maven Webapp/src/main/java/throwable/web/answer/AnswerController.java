@@ -62,4 +62,19 @@ public class AnswerController {
 		}
 		return answerService.getUserAnswers(userId);
 	}
+	
+	/**
+	 * 获得用户回答的个数
+	 * @param userId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getUserAnswerNum")
+	public Map getUserAnserNumber(int userId) {
+		if(userId < 1) {
+			return BackTool.errorInfo("030301", "用户id不能为空");
+		}
+		return answerService.getUserAnswerNumber(userId);
+	}
 }
