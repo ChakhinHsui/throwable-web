@@ -118,13 +118,15 @@ public class UserController {
 		return userService.getUserExtendInfo(userId);
 	}
 	
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/saveUserExtendInfo")
 	public Map saveUserExtend(int userId, String live_address, 
 			String now_job, String graduate_school, String motto,
 			String interest, String goodAt) {
 		if(userId < 1) {
 			return BackTool.errorInfo("010501");
 		}
-		
-		return null;
+		return userService.saveUserExtendInfo(userId, live_address, now_job, graduate_school, motto, interest, goodAt);
 	}
 }

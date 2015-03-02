@@ -37,7 +37,8 @@ var throwable_base = {
 			userAnswer : "answer/getUserAnswers",
 			userQuestionNumber : "question/queryUserQuestionNum",
 			userAnswerNumber : "answer/getUserAnswerNum",
-			userExtendInfo : "user/getUserExtendInfo"
+			userExtendInfo : "user/getUserExtendInfo",
+			UserSaveExtendInfo : "user/saveUserExtendInfo"
 		},
 		userInfo : {
 			id : 0,

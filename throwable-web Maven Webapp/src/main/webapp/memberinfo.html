@@ -217,6 +217,10 @@
   						兴趣<input type="text" id="add_interest" style="width: 100%;" /><br>
   						擅长<input type="text" id="add_goodAt" style="width: 100%;" /><br>
   					</form>
+  					<form enctype="multipart/form-data" method="post">
+  						<input type="file" name="imageUpload" />
+  						<button class="button" onclick="return ajaxImageUpload();">上传</button> 
+  					</form>
       			</div>
       			<div class="modal-footer">
       				<span id="sure-botton"></span>

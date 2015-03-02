@@ -10,7 +10,13 @@ var user_info = {
 			$.post(throwable_base.urls.userExtendInfo, {userId : id}, function(result){
 				console.debug(result);
 				if(1 == result.msgCode) {
-					
+					$("#live_location").html(result.live_address);
+					$("#now_job").html(result.now_job);
+					$("#graduate_school").html(result.graduate_school);
+					$("#motto").html(result.motto);
+					$("#interest").html(result.interest);
+					$("#goodAt").html(result.goodAt);
+					$("#register_time").html(result.create_time);
 				}
 			},"json");
 		},
@@ -43,7 +49,7 @@ var user_info = {
 					if("已解决" == obj[i].solved) {
 						str += '<br>正确答案 ' + obj[i].answer_abstract;
 					}
-					str += '</p></li>'
+					str += '</p></li>';
 				}
 				str += '</ul>';
 				$("#" + div).html(str);
@@ -79,6 +85,23 @@ var user_info = {
 			$("#myModal").modal("show");
 		},
 		saveExtendInfo : function() {
-			
+			var jsonObject = {
+					userId: throwable_base.userInfo.id,
+					live_address: $("#add_live_location").val(),
+					now_job: $("#add_now_job").val(),
+					graduate_school: $("#add_graduate_school").val(),
+					motto: $("#add_motto").val(),
+					interest: $("#add_interest").val(),
+					goodAt: $("#add_goodAt").val()
+			};
+			$.post(throwable_base.urls.UserSaveExtendInfo, jsonObject, function(result){
+				console.log(result);
+				if(1 == result.msgCode) {
+					throwable_util.url.refresh();
+				}
+			}, "json");
+		},
+		ajaxImageUpload : function() {
+			$.ajaxFile
 		}
 };
