@@ -73,7 +73,7 @@
     </div>
     <div class="row row-980-20 f-14 mb-40">
       <div class="span-7"> </div>
-      <div class="span-2"><a href="#">注册帐号</a></div>
+      <div class="span-2"><a href="register.html">注册帐号</a></div>
       <div class="span-2"></div>
       <div class="span-2"><a href="#">找回密码</a></div>
       <div class="span-7"></div>
@@ -125,9 +125,11 @@
 				password : $("#pword").val()
 		};
 		$.post("user/login", jsonObject, function(result){
-			console.log(result.msgCode);
+			console.log(result);
 			if(1 == result.msgCode) {
 				throwable_util.url.location("index.html");
+			}else{
+				alert(result.errorMsg);
 			}
 		}, "json");
 		return false;

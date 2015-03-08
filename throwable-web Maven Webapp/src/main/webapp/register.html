@@ -47,7 +47,7 @@
             <h4 class="required"><strong>电子邮箱</strong></h4>
             <input type="text" id="email" placeholder="请输入常用的电子邮箱" class="input-text input-big radius  mt-5" style="width:90%;">
             <h4 class="required"><strong>密码</strong></h4>
-            <input type="text" id="password" placeholder="必须有英文和数字，至少6位" type="password" class="input-text input-big radius  mt-5" style="width:90%;">
+            <input type="password" id="password" placeholder="必须有英文和数字，至少6位" type="password" class="input-text input-big radius  mt-5" style="width:90%;">
             <h4 class="required"><strong>验证码</strong></h4>
             <input type="text" id="checkcode" placeholder="请输入下方验证码，不区别大小写" class="input-text input-big radius  mt-5" style="width:90%;">
             <img src="static/h-ui/images/yzm.jpg"  width="150"/>
@@ -90,6 +90,7 @@
 <script type="text/javascript" src="Lib/bootstrap-modalmanager.js"></script> 
 <script type="text/javascript" src="Lib/bootstrap-modal.js"></script>
 <script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/throwable-base.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	throwable_base.login.isLogin("", function(temp){
@@ -129,6 +130,7 @@ $(document).ready(function(){
 		console.log(JSON.stringify(jsonObject));
 		$.post("user/register", jsonObject, function(result){
 			console.log(JSON.stringify(result));
+			throwable_util.url.location("login.html");
 		}, "json");
 		return false;
 	});

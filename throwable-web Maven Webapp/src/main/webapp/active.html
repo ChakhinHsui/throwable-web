@@ -12,13 +12,13 @@
     <script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			alert(throwalbe_util.url.getUrlParam("key"));
 			var jsonObject = {
-					key:throwalbe_util.url.getUrlParam("key")
+					key:throwable_util.url.getUrlParam("key")
 			};
+			console.log(jsonObject);
 			$.post("user/activeUser", jsonObject, function(result){
 				if(result.active == "OK") {
-					  window.location.href = "index.html";
+					  throwable_util.url.location("index.html");
 				}
 			}, "json");
 		});
@@ -26,6 +26,6 @@
   </head>
   
   <body>
-    
+    <h2>Hello</h2>
   </body>
 </html>
