@@ -43,16 +43,16 @@
           <div class="pl-20">
           	<form id="register_form">
             <h4 class="required"><strong>用户名</strong></h4>
-            <input type="text" id="username" placeholder="只支持字母、数字" class="input-text input-big radius  mt-5" style="width:465px;">
+            <input type="text" id="username" placeholder="只支持字母、数字" class="input-text input-big radius  mt-5" style="width:90%;">
             <h4 class="required"><strong>电子邮箱</strong></h4>
-            <input type="text" id="email" placeholder="请输入常用的电子邮箱" class="input-text input-big radius  mt-5" style="width:465px;">
+            <input type="text" id="email" placeholder="请输入常用的电子邮箱" class="input-text input-big radius  mt-5" style="width:90%;">
             <h4 class="required"><strong>密码</strong></h4>
-            <input type="text" id="password" placeholder="必须有英文和数字，至少6位" type="password" class="input-text input-big radius  mt-5" style="width:465px;">
+            <input type="text" id="password" placeholder="必须有英文和数字，至少6位" type="password" class="input-text input-big radius  mt-5" style="width:90%;">
             <h4 class="required"><strong>验证码</strong></h4>
-            <input type="text" id="checkcode" placeholder="请输入下方验证码，不区别大小写" class="input-text input-big radius  mt-5" style="width:465px;">
+            <input type="text" id="checkcode" placeholder="请输入下方验证码，不区别大小写" class="input-text input-big radius  mt-5" style="width:90%;">
             <img src="static/h-ui/images/yzm.jpg"  width="150"/>
             <p>提交注册表示您已同意<a href="#" class="c-green">《ThrowAble服务条例》</a></p>
-            <input class="btn radius btn-success btn-big mt-5"  style="width:475px;" type="submit" value="注册">
+            <input class="btn radius btn-success btn-big mt-5"  style="width:475px;" type="submit" value="注册" style="width:80%;">
             </form>
           </div>
         </div>
@@ -91,6 +91,14 @@
 <script type="text/javascript" src="Lib/bootstrap-modal.js"></script>
 <script type="text/javascript" src="js/utils.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+	throwable_base.login.isLogin("", function(temp){
+		if(temp == 1) {
+			throwable_util.url.location("index.html");
+		}
+	});
+});
+
 	$("#register_form").submit(function(){
 		if(!throwable_util.checkValue.isEmptyById("username")){
 			alert("用户名不能为空");
@@ -118,9 +126,9 @@
 				email:$("#email").val(),
 				nickname:$("#username").val()
 		};
-		alert(JSON.stringify(jsonObject));
+		console.log(JSON.stringify(jsonObject));
 		$.post("user/register", jsonObject, function(result){
-			alert(JSON.stringify(result));
+			console.log(JSON.stringify(result));
 		}, "json");
 		return false;
 	});

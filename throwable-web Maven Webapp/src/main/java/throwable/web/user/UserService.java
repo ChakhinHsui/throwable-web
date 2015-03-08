@@ -105,12 +105,12 @@ public class UserService {
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Map saveUserExtendInfo(int userId, String live_address, 
 			String now_job, String graduate_school, String motto,
-			String interest, String goodAt) {
+			String interest, String goodAt, String photo) {
 		Map map = null;
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.SAVE_USER_EXTEND, thirftCommon.initParams("user_id", userId, 
 					"live_address", live_address, "now_job", now_job, "graduate_school", graduate_school, "motto", motto, 
-					"interest", interest, "goodAt", goodAt), 100);
+					"interest", interest, "goodAt", goodAt, "image", photo), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.retMap;
 				map.put("msgCode", 1);

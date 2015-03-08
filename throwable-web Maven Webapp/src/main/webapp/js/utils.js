@@ -27,12 +27,11 @@ var throwable_util = {
 		 * @returns {Boolean}
 		 */
 		isEmail : function(email) {
-			if(!throwalbe_util.checkValue.isEmpty(email)) {
+			console.log("ff");
+			if(!throwable_util.regx.email_regx.test(email)) {
 				return false;
 			}
-			if(!email.match(throwalbe_util.regx.email_regx)) {
-				return false;
-			}
+			console.log("mm");
 			return true;
 		}
 	},
@@ -41,7 +40,7 @@ var throwable_util = {
 	 */
 	regx:{
 		//邮箱的正则表达式
-		email_regx: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/
+		email_regx:  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 	},
 	/**
 	 * 与url相关的基础工具

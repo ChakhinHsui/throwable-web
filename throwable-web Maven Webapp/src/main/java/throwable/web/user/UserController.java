@@ -1,5 +1,8 @@
 package throwable.web.user;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,9 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
+import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
+import org.nutz.mvc.upload.UploadAdaptor;
 
 import throwable.web.WebConf;
 import throwable.web.enums.Right;
@@ -39,7 +44,7 @@ public class UserController {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	@Ok("json")
+	@Ok("redirect:/memberinfo.html")
 	@At("/register")
 	public Map register(@Param("username") String username, @Param("password") String password, @Param("email") String email, @Param("nickname") String nickname, HttpServletRequest req){
 		if(StringTool.isEmpty(username)){
@@ -121,12 +126,38 @@ public class UserController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/saveUserExtendInfo")
+	@AdaptBy(type=UploadAdaptor.class, args={"ioc:myUpload"})
 	public Map saveUserExtend(int userId, String live_address, 
 			String now_job, String graduate_school, String motto,
-			String interest, String goodAt) {
+			String interest, String goodAt, String image, @Param("photo") File file) {
 		if(userId < 1) {
 			return BackTool.errorInfo("010501");
 		}
-		return userService.saveUserExtendInfo(userId, live_address, now_job, graduate_school, motto, interest, goodAt);
+		String photo = null;
+		if(null == file) {
+			photo = image;
+		} else {
+			try {
+				String fileName = file.getName();
+				File outFile = new File("../webapps/throwable-web/photo/" + userId + "_" + System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf(".")));
+				if(!outFile.exists()) {
+					outFile.createNewFile();
+				}
+				FileInputStream fis = new FileInputStream(file);
+				FileOutputStream fos = new FileOutputStream(outFile);
+				byte[] buffer = new byte[1444];
+				int temp = 0;
+				while((temp = fis.read(buffer)) != -1) {
+					fos.write(buffer, 0, temp);
+				}
+				fos.flush();
+				fos.close();
+				fis.close();
+				photo = outFile.getName().substring(outFile.getName().lastIndexOf("/") + 1);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return userService.saveUserExtendInfo(userId, live_address, now_job, graduate_school, motto, interest, goodAt, photo);
 	}
 }

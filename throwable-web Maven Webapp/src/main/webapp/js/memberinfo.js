@@ -17,6 +17,10 @@ var user_info = {
 					$("#interest").html(result.interest);
 					$("#goodAt").html(result.goodAt);
 					$("#register_time").html(result.create_time);
+					$("#image").val(result.image);
+					var str = '<img  alt="露个相吧朋友" class=" box-shadow" src="static/h-ui/images/avatar_default.jpg"/>';
+					str = '<img  alt="露个相吧朋友" style="width:70%; height:100%" class=" box-shadow" src="photo/'+result.image+'"/>';
+					$("#image_area").html(str);
 				}
 			},"json");
 		},
@@ -83,6 +87,8 @@ var user_info = {
 			$("#add_interest").val($("#interest").html());
 			$("#add_goodAt").val($("#goodAt").html());
 			$("#myModal").modal("show");
+			$("#add_userId").val(throwable_util.url.getUrlParam("id"));
+			$("#add_image").val($("#image").val());
 		},
 		saveExtendInfo : function() {
 			var jsonObject = {
@@ -100,6 +106,9 @@ var user_info = {
 					throwable_util.url.refresh();
 				}
 			}, "json");
+		},
+		saveExtendInfo2 : function() {
+			$("#user_extend_add").submit();
 		},
 		ajaxImageUpload : function() {
 			$.ajaxFile

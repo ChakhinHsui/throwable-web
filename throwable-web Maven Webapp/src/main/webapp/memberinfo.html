@@ -42,7 +42,7 @@
   <div class="row row-980-20"> 
     <div class="span-6">
     <!--头像图片区--start-->
-    <div>
+    <div id = "image_area">
 	<img  alt="单击此处修改个人头像" class=" box-shadow" src="static/h-ui/images/avatar_default.jpg"/>
     </div>
     <!--头像图片区--end-->  
@@ -145,7 +145,7 @@
     <p>个人宣言：<span id="motto"></span></p>
     <p>个人兴趣：<span id="interest"></span></p>
     <p>擅长：<span id="goodAt"></span></p>
-    <p>注册时间：<span id="register_time"></span></p>
+    <p>注册时间：<span id="register_time"></span><input type="hidden" id="image" /></p>
     </div>
     
     <div style="margin-left:580px;">
@@ -209,22 +209,21 @@
       			</div>
       			<div class="modal-body" id="modal-body-context">
       				
-      				<form id="question">
-  						住址 <input type="text" id="add_live_location" style="width: 100%;" /><br>
-  						职位 <input type="text" id="add_now_job" style="width: 100%;" /><br>
-  						毕业院校<input type="text" id="add_graduate_school" style="width: 100%;" /><br>
-  						座右铭<input type="text" id="add_motto" style="width: 100%;" /><br>
-  						兴趣<input type="text" id="add_interest" style="width: 100%;" /><br>
-  						擅长<input type="text" id="add_goodAt" style="width: 100%;" /><br>
-  					</form>
-  					<form enctype="multipart/form-data" method="post">
-  						<input type="file" name="imageUpload" />
-  						<button class="button" onclick="return ajaxImageUpload();">上传</button> 
+      				<form id="user_extend_add" enctype="multipart/form-data" method="post" action="user/saveUserExtendInfo">
+      					 <input type="hidden" id="add_userId" name="userId" style="width: 100%;" />
+  						住址 <input type="text" name="live_address" id="add_live_location" style="width: 100%;" /><br>
+  						职位 <input type="text" name="now_job" id="add_now_job" style="width: 100%;" /><br>
+  						毕业院校<input type="text" name="graduate_school" id="add_graduate_school" style="width: 100%;" /><br>
+  						座右铭<input type="text" name="motto" id="add_motto" style="width: 100%;" /><br>
+  						兴趣<input type="text" name="interest" id="add_interest" style="width: 100%;" /><br>
+  						擅长<input type="text" name="goodAt" id="add_goodAt" style="width: 100%;" /><br><br>
+  						<input type="file" name="photo" /><br>
+  						<input type="hidden" id="add_image" name="image" />
   					</form>
       			</div>
       			<div class="modal-footer">
       				<span id="sure-botton"></span>
-      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="user_info.saveExtendInfo();">保存信息</button>
+      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="user_info.saveExtendInfo2();">保存信息</button>
         			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
       			</div>
     		</div><!-- /.modal-content -->

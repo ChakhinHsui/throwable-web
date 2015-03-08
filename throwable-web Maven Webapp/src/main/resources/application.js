@@ -35,7 +35,7 @@ var ioc = {
 		}
 	},
 	myUpload : {
-		type : 'org.nutz.mvc.upload.UploadAdapter',
+		type : 'org.nutz.mvc.upload.UploadAdaptor',
 		singleton : false,
 		args : [{refer : 'uploadFileContext'}]
 	}
