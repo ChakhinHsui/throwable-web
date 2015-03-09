@@ -81,12 +81,12 @@
     <div class="span-15"> 
       <!--问题部分--start-->
       <div class="bk-gray-bottom">
-        <div class="upordown box-shadow l"> <a href="#">
+        <div class="upordown box-shadow l"> <a href="javascript:throwable_details.agreeQuestion();">
           <div class="upordown-up box-shadow"></div>
           </a>
-          <div class="upordown-middle text-c c-orange">12</div>
-          <div class="upordown-middle text-c c-gray">2</div>
-          <a href="#">
+          <div id="agreeQ" class="upordown-middle text-c c-orange">12</div>
+          <div id="disagreeQ" class="upordown-middle text-c c-gray">2</div>
+          <a href="javascript:throwable_details.disagreeQuestion();">
           <div class="upordown-down box-shadow"></div>
           </a> </div>
         <div class="pl-50" id="question_description">
@@ -230,6 +230,8 @@
 					$("#question_description").html(result.question_description);
 					$("#question_author").html(result.username);
 					$("#question_time").html(result.create_time);
+					$("#agreeQ").html(result.agrees);
+					$("#disagreeQ").html(result.degrees);
 				}, "json");
 		$.post("answer/getAnswers", 
 				jsonObject, 
@@ -257,6 +259,11 @@
 						str += '<p>'+obj[i].answer_description+'</p></div></div>';
 						$("#answer_area").append(str);
 					}
+				}, "json");
+		$.post("question/addViewer", 
+				jsonObject, 
+				function(result){
+					console.log(result);
 				}, "json");
 	}); 
 </script>

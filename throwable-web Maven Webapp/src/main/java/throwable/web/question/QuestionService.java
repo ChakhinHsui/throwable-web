@@ -223,4 +223,52 @@ public class QuestionService {
 		}
 		return map;
 	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map addViewer(int questionId) {
+		Map map = new HashMap();
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_ADD_VIEWER, thirftCommon.initParams("questionId", questionId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map.put("number", msg.retMsg);
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map agreeQuestion(int questionId) {
+		Map map = new HashMap();
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_AGREE_QUESTION, thirftCommon.initParams("questionId", questionId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map.put("number", msg.retMsg);
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map disagreeQuestion(int questionId) {
+		Map map = new HashMap();
+		try{
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_DISAGREE_QUESTION, thirftCommon.initParams("questionId", questionId), 100);
+			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map.put("number", msg.retMsg);
+			}else{
+				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return map;
+	}
 }

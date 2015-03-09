@@ -42,6 +42,10 @@ public class ThirftCommon {
 	public static final String Q_GET_USER_QUESTIONS = "question.getUserQuestions";  //查询用户的问题
 	public static final String Q_GET_USER_FOCUS = "question.getUserFocusQuestion";  //查询用户关注的问题
 	public static final String Q_GET_USER_QUESTION_NUM = "question.getUserQuestionNumber";  //查询用户提问的问题数
+	public static final String Q_ADD_VIEWER = "question.addViewer";  //增加访问数
+	public static final String Q_AGREE_QUESTION = "question.agreeQuestion";  //顶问题
+	public static final String Q_DISAGREE_QUESTION = "question.disagreeQuestion"; //踩问题
+	
 	
 	/********************** 答案相关接口 ***************************/
 	public static final String A_ADD_ANSWER = "answer.addAnswer";  //添加答案

@@ -25,5 +25,21 @@ var throwable_details = {
 					throwable_util.url.location("login.html");
 				}
 			});
+		},
+		agreeQuestion : function(){
+			var jsonObject = {questionId:throwable_util.url.getUrlParam("qid")};
+			$.post("question/agreeQuestion", 
+					jsonObject, 
+					function(result){
+						console.log(result);
+					}, "json");
+		},
+		disagreeQuestion : function(){
+			var jsonObject = {questionId:throwable_util.url.getUrlParam("qid")};
+			$.post("question/disagreeQuestion", 
+					jsonObject, 
+					function(result){
+						console.log(result);
+					}, "json");
 		}
 };

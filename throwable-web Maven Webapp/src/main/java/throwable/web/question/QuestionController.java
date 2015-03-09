@@ -141,4 +141,49 @@ public class QuestionController {
 		}
 		return questionService.getUserQuestionNumber(userId);
 	}
+	
+	/**
+	 * 增加访问数
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/addViewer")
+	public Map addViewer(int questionId) {
+		if(questionId < 1) {
+			return BackTool.errorInfo("0200", "问题id不合法");
+		}
+		return questionService.addViewer(questionId);
+	}
+	
+	/**
+	 * 增加顶的个数
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/agreeQuestion")
+	public Map agreeQuestion(int questionId) {
+		if(questionId < 1) {
+			return BackTool.errorInfo("0200", "问题id不合法");
+		}
+		return questionService.agreeQuestion(questionId);
+	}
+	
+	/**
+	 * 增加踩的个数
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/disagreeQuestion")
+	public Map disagreeQuestion(int questionId) {
+		if(questionId < 1) {
+			return BackTool.errorInfo("0200", "问题id不合法");
+		}
+		return questionService.disagreeQuestion(questionId);
+	}
 }
