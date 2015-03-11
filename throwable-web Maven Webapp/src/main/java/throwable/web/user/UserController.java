@@ -139,8 +139,9 @@ public class UserController {
 		} else {
 			try {
 				String fileName = file.getName();
-				File outFile = new File("../webapps/throwable-web/photo/" + userId + "_" + System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf(".")));
+				File outFile = new File("../webapps/throwable/photo/" + userId + "_" + System.currentTimeMillis() + fileName.substring(fileName.lastIndexOf(".")));
 				if(!outFile.exists()) {
+					outFile.getParentFile().mkdir();
 					outFile.createNewFile();
 				}
 				FileInputStream fis = new FileInputStream(file);

@@ -7,6 +7,8 @@ import java.util.Map;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.json.Json;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 
 import throwable.server.framework.client.ClientPools;
 import throwable.server.framework.rpc.ResultMsg;
@@ -19,6 +21,8 @@ import throwable.server.framework.rpc.ResultMsg;
 @IocBean
 public class ThirftCommon {
 
+	private static final Log log = Logs.getLog(ThirftCommon.class);
+	
 	@Inject
 	private ApiDirUtil apiDirUtil;
 
@@ -90,13 +94,16 @@ public class ThirftCommon {
 	 * @throws Exception
 	 */
 	public ResultMsg getResult(ClientPools thriftPools, String uri, Map<String, String> params, long uid) throws Exception {
+		log.info("调用 " + uri + "  参数： " + Json.toJson(params));
 		ResultMsg resultMsg = thriftPools.call("W" + System.nanoTime(), apiDirUtil.getValue(uri), params);
-		System.out.println(Json.toJson(resultMsg));
+		log.info(Json.toJson(resultMsg));
 		return resultMsg;
 	}
 
 	public List<Object> getResultByList(ClientPools thriftPools, String uri, Map<String, String> params, long uid) throws Exception {
+		log.info("调用 " + uri + "  参数： " + Json.toJson(params));
 		List<String> list = getResult(thriftPools, uri, params, uid).getRetList();
+		log.info(Json.toJson(list));
 		return Json.fromJsonAsList(Object.class, list.toString());
 	}
 }

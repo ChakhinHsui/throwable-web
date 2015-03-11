@@ -1,31 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="1 minutes">
+	<!--  
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder charset="UTF-8">
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n
 			</pattern>
 		</encoder>
 	</appender>
+	-->
+	
+	<appender name="FileDebug" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+ 	     	<level>DEBUG</level> 
+ 	    	<OnMismatch>DENY</OnMismatch> 
+ 	   		<OnMatch>ACCEPT</OnMatch> 
+        	</filter>  
+ 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+ 			<fileNamePattern>../logs/throwable.%d{yyyy-MM-dd}.debug.log</fileNamePattern> 
+ 			<maxHistory>5</maxHistory> 
+ 		</rollingPolicy> 
+ 		<encoder> 
+ 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern> 
+ 		</encoder> 
+ 		<prudent>true</prudent> 
+ 	</appender> 
 
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>../logs/service.log</File>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>../logs/service.%d{yyyy-MM-dd}.log</fileNamePattern>
-			<maxHistory>30</maxHistory>
-		</rollingPolicy>
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern>
-		</encoder>
-		<prudent>true</prudent>
-	</appender>
+ 	<appender name="FileInfo" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+ 		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+ 	     	<level>INFO</level> 
+ 	    	<OnMismatch>DENY</OnMismatch> 
+ 	   		<OnMatch>ACCEPT</OnMatch> 
+        	</filter>  
+ 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+ 			<fileNamePattern>../logs/throwable.%d{yyyy-MM-dd}.info.log</fileNamePattern> 
+ 			<maxHistory>5</maxHistory> 
+ 		</rollingPolicy> 
+ 		<encoder> 
+ 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern> 
+ 		</encoder> 
+ 		<prudent>true</prudent> 
+ 	</appender> 
+	
+     <appender name="FileError" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+ 	    <filter class="ch.qos.logback.classic.filter.LevelFilter"> 
+ 	        <level>ERROR</level> 
+ 	        <OnMismatch>DENY</OnMismatch> 
+ 	        <OnMatch>ACCEPT</OnMatch> 
+ 	    </filter> 
+ 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+ 	        <fileNamePattern>../logs/throwable.%d{yyyy-MM-dd}.error.log</fileNamePattern> 
+ 	        <maxHistory>5</maxHistory> 
+ 	    </rollingPolicy> 
+ 	    <encoder> 
+         	<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern> 
+ 	    </encoder> 
+ 	    <prudent>true</prudent> 
+     </appender> 
+     
 
 	<root level="INFO">
-		<appender-ref ref="stdout" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<!-- <appender-ref ref="stdout" />  -->
+		<appender-ref ref="FileDebug" /> 
+ 		<appender-ref ref="FileInfo" /> 
+    	<appender-ref ref="FileError" /> 
+    	
 	</root>
 	
-	<logger name="xiuba.web">
-		<level value="TRACE" />
+	<logger name="throwable.web">
+		<level value="INFO" />
 	</logger>
 	
 </configuration>
