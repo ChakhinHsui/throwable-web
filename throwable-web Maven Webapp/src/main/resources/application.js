@@ -38,5 +38,9 @@ var ioc = {
 		type : 'org.nutz.mvc.upload.UploadAdaptor',
 		singleton : false,
 		args : [{refer : 'uploadFileContext'}]
+	},
+	serverCall : {
+		type : 'throwable.web.utils.api.ThriftCallTool',
+		args : [{refer : 'thriftPools'}]
 	}
 };

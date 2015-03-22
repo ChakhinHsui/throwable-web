@@ -6,13 +6,17 @@ import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.nutz.json.Json;
 
 public class StringTool {
 
@@ -132,18 +136,63 @@ public class StringTool {
 		return s;
 	}
 	
-	public static boolean isEmpty(String s) {
-		if (null == s || "".equals(s.trim())) {
+	public static boolean isEmpty(Object object) {
+		if(null == object) {
 			return true;
+		}
+		if(object instanceof String) {
+			return "".equals(((String)object).trim());
+		}
+		if(object instanceof Map) {
+			return ((Map<?,?>)object).isEmpty();
+		}
+		if(object instanceof List) {
+			return ((List<?>)object).isEmpty();
+		}
+		if(object instanceof Set) {
+			return ((Set<?>)object).isEmpty();
 		}
 		return false;
 	}
-
-	public static boolean isEmpty(Object o) {
-		if (null == o || isEmpty(String.valueOf(o))) {
-			return true;
+	
+	/**
+	 * 将map的Object转成String
+	 * @param map
+	 * @return
+	 */
+	public static Map<String, String> mapStr2Obj(Map<String, Object> map) {
+		Map<String, String> retMap = new HashMap<String, String>();
+		for(String key : map.keySet()) {
+			retMap.put(key, map.get(key).toString());
 		}
-		return false;
+		return retMap;
+	}
+	
+	/**
+	 * 将List中的str转为Object
+	 * @param list
+	 * @param type
+	 * @return
+	 */
+	public static <T>List<T> listStr2Obj(List<String> list, Class<T> type) {
+		List<T> retList = new ArrayList<T>();
+		for(String str : list) {
+			retList.add(Json.fromJson(type, str));
+		}
+		return retList;
+	}
+	
+	/**
+	 * 将List中的Object转为String
+	 * @param list
+	 * @return
+	 */
+	public static List<String> listObj2Str(List<Object> list) {
+		List<String> retList = new ArrayList<String>();
+		for(Object o : list) {
+			retList.add(Json.toJson(o));
+		}
+		return retList;
 	}
 
 	public static boolean isEmptyOrLong(String s, int length) {

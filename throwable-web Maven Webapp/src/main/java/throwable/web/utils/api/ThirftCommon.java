@@ -57,6 +57,19 @@ public class ThirftCommon {
 	public static final String A_GET_USER_ANSWER = "answer.getUserAnswer";  //查询用户回答过得问题
 	public static final String A_GET_USER_ANSWER_NUM = "answer.getUserAnswerNumber";  //查询用户回答问题的个数
 	
+	/********************** 分类相关接口 ***************************/
+	public static final String KIND_ADD = "kind.addKind";  //添加分类
+	public static final String KIND_QUERYALL = "kind.queryAllKinds";  //查询所有分类
+	
+	
+	/********************** 标签相关接口 ***************************/
+	public static final String LABEL_ADD = "label.addLabel";  //添加标签
+	public static final String LABEL_QUERYALL = "label.queryAllLabels";  //查询所有标签
+	public static final String LABEL_QUERY_BY_QUESTIONID = "label.queryLabelsByQuestionId";  //根据问题id查询所有标签
+	public static final String LABEL_QUERY_BY_USERID = "label.queryLabelsByUserId";  //根据用户id查询所有标签
+	
+	
+	
 	/**
 	 * 根据传递参数 组织成 thrift需要的参数 MAP， 省去每次都写一个初始化MAP的工作
 	 * 
