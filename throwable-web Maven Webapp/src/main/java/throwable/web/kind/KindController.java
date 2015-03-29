@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
+import org.nutz.mvc.annotation.Ok;
 
 import throwable.web.enums.Right;
 import throwable.web.utils.BackTool;
@@ -46,6 +47,7 @@ public class KindController {
 	 * @param httpSession
 	 * @return
 	 */
+	@Ok("json")
 	@SuppressWarnings("rawtypes")
 	@At("/queryAllKinds")
 	public Map queryAllList(HttpSession httpSession) {

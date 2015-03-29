@@ -42,13 +42,14 @@ public class QuestionService {
 			String question_description,
 			int question_type,
 			int kind_id,
-			int user_id){
+			int user_id,
+			String label_names){
 		Map map = null;
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_ADD_QUESTION, thirftCommon.initParams(
 					"question_name", question_name, 
 					"question_description", question_description, "question_type", question_type, 
-					"kind_id", kind_id, "user_id", user_id), 100);
+					"kind_id", kind_id, "user_id", user_id, "label_names", label_names), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
 			}else{
@@ -146,10 +147,10 @@ public class QuestionService {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map getOneQuestion(int questionId){
+	public Map getOneQuestion(int questionId, int userId){
 		Map map = null;
 		try{
-			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_ONE_QUESTION, thirftCommon.initParams("id", questionId), 100);
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_ONE_QUESTION, thirftCommon.initParams("id", questionId, "userId",userId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
 			}else{

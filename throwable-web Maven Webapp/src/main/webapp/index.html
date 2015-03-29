@@ -1,4 +1,5 @@
-﻿<!DOCTYPE HTML>
+﻿
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
@@ -91,7 +92,7 @@
 	 <div class="line  pt-10 mt-10"/>
       <!--最热标签-->
       <div class="pt-5 pb-5 f-20 mt-15" > <a href="#">最热标签</a> </div>
-      <div class="pt-5 pb-5 f-14 mt-15" > 
+      <div class="pt-5 pb-5 f-14 mt-15" id="allLabels_area"> 
       <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">java</span></a> 
       <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">eclipse</span></a> 
       <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">java</span></a> 
@@ -212,6 +213,7 @@ var ue = UE.getEditor('myEditor');
 					var str = appendRightStr(result);
 					$("#new_ma_list").append(str);
 				}, "json");
+		throwable_index.getAllLabels();
 	}); 
 	
 	function appendStr(result) {
@@ -232,8 +234,9 @@ var ue = UE.getEditor('myEditor');
 			str += '<div class="main-right-same">';
 			str += '<div class="main-right-top-left f-13 c-gray">'+obj[i].username+'</div>';
 			str += '<div class="main-right-top-left pl-10 f-13 c-gray">'+obj[i].create_time+'提问</div>';
-			str += '<a href="#"><span class="main-right-bottom-tag ml-10">java</span></a>';
-			str += '<a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a>';
+			for(var j = 0; j < obj[i].labels.length; j++) {
+				str += '<a href="#"><span class="main-right-bottom-tag ml-10">'+obj[i].labels[j].labelName+'</span></a>';
+			}
 			str += '</div></div></div></div>';
 			str += '<div class="clearfix bb"></div>';
 			retStr += str;

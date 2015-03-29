@@ -40,7 +40,11 @@
       <li><a href="#">扩展</a></li>
       <li><a href="#">案例</a></li>
       <li><a href="#">联系我们</a></li>
-      <li> </li>
+      <li>
+      	<div style="float: right" id="login_area">
+      	
+      	</div>
+      </li>
     </ul>
   </nav>
 </header>
@@ -63,9 +67,10 @@
       </div>
       <div class="span-5 mt-5"> 
         <!--以下为右边的按钮--start-->
-        <button class="btn radius radius btn-primary mt-10" type="button">关注</button>
+        <div id="focus_button"></div>
         <br/>
-        <button class="btn radius radius btn-info mt-10" type="button">收藏</button>
+        <div id="collect_button"></div>
+        
         <!--以下为右边的按钮--end--> 
       </div>
     </div>
@@ -220,18 +225,50 @@
 
 	$(function(){
 		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		throwable_base.login.isLogin("", function(isLogin){
+			if(1 == isLogin) {
+				$("#login_area").html('<a href="memberinfo.html?id='+throwable_base.userInfo.id+'">'+throwable_base.userInfo.username+'</a>');
+			} else {
+				$("#login_area").html('<a href="login.html">登陆</a>');
+			}
+		});
 		var jsonObject = {
-				questionId:$.getUrlParam("qid")
+				questionId:$.getUrlParam("qid"),
+				userId:throwable_base.userInfo.id
 		};
 		$.post("question/getOneQuestion", 
 				jsonObject, 
 				function(result){
+					console.log(result);
 					$("#question_title").html(result.question_name);
 					$("#question_description").html(result.question_description);
 					$("#question_author").html(result.username);
 					$("#question_time").html(result.create_time);
 					$("#agreeQ").html(result.agrees);
 					$("#disagreeQ").html(result.degrees);
+					console.log(result.focused);
+					console.log(throwable_util.checkValue.isEmpty(result.focused));
+					if(result.user_id == throwable_base.userInfo.id) {
+						$("#focus_button").html('关注数  ' + result.focuses);
+						$("#collect_button").html('收藏数  '+ result.collections);
+						return;
+					}
+					if(result.focused) {
+						$("#focus_button").html("已关注");
+					}
+					if(result.collected) {
+						$("#collect_button").html("已收藏");
+					}
+					console.log(throwable_base.userInfo.id);
+					if(result.solved == 1) {
+						if(!result.collected) {
+							$("#collect_button").html('<button class="btn radius radius btn-info mt-10" type="button">收藏</button>');
+						}
+					} else {
+						if(!result.focused) {
+							$("#collect_button").html('<button class="btn radius radius btn-info mt-10" type="button">关注</button>');
+						}
+					}
 				}, "json");
 		$.post("answer/getAnswers", 
 				jsonObject, 

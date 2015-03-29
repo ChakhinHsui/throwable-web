@@ -2,6 +2,8 @@ package throwable.web.question;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
@@ -70,11 +72,11 @@ public class QuestionController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/getOneQuestion")
-	public Map getOneQuestion(@Param("questionId") int questionId){
+	public Map getOneQuestion(@Param("questionId") int questionId, @Param("userId") int userId){
 		if(questionId < 0){
 			return BackTool.errorInfo("0200", "问题id不合法");
 		}
-		return questionService.getOneQuestion(questionId);
+		return questionService.getOneQuestion(questionId, userId);
 	}
 	
 	/**
@@ -93,17 +95,20 @@ public class QuestionController {
 			@Param("question_description") String question_description,
 			@Param("question_type") int question_type,
 			@Param("kind_id") int kind_id,
-			@Param("user_id") int user_id)
+			@Param("user_id") int user_id,
+			@Param("label_names") String label_names)
 	{
-		if(StringTool.isEmpty(question_name)){
-			return BackTool.errorInfo("0100", "问题名称不能为空");
+		if(kind_id < 1 || user_id < 1 || StringTool.isEmpty(question_name) || StringTool.isEmpty(question_description)) {
+			return BackTool.errorInfo("0101", "参数有错");
 		}
-		if(StringTool.isEmpty(question_description)){
-			return BackTool.errorInfo("0101", "问题内容不能为空");
-		}
-		return questionService.addQuestion(question_name, question_description, question_type, kind_id, user_id);
+		return questionService.addQuestion(question_name, question_description, question_type, kind_id, user_id, label_names);
 	}
 	
+	/**
+	 * 查询用户的问题  我的提问
+	 * @param userId   用户id
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/queryUserQuestion")
@@ -114,6 +119,11 @@ public class QuestionController {
 		return questionService.getUserQuestion(userId);
 	}
 	
+	/**
+	 * 查询用户关注的问题   我的关注
+	 * @param userId
+	 * @return
+	 */
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/queryUserFocusQuestion")

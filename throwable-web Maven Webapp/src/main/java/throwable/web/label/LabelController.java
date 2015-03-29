@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
+import org.nutz.mvc.annotation.Ok;
 
 import throwable.web.enums.Right;
 import throwable.web.utils.BackTool;
@@ -46,12 +47,10 @@ public class LabelController {
 	 * @param httpSession
 	 * @return
 	 */
+	@Ok("json")
 	@SuppressWarnings("rawtypes")
 	@At("/queryAllLabels")
 	public Map queryAllLabels(HttpSession httpSession) {
-		if(LoginTool.isLogin(httpSession)) {
-			return BackTool.errorInfo("120002", "用户未登陆");
-		}
 		return labelService.queryAllLabels();
 	}
 	
