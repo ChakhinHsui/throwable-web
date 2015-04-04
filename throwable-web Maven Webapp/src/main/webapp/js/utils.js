@@ -66,5 +66,31 @@ var throwable_util = {
 		goPre : function() {
 			 window.location.href = document.referrer; //使用document.referrer
 		}
+	},
+	cookie : {
+		//存储cookie  time为小时
+		setCookie : function(name, value, time) {
+			var exp = new Date();
+			exp.setTime(exp.getTime() + time * 60 * 60 * 1000);
+			document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+		},
+		//取cookie
+		getCookie : function(name) {
+			var arr, reg = new RegExp("(^|)"+name+"=([^;]*)(;|$)");
+			if(arr = document.cookie.match(reg)) {
+				return unescape(arr[2]);
+			} else {
+				return null;
+			}
+		},
+		//删除cookie
+		deleteCookie : function(name) {
+			var exp = new Date();
+			exp.setTime(exp.getTime() - 1);
+			var cval = throwable_util.cookie.getCookie(name);
+			if(null != cval) {
+				document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+			}
+		}
 	}
 };

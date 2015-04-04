@@ -2,8 +2,6 @@ package throwable.web.question;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.mvc.annotation.At;
@@ -195,5 +193,37 @@ public class QuestionController {
 			return BackTool.errorInfo("0200", "问题id不合法");
 		}
 		return questionService.disagreeQuestion(questionId);
+	}
+	
+	/**
+	 * 关注问题
+	 * @param userId
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/focusQuestion")
+	public Map focusQuestion(int userId, int questionId) {
+		if(userId < 1 || questionId < 1) {
+			return BackTool.errorInfo("0200", "参数不正确");
+		}
+		return questionService.focusQuestion(userId, questionId);
+	}
+	
+	/**
+	 * 收藏问题
+	 * @param userId
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/collectQuestion")
+	public Map collectQuestion(int userId, int questionId) {
+		if(userId < 1 || questionId < 1) {
+			return BackTool.errorInfo("0200", "参数不正确");
+		}
+		return questionService.collectQuestion(userId, questionId);
 	}
 }

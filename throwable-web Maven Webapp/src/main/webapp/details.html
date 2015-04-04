@@ -96,6 +96,8 @@
           </a> </div>
         <div class="pl-50" id="question_description">
         </div>
+        <br>
+        <div id="comment_button"></div>
         <!--额外评论的开始-->
         <ul class="commentList">
 	  <li class="item cl">
@@ -109,6 +111,7 @@
 	</ul>
         <!--额外评论的结束-->
       </div>
+      <br>
       <!--问题部分--end--> 
       <!--答案部分--start-->
       <div id="answer_area">
@@ -189,6 +192,35 @@
     </div>
   </div>
 </div>
+	
+
+<!-- 弹窗代码  begin -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    	<div class="modal-dialog" style="width: 100%;">
+    		<div class="modal-content">	
+    			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        			<h4 class="modal-title" id="myModalLabel"><div id="to_user_area"></div></h4>
+      			</div>
+      			<div class="modal-body" id="modal-body-context">
+      				
+      				<form id="commentContext">
+  						<script type="text/plain" id="myEditor2" style="height:240px;"></script>
+		<!-- <textarea name="content" style="width:800px;height:400px;visibility:hidden;"></textarea> -->	
+  					</form>
+      			</div>
+      			<div class="modal-footer">
+      				<span id="sure-botton"></span>
+      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="throwable_details.addComment();">评论</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      			</div>
+    		</div><!-- /.modal-content -->
+  		</div>
+    </div>
+    
+    <div id="ajaxModal" class="modal hide fade" tabindex="-1" data-width="700"></div>
+<!-- 弹窗代码  end -->
+
 <div class="clearfix"></div>
 <footer class="footer cl">
   <p>Copyright &copy;2013-2014 throwable.com All Rights Reserved. Seava Studio</p>
@@ -214,7 +246,7 @@
 <script type="text/javascript">
 
     var ue = UE.getEditor('myEditor');
- 
+    var ue2 = UE.getEditor('myEditor2');
     (function($){
     	$.getUrlParam= function(name){
     		var reg = new RegExp("(^|&)" + name +"=([^&]*)(&|$)");
@@ -234,7 +266,7 @@
 		});
 		var jsonObject = {
 				questionId:$.getUrlParam("qid"),
-				userId:throwable_base.userInfo.id
+				userId:throwable_base.getIdFromCookie("throwable")
 		};
 		$.post("question/getOneQuestion", 
 				jsonObject, 
@@ -246,29 +278,31 @@
 					$("#question_time").html(result.create_time);
 					$("#agreeQ").html(result.agrees);
 					$("#disagreeQ").html(result.degrees);
-					console.log(result.focused);
-					console.log(throwable_util.checkValue.isEmpty(result.focused));
-					if(result.user_id == throwable_base.userInfo.id) {
+					if(result.user_id == throwable_base.getIdFromCookie("throwable")) {
 						$("#focus_button").html('关注数  ' + result.focuses);
 						$("#collect_button").html('收藏数  '+ result.collections);
 						return;
 					}
-					if(result.focused) {
+					if(result.focused && result.focused == 1) {
 						$("#focus_button").html("已关注");
 					}
-					if(result.collected) {
+					if(result.collected && result.collected == 1) {
 						$("#collect_button").html("已收藏");
 					}
-					console.log(throwable_base.userInfo.id);
-					if(result.solved == 1) {
-						if(!result.collected) {
-							$("#collect_button").html('<button class="btn radius radius btn-info mt-10" type="button">收藏</button>');
-						}
-					} else {
-						if(!result.focused) {
-							$("#collect_button").html('<button class="btn radius radius btn-info mt-10" type="button">关注</button>');
+					if(result.user_id != throwable_base.getIdFromCookie("throwable")) {
+						if(result.solved == 1) {
+							if(!result.collected || result.collected == 0) {
+								$("#collect_button").html('<button class="btn radius radius btn-info mt-10" onclick="throwable_details.collectQuestion()" type="button">收藏</button>');
+							}
+						} else {
+							if(!result.focused || result.focused == 0) {
+								$("#focus_button").html('<button class="btn radius radius btn-info mt-10" onclick="throwable_details.focusQuestion()" type="button">关注</button>');
+							}
 						}
 					}
+					throwable_details.users["1_" + jsonObject.questionId] = result.username;
+					var comment_button = '<a href="javascript:throwable_details.openComment('+jsonObject.questionId+', '+result.user_id+', 1)">评论</a>';
+					$("#comment_button").html(comment_button);
 				}, "json");
 		$.post("answer/getAnswers", 
 				jsonObject, 
@@ -303,6 +337,11 @@
 					console.log(result);
 				}, "json");
 	}); 
+	
+	function focusQuestion() {
+		alert("fff");
+		throwable_details.focusQuestion();
+	}
 </script>
 </body>
 </html>

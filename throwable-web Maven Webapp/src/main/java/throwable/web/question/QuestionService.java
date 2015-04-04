@@ -14,7 +14,9 @@ import throwable.server.framework.client.ClientPools;
 import throwable.server.framework.rpc.ResultCode;
 import throwable.server.framework.rpc.ResultMsg;
 import throwable.web.utils.BackTool;
+import throwable.web.utils.api.ApiDirUtil;
 import throwable.web.utils.api.ThirftCommon;
+import throwable.web.utils.api.ThriftCallTool;
 
 /**
  * @author WaterHsu@xiu8.com
@@ -27,6 +29,12 @@ public class QuestionService {
 	private ClientPools thriftPools;
 	@Inject
 	private ThirftCommon thirftCommon;
+	
+	@Inject
+	private ThriftCallTool serverCall;
+	
+	@Inject
+	private ApiDirUtil apiDirUtil;
 	
 	/**
 	 * 添加问题
@@ -247,6 +255,7 @@ public class QuestionService {
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_AGREE_QUESTION, thirftCommon.initParams("questionId", questionId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map.put("msgCode", 1);
 				map.put("number", msg.retMsg);
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
@@ -263,6 +272,7 @@ public class QuestionService {
 		try{
 			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_DISAGREE_QUESTION, thirftCommon.initParams("questionId", questionId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
+				map.put("msgCode", 1);
 				map.put("number", msg.retMsg);
 			}else{
 				return BackTool.errorInfo(msg.errorCode, msg.retMsg);
@@ -270,6 +280,52 @@ public class QuestionService {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		return map;
+	}
+	
+	/**
+	 * 关注问题
+	 * @param userId
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map focusQuestion(int userId, int questionId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", userId);
+		params.put("questionId", questionId);
+		ResultMsg resultMsg = serverCall.baseCall("/question/addFocus", params);
+		if(null == resultMsg) {
+			return BackTool.errorInfo("120015", "调用服务器出错");
+		}
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			return BackTool.errorInfo(resultMsg.errorCode, resultMsg.retMsg);
+		}
+		Map map = new HashMap();
+		map.put("msgCode", 1);
+		return map;
+	}
+	
+	/**
+	 * 收藏问题
+	 * @param userId
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map collectQuestion(int userId, int questionId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", userId);
+		params.put("questionId", questionId);
+		ResultMsg resultMsg = serverCall.baseCall("/question/addCollection", params);
+		if(null == resultMsg) {
+			return BackTool.errorInfo("120015", "调用服务器出错");
+		}
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			return BackTool.errorInfo(resultMsg.errorCode, resultMsg.retMsg);
+		}
+		Map map = new HashMap();
+		map.put("msgCode", 1);
 		return map;
 	}
 }
