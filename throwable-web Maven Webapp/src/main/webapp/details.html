@@ -99,6 +99,10 @@
         <br>
         <div id="comment_button"></div>
         <!--额外评论的开始-->
+        <div id="q_comment_show_area">
+        
+        </div>
+        <!--
         <ul class="commentList">
 	  <li class="item cl">
 	    <a href="#"><img width="48" height="48" class="comment-avatar" alt="" src="static/h-ui/images/avatar-default-S.gif"></a>
@@ -109,9 +113,9 @@
 		  <div class="comment-body"><p><a href="#">@某人</a> 你是猴子派来的救兵吗？</p></div></div>
 	  </li>
 	</ul>
+	-->
         <!--额外评论的结束-->
       </div>
-      <br>
       <!--问题部分--end--> 
       <!--答案部分--start-->
       <div id="answer_area">
@@ -278,6 +282,20 @@
 					$("#question_time").html(result.create_time);
 					$("#agreeQ").html(result.agrees);
 					$("#disagreeQ").html(result.degrees);
+					if(result.comments) {
+						var comments = JSON.parse(result.comments);
+						var str = '<ul class="commentList">';
+						for(var i = 0; i < comments.length; i++) {
+							console.log(comments[i]);
+							str += '<li class="item cl">';
+							str += '<a href="#"><img width="48" height="48" class="comment-avatar" alt="" src="photo/'+comments[i].image+'"></a>';
+							str += '<div class="comment-main"><header class="comment-header">';
+							str += '<div class="comment-meta"><a class="comment-author" href="#">'+comments[i].fromUserName+'</a> 评论于 <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20">'+comments[i].time+'</time></div>';
+							str += '</header><div class="comment-body"><p><a href="#">@'+comments[i].toUserName+'</a>  &nbsp; '+comments[i].comment+'</p></div></div>';
+						}
+						str += '</ul>';
+						$("#q_comment_show_area").html(str);
+					}
 					if(result.user_id == throwable_base.getIdFromCookie("throwable")) {
 						$("#focus_button").html('关注数  ' + result.focuses);
 						$("#collect_button").html('收藏数  '+ result.collections);
@@ -327,7 +345,25 @@
 						str += '<p class="l pl-10"><strong>54</strong></p>';
 						str += '<p class="l pl-10 c-999">'+obj[i].answer_time+'回答</p></div>';
 						str += '<div class="pl-50  pt-40">';
-						str += '<p>'+obj[i].answer_description+'</p></div></div>';
+						str += '<p>'+obj[i].answer_description+'</p></div>';
+						if(obj[i].comments) {
+							var comments = obj[i].comments;
+							var str2 = '<div><ul class="commentList">';
+							for(var k = 0; k < comments.length; k++) {
+								str2 += '<li class="item cl">';
+								str2 += '<a href="#"><img width="48" height="48" class="comment-avatar" alt="" src="photo/'+comments[k].image+'"></a>';
+								str2 += '<div class="comment-main"><header class="comment-header">';
+								str2 += '<div class="comment-meta"><a class="comment-author" href="#">'+comments[k].fromUserName+'</a> 评论于 <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20">'+comments[k].time+'</time></div>';
+								str2 += '</header><div class="comment-body"><p><a href="#">@'+comments[k].toUserName+'</a>  &nbsp; '+comments[k].comment+'</p></div></div>';
+							}
+							str2 += '</ul></div>';
+							str += str2;
+						}
+						throwable_details.users["2_" + obj[i].id] = obj[i].username;
+						if(obj[i].user_id != throwable_base.getIdFromCookie("throwable")) {
+							str += '<div><a href="javascript:throwable_details.openComment('+obj[i].id+', '+obj[i].user_id+', 2)">评论</a></div>';
+						}
+						str += '</div>';
 						$("#answer_area").append(str);
 					}
 				}, "json");
@@ -337,11 +373,6 @@
 					console.log(result);
 				}, "json");
 	}); 
-	
-	function focusQuestion() {
-		alert("fff");
-		throwable_details.focusQuestion();
-	}
 </script>
 </body>
 </html>
