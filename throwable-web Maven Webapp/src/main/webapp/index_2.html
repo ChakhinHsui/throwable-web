@@ -1,0 +1,230 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<title>欢迎来到Throwable</title>
+<meta name="keywords" content="throwaable,seava,error">
+<meta name="description" content="ThrowAble网站！">
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="faviconte.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+<script type="text/javascript" src="http://libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href="static/h-ui/css/H-ui.css" rel="stylesheet" type="text/css" />
+<link href="static/h-ui/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!--[if IE 7]>
+<link href="http://www.bootcss.com/p/font-awesome/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<link href="static/h-ui/css/style.css" rel="stylesheet" type="text/css" />
+<!--自己的样式-->
+<!--[if IE 6]>
+<script type="text/javascript" src="Lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('.pngfix,.icon');</script>
+<![endif]-->
+</head>
+<body>
+<header class="header">
+  <nav class="mainnav cl">
+    <ul class="cl">
+      <li class="current"><a href="#">首页</a></li>
+      <li><a href="#">核心</a></li>
+      <li><a href="#">扩展</a></li>
+      <li><a href="#">案例</a></li>
+      <li><a href="#">联系我们</a></li>
+      <li ms-controller="login_area">
+      	<a ms-href="{{href}}">{{text}}</a>
+      
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="wp cl mt-15 f-14">
+  <div class="row row-980-20"> 
+    <!--以下为大标题部分内容--开始-->
+    <div class="main-top-question f-24"> 提出你的问题，大家来解决。
+      <button class="btn radius radius btn-info" type="button">提问题</button>
+    </div>
+    <div class="searchBar">
+  			<form class="form-search" method="post" action="">
+            <input id="searchKeyword" name="searchKeyword" value="请输入搜索关键词" class="searchTxt">
+            <input id="searchBtn" name="searchBtn" type="submit" value="搜索" class="searchBtn" onclick="b_onclick()">
+          </form>
+		</div>
+    <!--以下为大标题部分内容--结束--> 
+    <!--以下为左边的主显示板块--开始--> 
+    <!--左边主体部分的标签页-->
+    <div class="span-15">
+      <div id="tab_demo" class="HuiTab" ms-controller="index_list">
+        <div class="tabBar cl"><span>最新的</span><span>最热的</span><span>等你的</span></div>
+        <!--最新--开始-->
+        <div class="tabCon"> 
+          
+          <!--问题重复的部分--开始-->
+          <div ms-repeat="new_posts_list">
+           <div class="bk-gray-xm" >
+            <div class="main-all-list-item">
+              <div class="main-left-3thing">
+                <div class="main-left-inside text-c">{{el.agrees}}<br/>
+                  赞同</div>
+                <div class="main-left-inside text-c box-shadow answer-color">{{el.answers}}<br/>
+                  回答</div>
+                <div class="main-left-inside text-c">{{el.viewers}}<br/>
+                  浏览</div>
+              </div>
+              <div class="main-right">
+                <div class="main-right-same">
+                  <div class="f-16 main-right-bottom-title"><a ms-href="details.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  </div>
+                <div class="main-right-same">
+                  <div class="main-right-top-left f-13 c-gray">{{el.username}}</div>
+                  <div class="main-right-top-left pl-10 f-13 c-gray">{{el.create_time}}</div>
+                   	<a href="#" ms-repeat="el.labels"><span class="main-right-bottom-tag ml-10">{{el.labelName}}</span></a> 
+                </div>
+              </div>
+              </div>
+          </div> 
+              <!--下面这个就是显示的分割线，拷！-->
+			 <div class="clearfix bb"></div><!--只要在循环的时候把这个加到每个问题的最后就行！-->
+          </div>
+          <!--问题重复的部分--结束-->
+          
+          
+        </div>
+        <!--最新--结束-->
+        
+        <!--热门的部分--开始-->
+        <div class="tabCon">
+        
+        	<!--问题重复的部分--开始-->
+          <div ms-repeat="hot_posts_list">
+           <div class="bk-gray-xm" >
+            <div class="main-all-list-item">
+              <div class="main-left-3thing">
+                <div class="main-left-inside text-c">{{el.agrees}}<br/>
+                  赞同</div>
+                <div class="main-left-inside text-c box-shadow answer-color">{{el.answers}}<br/>
+                  回答</div>
+                <div class="main-left-inside text-c">{{el.viewers}}<br/>
+                  浏览</div>
+              </div>
+              <div class="main-right">
+                <div class="main-right-same">
+                  <div class="f-16 main-right-bottom-title"><a ms-href="details.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  </div>
+                <div class="main-right-same">
+                  <div class="main-right-top-left f-13 c-gray">{{el.username}}</div>
+                  <div class="main-right-top-left pl-10 f-13 c-gray">{{el.create_time}}</div>
+                   	<a href="#" ms-repeat="el.labels"><span class="main-right-bottom-tag ml-10">{{el.labelName}}</span></a> 
+                </div>
+              </div>
+              </div>
+          </div> 
+              <!--下面这个就是显示的分割线，拷！-->
+			 <div class="clearfix bb"></div><!--只要在循环的时候把这个加到每个问题的最后就行！-->
+          </div>
+          <!--问题重复的部分--结束-->
+        </div>
+        <!--热门的部分--结束-->
+        
+        <!--等你的部分--开始-->
+        <div class="tabCon">
+        
+        	<!--问题重复的部分--开始-->
+          <div ms-repeat="wait_posts_list">
+           <div class="bk-gray-xm" >
+            <div class="main-all-list-item">
+              <div class="main-left-3thing">
+                <div class="main-left-inside text-c">{{el.agrees}}<br/>
+                  赞同</div>
+                <div class="main-left-inside text-c box-shadow answer-color">{{el.answers}}<br/>
+                  回答</div>
+                <div class="main-left-inside text-c">{{el.viewers}}<br/>
+                  浏览</div>
+              </div>
+              <div class="main-right">
+                <div class="main-right-same">
+                  <div class="f-16 main-right-bottom-title"><a ms-href="details.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  </div>
+                <div class="main-right-same">
+                  <div class="main-right-top-left f-13 c-gray">{{el.username}}</div>
+                  <div class="main-right-top-left pl-10 f-13 c-gray">{{el.create_time}}</div>
+                   	<a href="#" ms-repeat="el.labels"><span class="main-right-bottom-tag ml-10">{{el.labelName}}</span></a> 
+                </div>
+              </div>
+              </div>
+          </div> 
+              <!--下面这个就是显示的分割线，拷！-->
+			 <div class="clearfix bb"></div><!--只要在循环的时候把这个加到每个问题的最后就行！-->
+          </div>
+          <!--问题重复的部分--结束-->
+        
+        </div>
+         <!--等你的部分--结束-->
+         
+      </div>
+    </div>
+    <!--以下为左边的主显示板块--结束--> 
+    
+    <!--以下为右边的附显示板块--开始-->
+    <div class="span-5">
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的提问</a></div>
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的关注</a></div>
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的收藏</a></div>
+    
+	 <div class="line  pt-10 mt-10" />
+      <!--最热标签-->
+      <div class="pt-5 pb-5 f-20 mt-15" > <a href="#">最热标签</a> </div>
+      <div class="pt-5 pb-5 f-14 mt-15" ms-controller = "label_list"> 
+      <a href="#" ms-repeat="label_list"><span class="main-right-bottom-tag ml-10 mt-10">{{el.name}}</span></a>
+      </div> 
+      <div class="line pt-10 mt-10"></div>
+      <!--最新热门-->
+      <div ms-controller = "new_hot_solved">
+      <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">最新热门</a> </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5" ms-repeat="new_hot_list">
+        <div>
+          <div class="c-orange right-hot-title"><a ms-href="details.html?qid={{el.id}}">{{el.question_name}}</a></div>
+          <div class="f-12 c-999 right-hot-title">{{el.answers}}&nbsp;回应</div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+
+<footer class="footer">
+  <p>Copyright &copy;2013-2014 throwable.com All Rights Reserved. Seava Studio</p>
+	<div class="row row-980-20 c-black">
+    	<div class="span-4">本站相关</div>
+    	<div class="span-4">1</div>
+        <div class="span-4">1</div>
+        <div class="span-4">1</div>
+        <div class="span-4">1</div>
+    </div>
+</footer>
+
+<a href="javascript:void(0)" class="toTop" title=backToTopTxt alt=backToTopTxt></a>
+<script type="text/javascript" src="Lib/jquery.min.js"></script> 
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="Lib/stickUp.min.js"></script> 
+<script type="text/javascript" src="Lib/bootstrap-modalmanager.js"></script> 
+<script type="text/javascript" src="Lib/bootstrap-modal.js"></script> 
+<script type="text/javascript" charset="utf-8" src="js/utils.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/throwable-base.js"></script> 
+<script type="text/javascript" charset="utf-8" src="js/avalon.js"></script> 
+<script type="text/javascript" charset="utf-8" src="js_new/index_2.js"></script> 
+
+<!--三个选择页代码--> 
+<script type="text/javascript">
+$(function(){
+	$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+	}); 
+</script>
+
+
+</body>
+</html>
+<!--H-ui前端框架提供前端技术支持 h-ui.net @2014-7-10 -->

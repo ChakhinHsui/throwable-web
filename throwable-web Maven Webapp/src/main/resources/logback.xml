@@ -70,4 +70,14 @@
 		<level value="INFO" />
 	</logger>
 	
+	<logger name="ch.qos.logback">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.apache.thrift.server">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org">
+		<level value="INFO" />
+	</logger>
+	
 </configuration>

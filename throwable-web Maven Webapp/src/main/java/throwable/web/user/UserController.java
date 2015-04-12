@@ -40,11 +40,12 @@ public class UserController {
 		if(StringTool.isEmpty(password)) {
 			return BackTool.errorInfo("010302", WebConf.errorMsg);
 		}
-		return userService.userLogin(username, password, AddressUtil.getIpAddr(req), req, session);
+//		return userService.userLogin(username, password, AddressUtil.getIpAddr(req), req, session);
+		return userService.userLogin_new(username, password, AddressUtil.getIpAddr(req), req, session);
 	}
 	
 	@SuppressWarnings("rawtypes")
-	@Ok("redirect:/memberinfo.html")
+	@Ok("json")
 	@At("/register")
 	public Map register(@Param("username") String username, @Param("password") String password, @Param("email") String email, @Param("nickname") String nickname, HttpServletRequest req){
 		if(StringTool.isEmpty(username)){
@@ -65,7 +66,8 @@ public class UserController {
 		if(!StringTool.checkEmail(email)){
 			return BackTool.errorInfo("010105", WebConf.errorMsg);
 		}
-		return userService.userRegister(username, password, email, nickname, AddressUtil.getIpAddr(req));
+//		return userService.userRegister(username, password, email, nickname, AddressUtil.getIpAddr(req));
+		return userService.userRegister_new(username, password, email, nickname, AddressUtil.getIpAddr(req));
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -75,7 +77,8 @@ public class UserController {
 		if(StringTool.isEmpty(key)) {
 			return BackTool.errorInfo("010201", WebConf.errorMsg);
 		}
-		return userService.userActive(key);
+//		return userService.userActive(key);
+		return userService.userActive_new(key);
 	}
 	
 	@SuppressWarnings("rawtypes")

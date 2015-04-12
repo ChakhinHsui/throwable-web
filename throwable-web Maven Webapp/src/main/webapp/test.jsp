@@ -20,15 +20,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="js/socket.io.js"></script>
+	<script src="js/jquery-1.7.2.min.js"></script>
 	<script>
 	$(document).ready(function(){
-		/*	$.post("question/getQuestion", {id: 1000}, function(result){
-				alert("oookk");
-				alert(result);
-				$("#test").html(result.Hello + " <br>" + result.id);
-				}, "json");*/
+		socket = io.connect('http://192.168.1.105:861/chat?uid=1&fid=1');
+		socket.on('msg', function(msg) {
+			commands(msg);
+		});
 	});
+	
+	function commands(msg) {
+		console.log(msg);
+	}
 	</script>
 
   </head>

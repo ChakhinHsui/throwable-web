@@ -129,8 +129,10 @@ $(document).ready(function(){
 		};
 		console.log(JSON.stringify(jsonObject));
 		$.post("user/register", jsonObject, function(result){
+			if(result.msgCode == 1) {
+				throwable_util.url.location("login.html");
+			}
 			console.log(JSON.stringify(result));
-			throwable_util.url.location("login.html");
 		}, "json");
 		return false;
 	});

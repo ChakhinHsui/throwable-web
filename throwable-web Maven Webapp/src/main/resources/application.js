@@ -20,6 +20,19 @@ var ioc = {
 			maxActive : "60"
 		}
 	},
+	userPools : {
+		type : "throwable.server.framework.client.ClientPools",
+		args : [ {
+			java : "$config.get('user.thrift.ip')"
+		}, {
+			java : "$config.get('user.thrift.port')"
+		} ],
+		fields : {
+			minIdle : "5",
+			maxIdle : "50",
+			maxActive : "60"
+		}
+	},
 	tmpFilePool : {
 		type : 'org.nutz.filepool.NutFilePool',
 		args : ["~/upload/images/tmps", 1000]
@@ -42,5 +55,9 @@ var ioc = {
 	serverCall : {
 		type : 'throwable.web.utils.api.ThriftCallTool',
 		args : [{refer : 'thriftPools'}]
+	},
+	userCall : {
+		type : 'throwable.web.utils.api.ThriftCallTool',
+		args : [{refer : 'userPools'}]
 	}
 };
