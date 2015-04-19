@@ -1,0 +1,412 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<title>欢迎来到Throwable</title>
+<meta name="keywords" content="throwaable,seava,error">
+<meta name="description" content="ThrowAble网站！">
+<link rel="Bookmark" href="favicon.ico" >
+<link rel="Shortcut Icon" href="faviconte.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+<script type="text/javascript" src="http://libs.useso.com/js/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href="static/h-ui/css/H-ui.css" rel="stylesheet" type="text/css" />
+<link href="static/h-ui/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!--[if IE 7]>
+<link href="http://www.bootcss.com/p/font-awesome/assets/css/font-awesome-ie7.min.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<link href="static/h-ui/css/style.css" rel="stylesheet" type="text/css" />
+<!--自己的样式-->
+<!--坑爹的html文本编辑器--start-->
+ <link href="umeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="umeditor/third-party/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+<!--坑爹的html文本编辑器--end-->
+<!--[if IE 6]>
+<script type="text/javascript" src="Lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('.pngfix,.icon');</script>
+<![endif]-->
+</head>
+<body>
+<header class="header">
+  <nav class="mainnav cl">
+    <ul class="cl">
+      <li class="current"><a href="index.html">首页</a></li>
+      <li><a href="#">核心</a></li>
+      <li><a href="#">扩展</a></li>
+      <li><a href="#">案例</a></li>
+      <li><a href="#">联系我们</a></li>
+      <li>
+      	<div style="float: right" id="login_area">
+      	
+      	</div>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="question-title" ms-controller="question_title">
+  <div class="wp cl">
+    <div class="row row-980-20 f-14"> 
+      
+      <!--以下为面包导航--start-->
+      <nav class="breadcrumb pngfix"> <a href="/" class="maincolor f-12 c-gray">首页</a> <span class="c_gray en">&gt;</span><a class=" c-gray f-12" href="#">问答</a> <span class="c_gray en">&gt;</span><span class="c-gray f-12">详情</span> </nav>
+      <!--以下为面包导航--end-->
+      <div class="span-15 mt-5"> 
+        <!--以下为问题的标题--start-->
+        <h3><a href="#" id="question_title">{{title}}</a></h3>
+        <!--  <a href="#"><span class="main-right-bottom-tag ml-10 l">php</span></a> 
+            <a href="#"><span class="main-right-bottom-tag ml-10 l">框架</span></a> </div>--> 
+        <!--以下为问题的标题--end-->
+        <p class="c-green l" id="question_author">{{author}}</p>
+        <p class="l pl-10"><strong>24</strong></p>
+        <p class="l pl-10 c-999" id="question_time">{{time}}</p>
+      </div>
+      <div class="span-5 mt-5"> 
+        <!--以下为右边的按钮--start-->
+        <div id="focus_button">{{focus | html}}</div>
+        <br/>
+        <div id="collect_button">{{collect | html}}</div>
+        
+        <!--以下为右边的按钮--end--> 
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wp cl mt-15 f-14">
+  <div class="row row-980-20"> 
+    <!--以下为大标题部分内容--开始--> 
+    
+    <!--以下为大标题部分内容--结束--> 
+    <!--以下为左边的主显示板块--开始--> 
+    <!--左边主体部分的标签页-->
+    <div class="span-15"> 
+      <!--问题部分--start-->
+      <div class="bk-gray-bottom" ms-controller="question_detail">
+        <div class="upordown box-shadow l"> <a href="javascript:throwable_details.agreeQuestion();">
+          <div class="upordown-up box-shadow"></div>
+          </a>
+          <div id="agreeQ" class="upordown-middle text-c c-orange">{{agree}}</div>
+          <div id="disagreeQ" class="upordown-middle text-c c-gray">{{disagree}}</div>
+          <a href="javascript:throwable_details.disagreeQuestion();">
+          <div class="upordown-down box-shadow"></div>
+          </a> </div>
+        <div class="pl-50" id="question_description">
+        	<p>
+        	{{details | html}}
+        	</p>
+        </div>
+        <br>
+        <div id="comment_button"></div>
+        <br>
+        <!--额外评论的开始-->
+        <ul class="commentList" ms-repeat="comments">
+	  <li class="item cl">
+	    <a href="#"><img width="48" height="48" class="comment-avatar" alt="" ms-src="photo/{{el.image}}"></a>
+		<div class="comment-main">
+		  <header class="comment-header">
+		    <div class="comment-meta"><a class="comment-author" href="#">{{el.fromUserName}}</a> 评论于 <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20">{{el.time}}</time></div>
+	      </header>
+		  <div class="comment-body"><p><a href="#">@{{el.toUserName}}</a> {{el.comment | html}}</p></div></div>
+	  </li>
+	</ul>
+	<br>
+        <!--额外评论的结束-->
+      </div>
+      <!--问题部分--end--> 
+      <!--答案部分--start-->
+      <div id="answer_area" ms-controller="answer_list">
+      	<div ms-repeat="answers">
+      	<div class="bk-gray-bottom pt-20">
+      		<div class="upordown box-shadow l">
+      			<a href="#"><div class="upordown-up box-shadow"></div></a>
+      			<div class="upordown-middle text-c c-orange">2</div>
+      			<div class="upordown-middle text-c c-gray">2</div>
+      			<a href="#"><div class="upordown-down box-shadow"></div></a>
+      		</div>
+      		<div class="l pl-10">
+      				<p class="c-green l">{{el.username}}</p>
+      				<p class="l pl-10"><strong>54</strong></p>
+      				<p class="l pl-10 c-999">{{el.answer_time}}回答</p>
+      		</div>
+      		<div class="pl-50  pt-40">
+      			<p>{{el.answer_description | html}}</p>
+      		</div>
+      		<br>
+      		<div>
+      			 <ul class="commentList" ms-repeat="el.comments">
+	  <li class="item cl">
+	    <a href="#"><img width="48" height="48" class="comment-avatar" alt="" ms-src="photo/{{el.image}}"></a>
+		<div class="comment-main">
+		  <header class="comment-header">
+		    <div class="comment-meta"><a class="comment-author" href="#">{{el.fromUserName}}</a> 评论于 <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20">{{el.time}}</time></div>
+	      </header>
+		  <div class="comment-body"><p><a href="#">@{{el.toUserName}}</a> {{el.comment | html}}</p></div></div>
+	  </li>
+	</ul>
+      		</div>
+      		<br><br>
+      	</div>
+      	</div>
+      </div>
+
+<div class="pt-10">  
+<h4>撰写答案</h4>    
+<script type="text/plain" id="myEditor" style="width:728px;height:240px;">
+    <p>请在这里输入您的回答</p>
+</script>
+<br>
+<button class="btn radius radius btn-info" style="float:right; margin-right: 60px;" onclick="throwable_details.addAnswer();">提交</button>
+</div>
+      
+      
+      
+      
+	  
+	  
+	  
+    </div>
+    
+    
+    
+    
+    
+    <!--回答部分--end--> 
+    <!--以下为左边的主显示板块--结束--> 
+    
+    <!--以下为右边的附显示板块--开始-->
+    <div class="span-5">
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的提问</a></div>
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的关注</a></div>
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的收藏</a></div>
+      <div class="line  pt-10 mt-10"/>
+      <!--最热标签-->
+      <div class="pt-5 pb-5 f-20 mt-15" > <a href="#">最热标签</a> </div>
+      <div class="pt-5 pb-5 f-14 mt-15" > <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">java</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">eclipse</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">java</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">mysql</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">Spring</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">jdk</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">tomcat</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">hadoop</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">hibernate</span></a> <a href="#"><span class="main-right-bottom-tag ml-10 mt-10">spring</span></a> </div>
+      <div class="line pt-10 mt-10"/>
+      <!--最新热门-->
+      <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">最新热门</a> </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-orange right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-orange right-hot-title"><a href="#">sqlalchemy 如何调用有返回值的mysql存储过程</a></div>
+          <div class="f-12 c-999 right-hot-title">10&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-orange right-hot-title"><a href="#">MSATA和SATA3的固态硬盘 大家一般用的哪种？</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-orange right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-orange right-hot-title"><a href="#">CABasicAnimation旋转view，设置anchorPoint的，view会向上浮动一段距离再旋转。</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-orange right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	
+
+<!-- 弹窗代码  begin -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    	<div class="modal-dialog" style="width: 100%;">
+    		<div class="modal-content">	
+    			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        			<h4 class="modal-title" id="myModalLabel"><div id="to_user_area"></div></h4>
+      			</div>
+      			<div class="modal-body" id="modal-body-context">
+      				
+      				<form id="commentContext">
+  						<script type="text/plain" id="myEditor2" style="height:240px;"></script>
+		<!-- <textarea name="content" style="width:800px;height:400px;visibility:hidden;"></textarea> -->	
+  					</form>
+      			</div>
+      			<div class="modal-footer">
+      				<span id="sure-botton"></span>
+      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="throwable_details.addComment();">评论</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      			</div>
+    		</div><!-- /.modal-content -->
+  		</div>
+    </div>
+    
+    <div id="ajaxModal" class="modal hide fade" tabindex="-1" data-width="700"></div>
+<!-- 弹窗代码  end -->
+
+<div class="clearfix"></div>
+<footer class="footer cl">
+  <p>Copyright &copy;2013-2014 throwable.com All Rights Reserved. Seava Studio</p>
+  <div class="row row-980-20 c-black">
+    <div class="span-4">本站相关</div>
+    <div class="span-4">1</div>
+    <div class="span-4">1</div>
+    <div class="span-4">1</div>
+    <div class="span-4">1</div>
+  </div>
+</footer>
+<a href="javascript:void(0)" class="toTop" title=backToTopTxt alt=backToTopTxt></a> 
+<script type="text/javascript" src="Lib/jquery.min.js"></script> 
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="Lib/stickUp.min.js"></script> 
+<script type="text/javascript" src="Lib/bootstrap-modalmanager.js"></script> 
+<script type="text/javascript" src="Lib/bootstrap-modal.js"></script> 
+<script type="text/javascript" src="js/utils.js"></script> 
+<script type="text/javascript" src="js/throwable-base.js"></script> 
+<script type="text/javascript" charset="utf-8" src="js/avalon.js"></script>
+<script type="text/javascript" src="js_new/details_2.js"></script> 
+
+<!--三个选择页代码--> 
+<script type="text/javascript">
+
+    var ue = UE.getEditor('myEditor');
+    var ue2 = UE.getEditor('myEditor2');
+    (function($){
+    	$.getUrlParam= function(name){
+    		var reg = new RegExp("(^|&)" + name +"=([^&]*)(&|$)");
+    		var r = window.location.search.substr(1).match(reg);
+    		if (r!=null) return unescape(r[2]); return null;
+    	};
+    })(jQuery);
+
+	$(function(){
+		$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","Current","click","0");
+		throwable_base.login.isLogin("", function(isLogin){
+			if(1 == isLogin) {
+				$("#login_area").html('<a href="memberinfo.html?id='+throwable_base.userInfo.id+'">'+throwable_base.userInfo.username+'</a>');
+			} else {
+				$("#login_area").html('<a href="login.html">登陆</a>');
+			}
+		});
+		var jsonObject = {
+				questionId:$.getUrlParam("qid"),
+				userId:throwable_base.getIdFromCookie("throwable")
+		};
+	/*	$.post("question/getOneQuestion", 
+				jsonObject, 
+				function(result){
+					console.log(result);
+			//		$("#question_title").html(result.question_name);
+					$("#question_description").html(result.question_description);
+				//	$("#question_author").html(result.username);
+				//	$("#question_time").html(result.create_time);
+					$("#agreeQ").html(result.agrees);
+					$("#disagreeQ").html(result.degrees);
+					if(result.comments) {
+						var comments = JSON.parse(result.comments);
+						var str = '<ul class="commentList">';
+						for(var i = 0; i < comments.length; i++) {
+							console.log(comments[i]);
+							str += '<li class="item cl">';
+							str += '<a href="#"><img width="48" height="48" class="comment-avatar" alt="" src="photo/'+comments[i].image+'"></a>';
+							str += '<div class="comment-main"><header class="comment-header">';
+							str += '<div class="comment-meta"><a class="comment-author" href="#">'+comments[i].fromUserName+'</a> 评论于 <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20">'+comments[i].time+'</time></div>';
+							str += '</header><div class="comment-body"><p><a href="#">@'+comments[i].toUserName+'</a>  &nbsp; '+comments[i].comment+'</p></div></div>';
+						}
+						str += '</ul>';
+						$("#q_comment_show_area").html(str);
+					}
+					if(result.user_id == throwable_base.getIdFromCookie("throwable")) {
+						$("#focus_button").html('关注数  ' + result.focuses);
+						$("#collect_button").html('收藏数  '+ result.collections);
+						return;
+					}
+					if(result.focused && result.focused == 1) {
+						$("#focus_button").html("已关注");
+					}
+					if(result.collected && result.collected == 1) {
+						$("#collect_button").html("已收藏");
+					}
+					if(result.user_id != throwable_base.getIdFromCookie("throwable")) {
+						if(result.solved == 1) {
+							if(!result.collected || result.collected == 0) {
+								$("#collect_button").html('<button class="btn radius radius btn-info mt-10" onclick="throwable_details.collectQuestion()" type="button">收藏</button>');
+							}
+						} else {
+							if(!result.focused || result.focused == 0) {
+								$("#focus_button").html('<button class="btn radius radius btn-info mt-10" onclick="throwable_details.focusQuestion()" type="button">关注</button>');
+							}
+						}
+					}
+					throwable_details.users["1_" + jsonObject.questionId] = result.username;
+					var comment_button = '<a href="javascript:throwable_details.openComment('+jsonObject.questionId+', '+result.user_id+', 1)">评论</a>';
+					$("#comment_button").html(comment_button);
+				}, "json");
+		$.post("answer/getAnswers", 
+				jsonObject, 
+				function(result){
+					if(!result.answers){
+						alert("还没答案呢");
+					}
+					$("#answer_area").empty();
+					var obj = eval('(' + result.answers + ')');
+					for(var i = 0; i < obj.length; i++){
+						str = '<div class="bk-gray-bottom pt-20">';
+						str += '<div class="upordown box-shadow l"><a href="#">';
+						str += '<div class="upordown-up box-shadow"></div></a>';
+						str += '<div class="upordown-middle text-c c-orange">2</div>';
+						str += '<div class="upordown-middle text-c c-gray">2</div>';
+						str += '<a href="#"><div class="upordown-down box-shadow"></div></a> </div>';
+						if(obj[i].correct_type == 1){
+							str += ' <div class="accept"></div></div>';
+						}
+						str += '<div class="l pl-10">';
+						str += '<p class="c-green l">'+obj[i].username+'</p>';
+						str += '<p class="l pl-10"><strong>54</strong></p>';
+						str += '<p class="l pl-10 c-999">'+obj[i].answer_time+'回答</p></div>';
+						str += '<div class="pl-50  pt-40">';
+						str += '<p>'+obj[i].answer_description+'</p></div>';
+						if(obj[i].comments) {
+							var comments = obj[i].comments;
+							var str2 = '<div><ul class="commentList">';
+							for(var k = 0; k < comments.length; k++) {
+								str2 += '<li class="item cl">';
+								str2 += '<a href="#"><img width="48" height="48" class="comment-avatar" alt="" src="photo/'+comments[k].image+'"></a>';
+								str2 += '<div class="comment-main"><header class="comment-header">';
+								str2 += '<div class="comment-meta"><a class="comment-author" href="#">'+comments[k].fromUserName+'</a> 评论于 <time title="2014年8月31日 下午3:20" datetime="2014-08-31T03:54:20">'+comments[k].time+'</time></div>';
+								str2 += '</header><div class="comment-body"><p><a href="#">@'+comments[k].toUserName+'</a>  &nbsp; '+comments[k].comment+'</p></div></div>';
+							}
+							str2 += '</ul></div>';
+							str += str2;
+						}
+						throwable_details.users["2_" + obj[i].id] = obj[i].username;
+						if(obj[i].user_id != throwable_base.getIdFromCookie("throwable")) {
+							str += '<div><a href="javascript:throwable_details.openComment('+obj[i].id+', '+obj[i].user_id+', 2)">评论</a></div>';
+						}
+						str += '</div>';
+						$("#answer_area").append(str);
+					}
+				}, "json"); */
+		$.post("question/addViewer", 
+				jsonObject, 
+				function(result){
+					console.log(result);
+				}, "json");
+	}); 
+</script>
+</body>
+</html>
+<!--H-ui前端框架提供前端技术支持 h-ui.net @2014-7-10 -->

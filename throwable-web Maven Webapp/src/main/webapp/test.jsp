@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="js/socket.io.js"></script>
 	<script src="js/jquery-1.7.2.min.js"></script>
 	<script>
-	$(document).ready(function(){
+/*	$(document).ready(function(){
 		socket = io.connect('http://192.168.1.105:861/chat?uid=1&fid=1');
 		socket.on('msg', function(msg) {
 			commands(msg);
@@ -32,7 +32,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function commands(msg) {
 		console.log(msg);
-	}
+	}*/
+	
+	
+	var events = (function(){
+		var topics = {};
+		return {
+			subscribe: function(topic, listener){
+				if(!topics[topic]) {
+					topics[topic] = {queue: []};
+				}
+				var index = topics[topic].queue.push(listener) - 1;
+				return (function(topic, index){
+					return {
+						remove: function() {
+							delete topics[topic].queue[index];
+						}
+					};
+				})();
+			},
+			publish: function(topic, info) {
+				if(!topics[topic] || !topics[topic].queue.length) return;
+				var items = topics[topic].queue;
+				items.forEach(function(item){
+					item(info || {});
+				});
+			}
+		};
+	})();
+	
+	var subscription = events.subscribe("hello", function(obj){
+		console.log(obj);
+	});
+	var subscription = events.subscribe("hello", function(obj){
+		console.log("2222" + "--===--" + obj);
+	});
+ 	var subscription = events.subscribe("mmm", function(obj){
+		console.log("ddd" + "------" + obj);
+	});
+	
+	$(document).ready(function(){
+		events.publish('hello', {url:'hhhhhh'});
+		events.publish('hello', {url:'ffffff'});
+		events.publish('mmm', {url:'ffffff'});
+	});	
 	</script>
 
   </head>

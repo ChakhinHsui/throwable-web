@@ -23,6 +23,7 @@ $(document).ready(function(){
 			{}, 
 			function(result){
 				new_model.new_posts_list = eval('(' + result.questions + ')');
+				console.log(new_model.new_posts_list);
 			}, "json");
 	$.post("question/getPublicHotQuestion", 
 			{}, 
