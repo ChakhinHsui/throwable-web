@@ -34,10 +34,13 @@ public class ThriftCallTool {
 	 */
 	public ResultMsg baseCall(String url, Map<String, Object> params) {
 		ResultMsg resultMsg = null;
+		long time = System.currentTimeMillis();
 		try {
+			log.info("调用 " + url + "  " + params);
 			resultMsg = thriftPools.call("W" + System.nanoTime(), url, StringTool.mapStr2Obj(params));
+			log.info("返回 " + url + " 耗时： " + (System.currentTimeMillis() - time));
 		} catch(Exception e) {
-			log.error("调用服务器出错 " + e);
+			log.error("调用服务器出错 " + url + "  " + e);
 		}
 		return resultMsg;
 	}

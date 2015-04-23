@@ -35,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}*/
 	
 	
+	
 	var events = (function(){
 		var topics = {};
 		return {
@@ -61,13 +62,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		};
 	})();
 	
-	var subscription = events.subscribe("hello", function(obj){
+	var util = {
+			eee : events
+	};
+	
+	var subscription = util.eee.subscribe("hello", function(obj){
 		console.log(obj);
 	});
-	var subscription = events.subscribe("hello", function(obj){
+	var subscription = util.eee.subscribe("hello", function(obj){
 		console.log("2222" + "--===--" + obj);
 	});
- 	var subscription = events.subscribe("mmm", function(obj){
+ 	var subscription = util.eee.subscribe("mmm", function(obj){
 		console.log("ddd" + "------" + obj);
 	});
 	

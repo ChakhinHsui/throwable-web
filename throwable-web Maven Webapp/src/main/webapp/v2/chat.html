@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>chat.html</title>
+	<meta charset="utf-8">
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	<script src="js/socket.io.js"></script>
+	<script src="js/jquery-1.7.2.min.js"></script>
+  </head>
+  
+  <body>
+    	<div style="width:100%; height:750px; margin:0 auto;">
+    		<div style="width: 78%; height:100%; background:#eefefe; float: left;">
+    			<div style="width:100%; height:600px;" id="showArea">
+    				
+    			</div>
+    			<hr>
+    			<div style="width:100%; height:150px;">
+    				<form id="speakForm">
+    					<input style="width:100%;height:70%" id="speakArea" /><br><br>
+    					<input type="button" value="发送" onclick="send();" />
+    				</form>
+    			</div>
+    		</div>
+    		
+    		<div style="width: 20%; height:100%; background:#eefefe; float: right;">
+    		
+    		</div>
+    	</div>
+    <script src="js/utils.js"></script>
+    <script src="js/chat.js"></script>
+  </body>
+</html>

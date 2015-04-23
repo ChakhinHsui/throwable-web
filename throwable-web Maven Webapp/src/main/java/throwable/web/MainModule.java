@@ -1,6 +1,8 @@
 package throwable.web;
 
 import org.nutz.ioc.Ioc;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
 import org.nutz.mvc.annotation.IocBy;
@@ -36,8 +38,9 @@ import org.nutz.mvc.ioc.provider.ComboIocProvider;
 public class MainModule implements Setup{
 	
 	private Ioc ioc;
-	
+	private static Log log = Logs.getLog(MainModule.class);
 	public void init(NutConfig config) {
+		log.info("加载开始");
 		ioc = config.getIoc();
 		ioc.get(WebConf.class).run(ioc);
 	}

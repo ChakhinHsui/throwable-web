@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" scanPeriod="1 minutes">
-	<!--  
+<configuration scan="true" scanPeriod="1 minutes" debug="false">
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder charset="UTF-8">
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n
-			</pattern>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{10} - %msg%n</pattern>
 		</encoder>
 	</appender>
-	-->
-	
+
+<!-- 
 	<appender name="FileDebug" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
 		<filter class="ch.qos.logback.classic.filter.LevelFilter"> 
  	     	<level>DEBUG</level> 
@@ -16,7 +14,7 @@
  	   		<OnMatch>ACCEPT</OnMatch> 
         	</filter>  
  		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
- 			<fileNamePattern>../logs/throwable.%d{yyyy-MM-dd}.debug.log</fileNamePattern> 
+ 			<fileNamePattern>../logs/throwable-web.%d{yyyy-MM-dd}.debug.log</fileNamePattern> 
  			<maxHistory>5</maxHistory> 
  		</rollingPolicy> 
  		<encoder> 
@@ -32,7 +30,7 @@
  	   		<OnMatch>ACCEPT</OnMatch> 
         	</filter>  
  		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
- 			<fileNamePattern>../logs/throwable.%d{yyyy-MM-dd}.info.log</fileNamePattern> 
+ 			<fileNamePattern>../logs/throwable-web.%d{yyyy-MM-dd}.info.log</fileNamePattern> 
  			<maxHistory>5</maxHistory> 
  		</rollingPolicy> 
  		<encoder> 
@@ -48,7 +46,7 @@
  	        <OnMatch>ACCEPT</OnMatch> 
  	    </filter> 
  	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
- 	        <fileNamePattern>../logs/throwable.%d{yyyy-MM-dd}.error.log</fileNamePattern> 
+ 	        <fileNamePattern>../logs/throwable-web.%d{yyyy-MM-dd}.error.log</fileNamePattern> 
  	        <maxHistory>5</maxHistory> 
  	    </rollingPolicy> 
  	    <encoder> 
@@ -56,20 +54,22 @@
  	    </encoder> 
  	    <prudent>true</prudent> 
      </appender> 
-     
+     -->
 
-	<root level="INFO">
-		<!-- <appender-ref ref="stdout" />  -->
-		<appender-ref ref="FileDebug" /> 
+	<root level="DEBUG">
+		<appender-ref ref="stdout" />
+ 	 	<!-- <appender-ref ref="FileDebug" /> 
  		<appender-ref ref="FileInfo" /> 
-    	<appender-ref ref="FileError" /> 
+    	<appender-ref ref="FileError" />  -->
     	
 	</root>
-	
-	<logger name="throwable.web">
+
+	<logger name="throwable.server.framework.ThrowableServiceImpl">
 		<level value="INFO" />
 	</logger>
-	
+	<logger name="throwable.web">
+		<level value="DEBUG" />
+	</logger>
 	<logger name="ch.qos.logback">
 		<level value="ERROR" />
 	</logger>
@@ -79,5 +79,7 @@
 	<logger name="org">
 		<level value="INFO" />
 	</logger>
-	
+	<logger name="org.nutz.dao">
+		<level value="DEBUG" />
+	</logger>
 </configuration>

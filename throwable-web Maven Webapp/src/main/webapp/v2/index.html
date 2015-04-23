@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>欢迎加入Throwable大家庭——欢迎来到Throwable</title>
+<meta name="keywords" content="throwaable,seava,error">
+<meta name="description" content="ThrowAble网站！">
+<meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+<!-- Loading Bootstrap -->
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Loading Flat UI -->
+<link href="assets/css/flat-ui.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link rel="shortcut icon" href="assets/favicon.ico">
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+      <script src="assets/js/vendor/html5shiv.js"></script>
+      <script src="assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header class="header">
+  <div class="row demo-row">
+    <div class="col-xs-12">
+      <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01"> <span class="sr-only">Toggle navigation</span> </button>
+          <a class="navbar-brand" href="#">首页</a> </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a class="active" href="#fakelink">频道<span class="navbar-unread">1</span></a></li>
+            <li><a href="#fakelink">标签</a></li>
+            <li><a href="#fakelink">联系我们</a></li>
+            <li ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" action="#" role="search">
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                <span class="input-group-btn">
+                <button type="submit" class="btn"><span class="fui-search"></span></button>
+                </span> </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.navbar-collapse --> 
+      </nav>
+      <!-- /navbar --> 
+    </div>
+  </div>
+  <!-- /row --> 
+</header>
+<div class="container">
+<div class="pt-40"></div>
+<p class=" hidden-xs">提出你的问题，大家来解决。
+  <button type="button" class="btn btn-primary btn-xs"> 提问</button>
+</p>
+<div class="clearfix"></div>
+<div class="row">
+<div class="col-sm-8 col-md-8 col-lg-8" ><!--为左边核心部分-->
+ 
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"> <a href="#new" data-toggle="tab">最新的</a> </li>
+      <li ><a href="#hot" data-toggle="tab">最热的</a></li>
+      <li ><a href="#wait" data-toggle="tab">等你的</a></li>
+    </ul>
+    
+    <div id="myTabContent" class="tab-content" ms-controller="index_list">
+
+    <div class="tab-pane fade in active" id="new" ><!--new start-->
+            <div class="f-12">
+            <!--问题循环开始-->
+            <div ms-repeat="new_question_list">
+            <div class="main-all-list-item">
+              <div class="main-left-3thing">
+                <div class="main-left-inside text-c  hidden-xs">{{el.agrees}}<br/>
+                  赞同</div>
+                <div class="main-left-inside text-c box-shadow answer-color">{{el.answers}}<br/>
+                  回答</div>
+                <div class="main-left-inside text-c  hidden-xs">{{el.viewers}}<br/>
+                  浏览</div>
+              </div>
+              <div class="main-right">
+                <div class="main-right-same">
+                  <div class="f-16 main-right-bottom-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  </div>
+                <div class="main-right-same">
+                  <div class="main-right-top-left f-13 c-gray"><a href="#">{{el.username}}</a></div>
+                  <div class="main-right-top-left pl-10 f-13 c-gray">{{el.create_time}}</div>
+                   <a href="#" ms-repeat="el.labels"><span class="main-right-bottom-tag ml-10">{{el.labelName}}</span></a> 
+                </div>
+              </div>
+              </div>
+              <div class="clearfix bb"></div>
+              </div>
+           <!--问题循环结束-->
+              <div class="clearfix bb"></div>
+              
+      <div class="clearfix"></div> 
+      <div class="text-c">             
+   <div class="pagination pagination-minimal"><!--分页--结束-->
+            <ul>
+              <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
+              <li class="active"><a href="#fakelink">1</a></li>
+              <li><a href="#fakelink">2</a></li>
+              <li><a href="#fakelink">3</a></li>
+              <li><a href="#fakelink">4</a></li>
+              <li><a href="#fakelink">5</a></li>
+              <li><a href="#fakelink">6</a></li>
+              <li><a href="#fakelink">7</a></li>
+              <li><a href="#fakelink">8</a></li>
+              <li><a href="#fakelink">9</a></li>
+              <li><a href="#fakelink">10</a></li>
+              <li class="pagination-dropdown dropup">
+                <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fui-triangle-up"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#fakelink">10–20</a></li>
+                  <li><a href="#fakelink">20–30</a></li>
+                  <li><a href="#fakelink">40–50</a></li>
+                </ul>
+              </li>
+              <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+            </ul>
+          </div>            
+          </div>
+     </div><!--分页--end-->
+    
+    </div><!--new end-->
+    <div class="tab-pane fade " id="hot"> 
+
+		<div class="f-12">
+            <!--问题循环开始-->
+            <div ms-repeat="hot_question_list">
+            <div class="main-all-list-item">
+              <div class="main-left-3thing">
+                <div class="main-left-inside text-c  hidden-xs">{{el.agrees}}<br/>
+                  赞同</div>
+                <div class="main-left-inside text-c box-shadow answer-color">{{el.answers}}<br/>
+                  回答</div>
+                <div class="main-left-inside text-c  hidden-xs">{{el.viewers}}<br/>
+                  浏览</div>
+              </div>
+              <div class="main-right">
+                <div class="main-right-same">
+                  <div class="f-16 main-right-bottom-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  </div>
+                <div class="main-right-same">
+                  <div class="main-right-top-left f-13 c-gray"><a href="#">{{el.username}}</a></div>
+                  <div class="main-right-top-left pl-10 f-13 c-gray">{{el.create_time}}</div>
+                   <a href="#" ms-repeat="el.labels"><span class="main-right-bottom-tag ml-10">{{el.labelName}}</span></a> 
+                </div>
+              </div>
+              </div>
+              <div class="clearfix bb"></div>
+              </div>
+           <!--问题循环结束-->
+              <div class="clearfix bb"></div>
+              
+      <div class="clearfix"></div> 
+      <div class="text-c">             
+   <div class="pagination pagination-minimal"><!--分页--结束-->
+            <ul>
+              <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
+              <li class="active"><a href="#fakelink">1</a></li>
+              <li><a href="#fakelink">2</a></li>
+              <li><a href="#fakelink">3</a></li>
+              <li><a href="#fakelink">4</a></li>
+              <li><a href="#fakelink">5</a></li>
+              <li><a href="#fakelink">6</a></li>
+              <li><a href="#fakelink">7</a></li>
+              <li><a href="#fakelink">8</a></li>
+              <li><a href="#fakelink">9</a></li>
+              <li><a href="#fakelink">10</a></li>
+              <li class="pagination-dropdown dropup">
+                <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fui-triangle-up"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#fakelink">10–20</a></li>
+                  <li><a href="#fakelink">20–30</a></li>
+                  <li><a href="#fakelink">40–50</a></li>
+                </ul>
+              </li>
+              <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+            </ul>
+          </div>            
+          </div>
+     </div><!--分页--end-->
+	
+	</div>
+    <div class="tab-pane fade " id="wait"> 
+		
+		<div class="f-12">
+            <!--问题循环开始-->
+            <div ms-repeat="wait_question_list">
+            <div class="main-all-list-item">
+              <div class="main-left-3thing">
+                <div class="main-left-inside text-c  hidden-xs">{{el.agrees}}<br/>
+                  赞同</div>
+                <div class="main-left-inside text-c box-shadow answer-color">{{el.answers}}<br/>
+                  回答</div>
+                <div class="main-left-inside text-c  hidden-xs">{{el.viewers}}<br/>
+                  浏览</div>
+              </div>
+              <div class="main-right">
+                <div class="main-right-same">
+                  <div class="f-16 main-right-bottom-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  </div>
+                <div class="main-right-same">
+                  <div class="main-right-top-left f-13 c-gray"><a href="#">{{el.username}}</a></div>
+                  <div class="main-right-top-left pl-10 f-13 c-gray">{{el.create_time}}</div>
+                   <a href="#" ms-repeat="el.labels"><span class="main-right-bottom-tag ml-10">{{el.labelName}}</span></a> 
+                </div>
+              </div>
+              </div>
+              <div class="clearfix bb"></div>
+              </div>
+           <!--问题循环结束-->
+              <div class="clearfix bb"></div>
+              
+      <div class="clearfix"></div> 
+      <div class="text-c">             
+   <div class="pagination pagination-minimal"><!--分页--结束-->
+            <ul>
+              <li class="previous"><a href="#fakelink" class="fui-arrow-left"></a></li>
+              <li class="active"><a href="#fakelink">1</a></li>
+              <li><a href="#fakelink">2</a></li>
+              <li><a href="#fakelink">3</a></li>
+              <li><a href="#fakelink">4</a></li>
+              <li><a href="#fakelink">5</a></li>
+              <li><a href="#fakelink">6</a></li>
+              <li><a href="#fakelink">7</a></li>
+              <li><a href="#fakelink">8</a></li>
+              <li><a href="#fakelink">9</a></li>
+              <li><a href="#fakelink">10</a></li>
+              <li class="pagination-dropdown dropup">
+                <a href="#fakelink" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fui-triangle-up"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="#fakelink">10–20</a></li>
+                  <li><a href="#fakelink">20–30</a></li>
+                  <li><a href="#fakelink">40–50</a></li>
+                </ul>
+              </li>
+              <li class="next"><a href="#fakelink" class="fui-arrow-right"></a></li>
+            </ul>
+          </div>            
+          </div>
+     </div><!--分页--end-->
+		
+	</div>
+  </div><!-- class="tab-content"-->
+ 
+</div>
+<div class="col-sm-4 col-md-8 col-lg-4" ms-controller="right-index">
+
+
+
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的提问</a></div>
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的关注</a></div>
+      <div class="pt-5 pb-5 f-16 c-gray pd-10 right-message-item"><a href="#">我的收藏</a></div>
+    
+	 <div class="line  pt-10 mt-10"/>
+      <!--最热标签-->
+      <div class="pt-5 pb-5 f-20 mt-15" > <a href="#">最热标签</a> </div>
+      <div class="pt-5 pb-5 f-14 mt-15" > 
+      <a href="#" ms-repeat="label_list"><span class="main-right-bottom-tag ml-10 mt-10">{{el.name}}</span></a>
+      </div> 
+      <div class="line pt-10 mt-10"/>
+      <!--最新热门-->
+      <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">最新热门</a> </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5" ms-repeat="new_hot_list">
+        <div>
+          <div class="c-orange right-hot-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+          <div class="f-12 c-999 right-hot-title">{{el.answers}}&nbsp;回应</div>
+        </div>
+      </div>
+</div>
+
+
+</div>
+</div>
+<!-- /container -->
+ <div class="bb clearfix"></div>
+<footer>
+
+    <div class="row">
+      <div class="col-xs-7">
+        <h3 class="footer-title">版权说明</h3>
+        <p>大家好Github <a href="#" target="_blank">github</a> </p>
+        <p class="pvl"> <a href="#" class="twitter-share-button" data-url="#" data-text="Flat UI Free - PSD&amp;amp;HTML User Interface Kit" data-via="designmodo">weibo</a> </p>
+        <a class="footer-brand" href="#" target="_blank"> <img src="assets/img/footer/logo.png" alt="Designmodo.com" /> </a> </div>
+      <!-- /col-xs-7 -->
+      
+      <div class="col-xs-5   hidden-xs">
+        <div class="footer-banner">
+          <h3 class="footer-title">相关资源</h3>
+          <ul>
+            <li>开源中国</li>
+            <li>Stackoverflow</li>
+            <li>SegmentFault</li>
+            <li>百度知道</li>
+          </ul>
+          Go to: <a href="#" target="_blank">#</a> </div>
+      </div>
+    </div>
+
+</footer>
+<script src="assets/js/vendor/jquery.min.js"></script> 
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/avalon.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
