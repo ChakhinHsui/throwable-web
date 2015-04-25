@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>欢迎查看问题——欢迎来到Throwable</title>
+<meta name="keywords" content="throwaable,seava,error">
+<meta name="description" content="ThrowAble网站！">
+<meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
+
+<!-- Loading Bootstrap -->
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Loading Flat UI -->
+<link href="assets/css/flat-ui.css" rel="stylesheet">
+<link href="assets/css/style.css" rel="stylesheet">
+<link rel="shortcut icon" href="assets/favicon.ico">
+<!--代码样式-->
+<link href="assets/css/shCoreDefault.css" rel="stylesheet">
+<link href="assets/css/shThemeDefault.css" rel="stylesheet">
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+      <script src="assets/js/vendor/html5shiv.js"></script>
+      <script src="assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+<!--坑爹的html文本编辑器--start-->
+  <link href="umeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="umeditor/third-party/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+<!--坑爹的html文本编辑器--end-->    
+
+
+</head>
+<body>
+<header class="header">
+  <div class="row demo-row">
+    <div class="col-xs-12">
+      <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01"> <span class="sr-only">Toggle navigation</span> </button>
+          <a class="navbar-brand" href="#">首页</a> </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-01">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a class="active" href="#fakelink">核心<span class="navbar-unread">1</span></a></li>
+            <li><a href="#fakelink">扩展</a></li>
+            <li><a href="#fakelink">案例</a></li>
+            <li><a href="#fakelink">联系我们</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" action="#" role="search">
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                <span class="input-group-btn">
+                <button type="submit" class="btn"><span class="fui-search"></span></button>
+                </span> </div>
+            </div>
+          </form>
+        </div>
+        <!-- /.navbar-collapse --> 
+      </nav>
+      <!-- /navbar --> 
+    </div>
+  </div>
+  <!-- /row --> 
+</header>
+<div class="container" ms-controller="question">
+  <div class="pt-40"></div>
+  
+  <!--以下为问题的标题--start-->
+  <h6>{{title}}</h6>
+  <!--以下为问题的标题--end-->
+  <p class="c-green l f-14">{{author}}</p>
+  <p class="l pl-10 f-14"><strong>24</strong></p>
+  <p class="l pl-10 c-999 f-14">{{time}}</p>
+  <div class="clearfix"></div>
+  <div class="row b-t">
+    <div class="col-sm-8 col-md-8 col-lg-8"><!--为左边核心部分-->
+      
+      <div class="f-12"> 
+        <!--问题循环开始-->
+        <div class="main-all-list-item">
+          <div class="main-left-3thing">
+            <div class="main-left-inside text-c ">{{agree}}<br/>
+              <a href="#">赞同</a></div>
+            <div class="main-left-inside text-c box-shadow  answer-color hidden-xs">☆<br/>
+              <a href="#">采纳</a></div>
+            <div class="main-left-inside text-c  hidden-xs ">{{disagree}}<br/>
+              <a href="#">反对</a></div>
+          </div>
+          <div class="main-right">
+            <div class="main-right-same">
+              <div class="answer-left-content">{{details | html}}</div>
+            </div>
+            <!--提问的相关信息--开始-->
+            <table class="fw">
+              <tbody>
+                <tr>
+                  <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="javascript:void(0);" onClick="show_textarea('textarea-id');"  class="suggest-edit-post" title="">评论该问题</a></div></td>
+                  <td class="post-signature c-999" align="right"><div class="user-info ">
+                      <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">{{time}}</span>前编辑</div>
+                      <div class="user-gravatar32"> </div>
+                      <div class="user-details"> <br>
+                      </div>
+                    </div></td>
+                  <td class="post-signature owner  c-999"><div class="user-info ">
+                      <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">{{time}}</span>提问</div>
+                      <div class="user-gravatar32"> <a href="#">
+                        <div class="gravatar-wrapper-32"><img src="assets/img/demo/browser-author.jpg" alt="" height="32" width="32"></div>
+                        </a> </div>
+                      <div class="user-details"> <a href="#">{{author}}</a><br>
+                        <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
+                    </div></td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <!--提问的相关信息--结束--> 
+            
+            <!--评论部分--开始-->
+            <div ms-repeat="comments">
+            	<div class="line" ></div>
+            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>{{el.comment | html}}<font color="#CCCCCC"><a href="#">评论该评论</a> {{el.time}}</font></div>
+           	</div>
+            <!--评论部分--结束--> 
+            <br>
+            <div class="f-12" style="display:none" id="textarea-id">
+            	<textarea class="textarea-class"></textarea>
+            </div>
+          </div>
+          <div class="clearfix bb"></div>
+          <!--问题循环结束--> 
+          
+          <!--回答--开始-->
+          <div class="main-all-list-item" ms-repeat="answers">
+            <div class="main-left-3thing">
+              <div class="main-left-inside text-c ">999<br/>
+                <a href="#">赞同</a></div>
+              <div class="main-left-inside text-c box-shadow  answer-color hidden-xs c-orange">☆<br/>
+                <a href="#">采纳</a></div>
+              <div class="main-left-inside text-c  hidden-xs ">1<br/>
+                <a href="#">反对</a></div>
+            </div>
+            <div class="main-right">
+              <div class="main-right-same">
+                <div class="answer-left-content">{{el.answer_description | html}}</div>
+              
+              <!--提问的相关信息--开始-->
+              <table class="fw">
+                <tbody>
+                  <tr>
+                    <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="#" class="suggest-edit-post" title="">评论该回答</a></div></td>
+                    <td class="post-signature c-999" align="right"><div class="user-info ">
+                        <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">{{el.answer_time}}</span>前编辑</div>
+                        <div class="user-gravatar32"> </div>
+                        <div class="user-details"> <br>
+                        </div>
+                      </div></td>
+                    <td class="post-signature owner  c-999"><div class="user-info ">
+                        <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">{{el.answer_time}}</span>回答</div>
+                        <div class="user-gravatar32"> <a href="#">
+                          <div class="gravatar-wrapper-32"><img src="assets/img/demo/browser-pic-3.jpg" alt="" height="32" width="32"></div>
+                          </a> </div>
+                        <div class="user-details"> <a href="#">{{el.username}}</a><br>
+                          <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
+                      </div></td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--提问的相关信息--结束--> 
+              
+              <!--提问信息--结束--> 
+            </div>
+            <div class="clearfix bb"></div>
+            <!--问题循环结束-->
+            <div class="clearfix"></div>
+            <h7>您的答案</h7>
+            <script type="text/plain" id="myEditor" style="width:auto;height:240px;">
+    	<p>请在这里输入您的回答</p>
+			</script>
+          </div>
+          <!--new end--> 
+          
+        </div>
+      </div>
+    </div>
+    <!-- class="tab-content"-->
+    
+    <div class="col-sm-4 col-md-8 col-lg-4" > 
+      
+      <!--相似问题-->
+      <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">相似问题</a> </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class=" c-green right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-green right-hot-title"><a href="#">sqlalchemy 如何调用有返回值的mysql存储过程</a></div>
+          <div class="f-12 c-999 right-hot-title">10&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-green right-hot-title"><a href="#">MSATA和SATA3的固态硬盘 大家一般用的哪种？</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-green right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-green right-hot-title"><a href="#">CABasicAnimation旋转view，设置anchorPoint的，view会向上浮动一段距离再旋转。</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+        <div>
+          <div class="c-green right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
+          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- /container -->
+  <div class="bb clearfix"></div>
+  <footer>
+    <div class="row">
+      <div class="col-xs-7">
+        <h3 class="footer-title">版权说明</h3>
+        <p>大家好Github <a href="#" target="_blank">github</a> </p>
+        <p class="pvl"> <a href="#" class="twitter-share-button" data-url="#" data-text="Flat UI Free - PSD&amp;amp;HTML User Interface Kit" data-via="designmodo">weibo</a> </p>
+        <a class="footer-brand" href="#" target="_blank"> <img src="assets/img/footer/logo.png" alt="Designmodo.com" /> </a> </div>
+      <!-- /col-xs-7 -->
+      
+      <div class="col-xs-5   hidden-xs">
+        <div class="footer-banner">
+          <h3 class="footer-title">相关资源</h3>
+          <ul>
+            <li>开源中国</li>
+            <li>Stackoverflow</li>
+            <li>SegmentFault</li>
+            <li>百度知道</li>
+          </ul>
+          Go to: <a href="#" target="_blank">#</a> </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="assets/js/vendor/jquery.min.js"></script> 
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="js/avalon.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/throwable-base.js"></script>
+<script src="js/detail.js"></script>
+<script type="text/javascript">
+<!--ueditor初始化--开始-->
+    var ue = UE.getEditor('myEditor');
+<!--ueditor初始化--结束-->
+<!----评论显示、隐藏--开始-->
+function show_textarea(id){
+$("#"+id).toggle();
+}
+<!----评论显示、隐藏--结束-->
+
+</script>
+</body>
+</html>
