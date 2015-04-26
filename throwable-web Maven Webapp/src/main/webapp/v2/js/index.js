@@ -18,6 +18,8 @@ var login_area = avalon.define({
 var throwable_index = {
 		subscribe : function() {
 			throwable_util.subPubTool.subscribe("new", function(obj){
+				console.log("new");
+				console.log(obj);
 				question_model.new_question_list = obj;
 			});
 			throwable_util.subPubTool.subscribe("hot", function(obj){
@@ -36,16 +38,29 @@ var throwable_index = {
 		},
 		publish : function(channel, obj) {
 			throwable_util.subPubTool.publish(channel, obj);
+		},
+		getNewQuestion : function(page, count) {
+			$.post("../question/getPublicQuestionPage", 
+					{page:page,count:count}, 
+					function(result){
+						throwable_index.publish("new", eval('(' + result.questions + ')'));
+					}, "json");
+		},
+		getTotal : function() {
+			$.post("../question/getTotal", 
+					{}, 
+					function(result){
+						if(result.msgCode == 1) {
+							console.log(result);
+						}
+					}, "json");
 		}
 };
 
 $(document).ready(function(){
 	throwable_index.subscribe();
-	$.post("../question/getPublicQuestion", 
-			{}, 
-			function(result){
-				throwable_index.publish("new", eval('(' + result.questions + ')'));
-			}, "json");
+	throwable_index.getNewQuestion(1, 5);
+	throwable_index.getTotal();
 	$.post("../question/getPublicHotQuestion", 
 			{}, 
 			function(result){

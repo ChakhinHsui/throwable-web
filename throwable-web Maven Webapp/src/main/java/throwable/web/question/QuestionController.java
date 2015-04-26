@@ -30,6 +30,31 @@ public class QuestionController {
 	}
 	
 	/**
+	 * 首页分页查询最新的问题
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getPublicQuestionPage")
+	public Map getPublicQuestionPage(int page, int count){
+		if(page < 0 || count < 0) {
+			return BackTool.errorInfo("0200", "参数非法");
+		}
+		return questionService.queryPublicQuestionsPage(page, count);
+	}
+	
+	/**
+	 * 查询问题的总数
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/getTotal")
+	public Map getTotal(){
+		return questionService.queryTotalQNum();
+	}
+	
+	/**
 	 * 查询最热问题
 	 * @return
 	 */

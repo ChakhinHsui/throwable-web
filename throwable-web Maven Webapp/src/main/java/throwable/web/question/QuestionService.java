@@ -328,4 +328,44 @@ public class QuestionService {
 		map.put("msgCode", 1);
 		return map;
 	}
+	
+	/**
+	 * 查询问题总记录数
+	 * @return
+	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public Map queryTotalQNum() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		ResultMsg resultMsg = serverCall.baseCall("/questionApi/getTotalQuestion", params);
+		if(null == resultMsg) {
+			return BackTool.errorInfo("120015", "调用服务器出错");
+		}
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			return BackTool.errorInfo(resultMsg.errorCode, resultMsg.retMsg);
+		}
+		Map map = new HashMap();
+		map.put("msgCode", 1);
+		map.put("total", Integer.parseInt(resultMsg.retMsg));
+		return map;
+	}
+	
+	/**
+	 * 分页查询最新的问题
+	 * @return
+	 */
+	@SuppressWarnings({"rawtypes"})
+	public Map queryPublicQuestionsPage(int page, int count) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("page", page);
+		params.put("count", count);
+		ResultMsg resultMsg = serverCall.baseCall("/questionApi/getPublicQsPage", params);
+		if(null == resultMsg) {
+			return BackTool.errorInfo("120015", "调用服务器出错");
+		}
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			return BackTool.errorInfo(resultMsg.errorCode, resultMsg.retMsg);
+		}
+		resultMsg.retMap.put("msgCode", "1");
+		return resultMsg.retMap;
+	}
 }
