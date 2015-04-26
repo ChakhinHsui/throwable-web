@@ -28,12 +28,12 @@
       <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01"> <span class="sr-only">Toggle navigation</span> </button>
-          <a class="navbar-brand" href="#">首页</a> </div>
+          <a class="navbar-brand" href="index.html">首页</a> </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
           <ul class="nav navbar-nav navbar-left">
-            <li><a class="active" href="#fakelink">频道<span class="navbar-unread">1</span></a></li>
-            <li><a href="#fakelink">标签</a></li>
-            <li><a href="#fakelink">联系我们</a></li>
+            <li><a class="active" href="channel.html">频道<span class="navbar-unread">1</span></a></li>
+            <li><a href="label.html">标签</a></li>
+            <li><a href="about.html">联系我们</a></li>
             <li ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="#" role="search">
@@ -56,7 +56,7 @@
 <div class="container">
 <div class="pt-40"></div>
 <p class=" hidden-xs">提出你的问题，大家来解决。
-  <button type="button" class="btn btn-primary btn-xs"> 提问</button>
+  <a href="question.html" class="btn btn-primary btn-xs">提问</a>
 </p>
 <div class="clearfix"></div>
 <div class="row">
@@ -85,7 +85,7 @@
               </div>
               <div class="main-right">
                 <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  <div class="f-16 main-right-bottom-title"><a ms-href="detail.html?qid={{el.id}}">{{el.question_name}}</a></div>
                   </div>
                 <div class="main-right-same">
                   <div class="main-right-top-left f-13 c-gray"><a href="#">{{el.username}}</a></div>
@@ -147,7 +147,7 @@
               </div>
               <div class="main-right">
                 <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  <div class="f-16 main-right-bottom-title"><a ms-href="detail.html?qid={{el.id}}">{{el.question_name}}</a></div>
                   </div>
                 <div class="main-right-same">
                   <div class="main-right-top-left f-13 c-gray"><a href="#">{{el.username}}</a></div>
@@ -209,7 +209,7 @@
               </div>
               <div class="main-right">
                 <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+                  <div class="f-16 main-right-bottom-title"><a ms-href="detail.html?qid={{el.id}}">{{el.question_name}}</a></div>
                   </div>
                 <div class="main-right-same">
                   <div class="main-right-top-left f-13 c-gray"><a href="#">{{el.username}}</a></div>
@@ -277,7 +277,7 @@
       <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">最新热门</a> </div>
       <div class="pt-5 pb-5 f-16 mt-5 mb-5" ms-repeat="new_hot_list">
         <div>
-          <div class="c-orange right-hot-title"><a ms-href="../details_2.html?qid={{el.id}}">{{el.question_name}}</a></div>
+          <div class="c-orange right-hot-title"><a ms-href="detail.html?qid={{el.id}}">{{el.question_name}}</a></div>
           <div class="f-12 c-999 right-hot-title">{{el.answers}}&nbsp;回应</div>
         </div>
       </div>

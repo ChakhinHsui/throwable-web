@@ -37,13 +37,13 @@
       <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01"> <span class="sr-only">Toggle navigation</span> </button>
-          <a class="navbar-brand" href="#">首页</a> </div>
+          <a class="navbar-brand" href="index.html">首页</a> </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
           <ul class="nav navbar-nav navbar-left">
-            <li><a class="active" href="#fakelink">核心<span class="navbar-unread">1</span></a></li>
-            <li><a href="#fakelink">扩展</a></li>
-            <li><a href="#fakelink">案例</a></li>
-            <li><a href="#fakelink">联系我们</a></li>
+            <li><a class="active" href="channel.html">频道<span class="navbar-unread">1</span></a></li>
+            <li><a href="label.html">标签</a></li>
+            <li><a href="about.html">联系我们</a></li>
+            <li ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="#" role="search">
             <div class="form-group">
@@ -76,7 +76,7 @@
       
               <!--以下为问题的标题--end-->
               
-        <input type="text" placeholder="标题(请不要超过60字符)" class="input-text input-big radius textarea-class  mt-20" />
+        <input id="name" type="text" placeholder="标题(请不要超过60字符)" class="input-text input-big radius textarea-class  mt-20" />
         <br/>
 
        
@@ -87,9 +87,14 @@
         
         <br/>
          <h5>标签</h5>
-        <input type="text" placeholder="请在此输入1-5个标签，用&quot;,&quot;隔开" class="input-text textarea-class " />
+        <input id="lable_names" type="text" placeholder="请在此输入1-5个标签，用&quot;,&quot;隔开" class="input-text textarea-class " />
         <br/>
-         <button class="btn radius btn-success sd mt-10  mr-20" type="button">提交问题</button>
+        <h5>频道</h5>
+        <select id="kind_select" ms-controller="kinds">
+        	<option ms-repeat="gg" ms-value="{{el.id}}">{{el.kind_name}}</option>
+        </select>
+        <br><br><br>
+         <button class="btn radius btn-success sd mt-10  mr-20" id="up_button" type="button" onclick="question.addQuestion();">提交问题</button>
        
     </div>
     <!-- class="tab-content"-->
@@ -132,8 +137,12 @@
 </div>
 <script src="assets/js/vendor/jquery.min.js"></script> 
 <script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="js/avalon.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/throwable-base.js"></script>
+<script src="js/question.js"></script>
 <script type="text/javascript">
-<!--ueditor初始化--开始-->
+//<!--ueditor初始化--开始-->
     var ue = UE.getEditor('myEditor');
 //<!--ueditor初始化--结束-->
 //<!----评论显示、隐藏--开始-->

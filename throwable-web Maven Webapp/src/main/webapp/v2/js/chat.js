@@ -25,7 +25,7 @@ var userId = 0;
 $("document").ready(function(){
 	chat.subscribe();
 	userId = Math.floor(Math.random() * 10);
-	socket = io.connect('http://192.168.1.105:861/chat?uid='+userId+'&fid=1&rid=10000');
+	socket = io.connect('http://192.168.1.173:861/chat?uid='+userId+'&fid=1&rid=10000');
 	socket.on('msg', function(msg) {
 		chat.publish(msg.fc, msg);
 	});

@@ -501,7 +501,7 @@ margin: 0px auto;}
 .main-right-same {
     height: auto;
     float: left;
-    /*width: 530px;*/
+    width: 530px;
 }
 .main-right-top-left {
     height: 20px;
@@ -534,6 +534,9 @@ margin: 0px auto;}
 }
 .l {
     float: left !important;
+}
+.r {
+    float: right !important;
 }
 .b-t {
     border-top: 1px solid #DDD;
@@ -616,4 +619,98 @@ margin: 0px auto;}
  width:100%;/*自动适应父布局宽度*/  
  overflow:auto;  
  word-break:break-all;  
+}
+
+.icon-sn-google{
+	background-color:#4285F4;
+		background-position:-80px 0
+	
+}
+
+.icon-sn-github{
+	background-color:#333;
+	background-position:-40px 0
+	
+	
+}
+
+.icon-sn-tenqq{
+	background-color:#1F9ED2;
+	background-position:-60px 0
+}
+
+.icon-sn-weixin{
+	background-color:#00B500;
+	background-position:-20px 0
+}
+
+.icon-sn-weibo{
+	background-color:#E90D24;
+background-position:0px 0
+}
+
+
+[class*="icon-sn-"]{
+	display:inline-block;
+	background-image:url(../img/demo/all-icon.png);
+	background-repeat:no-repeat;
+	width:20px;
+	height:20px;
+	vertical-align:middle;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	-moz-background-size:auto 20px;
+	-o-background-size:auto 20px;
+	-webkit-background-size:auto 20px;
+	background-size:auto 20px
+}
+.ml-180{
+	margin-left: 180px;
+}
+
+.border-without-top {
+    border-right: 1px solid #EEE;
+    border-width: 0px 1px 1px;
+    border-style: none solid solid;
+    border-color: -moz-use-text-color #EEE #EEE;
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+}
+
+.contribution {
+    list-style: none outside none;
+    margin: -1px 0px 0px;
+    padding: 3px;
+}
+.contribution-inside {
+    display: block;
+    float: left;
+    margin: 1px;
+    width: 15px;
+    height: 15px;
+}
+.bg-0 {
+    background-color: #EEE;
+}
+.bg-1 {
+    background-color: #D6E685;
+}
+.bg-2 {
+    background-color: #8CC665;
+}
+.bg-3 {
+    background-color: #44A340;
+}
+.bg-4 {
+    background-color: #1E6823;
+}
+.border-all {
+    border: 1px solid #DDD;
+}
+.border-bottom {
+    border-bottom: 1px solid #EEE;
 }

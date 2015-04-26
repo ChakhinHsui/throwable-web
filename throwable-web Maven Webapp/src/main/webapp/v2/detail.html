@@ -24,13 +24,14 @@
       <script src="assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 <!--坑爹的html文本编辑器--start-->
-  <link href="umeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+    <link href="umeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+     <link href="umeditor/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="umeditor/third-party/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.all.min.js"></script>
+<script type="text/javascript" src="umeditor/third-party/SyntaxHighlighter/shCore.js"></script> 
     <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
 <!--坑爹的html文本编辑器--end-->    
-
 
 </head>
 <body>
@@ -40,13 +41,13 @@
       <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01"> <span class="sr-only">Toggle navigation</span> </button>
-          <a class="navbar-brand" href="#">首页</a> </div>
+          <a class="navbar-brand" href="index.html">首页</a> </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
           <ul class="nav navbar-nav navbar-left">
-            <li><a class="active" href="#fakelink">核心<span class="navbar-unread">1</span></a></li>
-            <li><a href="#fakelink">扩展</a></li>
-            <li><a href="#fakelink">案例</a></li>
-            <li><a href="#fakelink">联系我们</a></li>
+            <li><a class="active" href="channel.html">频道<span class="navbar-unread">1</span></a></li>
+            <li><a href="label.html">标签</a></li>
+            <li><a href="about.html">联系我们</a></li>
+            <li ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="#" role="search">
             <div class="form-group">
@@ -91,7 +92,7 @@
           </div>
           <div class="main-right">
             <div class="main-right-same">
-              <div class="answer-left-content">{{details | html}}</div>
+              <div class="answer-left-content" >{{details | html}}</div>
             </div>
             <!--提问的相关信息--开始-->
             <table class="fw">
@@ -127,6 +128,8 @@
             <br>
             <div class="f-12" style="display:none" id="textarea-id">
             	<textarea class="textarea-class"></textarea>
+            	<br>
+            	<a href="javascript:alert('oo')">评论</a>
             </div>
           </div>
           <div class="clearfix bb"></div>
@@ -145,7 +148,7 @@
             <div class="main-right">
               <div class="main-right-same">
                 <div class="answer-left-content">{{el.answer_description | html}}</div>
-              
+              </div>
               <!--提问的相关信息--开始-->
               <table class="fw">
                 <tbody>
@@ -168,20 +171,29 @@
                   </tr>
                 </tbody>
               </table>
+              <div ms-repeat="el.comments">
+            	<div class="line" ></div>
+            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>{{el.comment | html}}<font color="#CCCCCC"><a href="#">评论该评论</a> {{el.time}}</font></div>
+           	</div>
               <!--提问的相关信息--结束--> 
               
               <!--提问信息--结束--> 
             </div>
+            
             <div class="clearfix bb"></div>
-            <!--问题循环结束-->
+            <!--回答循环结束-->
             <div class="clearfix"></div>
-            <h7>您的答案</h7>
-            <script type="text/plain" id="myEditor" style="width:auto;height:240px;">
-    	<p>请在这里输入您的回答</p>
-			</script>
+            
+        
+      
           </div>
           <!--new end--> 
-          
+          <h6>您的回答</h6>
+            <script type="text/plain" id="myEditor" style="width:auto;height:200px;"></div>
+    					<p>请输入内容</p>
+			</script>
+			<br>
+			<button class="btn radius btn-success sd mt-10  mr-20" id="up_button" type="button" onclick="throwable_detail.addAnswer();">提交问题</button>
         </div>
       </div>
     </div>
@@ -264,12 +276,12 @@
 <script type="text/javascript">
 <!--ueditor初始化--开始-->
     var ue = UE.getEditor('myEditor');
-<!--ueditor初始化--结束-->
-<!----评论显示、隐藏--开始-->
+
 function show_textarea(id){
 $("#"+id).toggle();
 }
-<!----评论显示、隐藏--结束-->
+
+SyntaxHighlighter.all();
 
 </script>
 </body>

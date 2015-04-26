@@ -1,3 +1,9 @@
+var login_area = avalon.define({
+	$id: "login_area",
+	href: "register.html",
+	text: "登陆"
+});
+
 $("#signin-form").submit(function(){
 	if(!$("#login-name").val()) {
 		alert("输入用户名");
@@ -60,3 +66,4 @@ $("#register-form").submit(function(){
 	}, "json");
 	return false;
 });
+avalon.scan();

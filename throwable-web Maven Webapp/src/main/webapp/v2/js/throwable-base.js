@@ -1,7 +1,7 @@
 var throwable_base = {
 		login : {
 			isLogin : function(userId, callback){
-				$.post("user/userIsLogin",
+				$.post("../user/userIsLogin",
 						{userId: userId},
 						function(result){
 							if(result.msgCode == 1) {
@@ -20,7 +20,7 @@ var throwable_base = {
 						}, "json");
 			},
 			isAllowed : function(right) {
-				$.post("user/isAllowed",
+				$.post("../user/isAllowed",
 						{right: right},
 						function(result){
 							alert(JSON.stringinfy(result));
