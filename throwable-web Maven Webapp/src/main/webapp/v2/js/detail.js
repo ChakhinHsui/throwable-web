@@ -67,13 +67,13 @@ $(document).ready(function(){
 		}
 	});
 	var questionId = throwable_util.url.getUrlParam("qid");
-	var userId = throwable_base.getIdFromCookie("throwable");
+//	var userId = throwable_base.getIdFromCookie("throwable");
 	if(!questionId) {
 		throwable_util.url.location("index.html");
 	}
-	if(!userId) {
-		throwable_util.url.location("register.html");
-	}
+//	if(!userId) {
+//		throwable_util.url.location("register.html");
+//	}
 	var jsonObject = {
 			questionId: throwable_util.url.getUrlParam("qid"),
 			userId: throwable_base.getIdFromCookie("throwable")

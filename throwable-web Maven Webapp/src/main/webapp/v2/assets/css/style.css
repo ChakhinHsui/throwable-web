@@ -501,7 +501,7 @@ margin: 0px auto;}
 .main-right-same {
     height: auto;
     float: left;
-    width: 530px;
+    /*width: 530px;*/
 }
 .main-right-top-left {
     height: 20px;
@@ -713,4 +713,79 @@ background-position:0px 0
 }
 .border-bottom {
     border-bottom: 1px solid #EEE;
+}
+
+.roomcard{
+    position: relative;
+    width: 215px;
+	height:200px;
+    padding: 5px;
+    margin: 0px 5px 10px;
+    float: left;
+    overflow: hidden;
+    background: none repeat scroll 0% 0% #FDFDFD;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #DDD #CCC #CCC #DDD;
+    box-shadow: 0px 1px 3px #DDD;
+    border-radius: 5px;
+    color: #222;
+}
+.roominchart{
+    position: relative;
+    width: 100%;
+	height:auto;
+    padding: 5px;
+    margin: 0px 5px 5px;
+    float: left;
+    overflow: hidden;
+    background: none repeat scroll 0% 0% #FDFDFD;
+    /*border-width: 1px;
+    border-style: solid;
+    border-color: #DDD #CCC #CCC #DDD;
+    box-shadow: 0px 1px 3px #DDD;
+    border-radius: 5px;
+    color: #222;*/
+
+}
+.romminchartuser{
+padding: 5px;
+margin: 0px 5px 5px;
+width:100px;
+float:left
+}
+
+
+.romminchartmess{
+    position: relative;
+    width: auto;
+	height:auto;
+    padding: 5px;
+    margin: 0px 5px 5px;
+	
+	/*  background-color: #F6F6F6;
+    border-radius: 6px;
+    padding: 5px 5px 5px 0px;
+    float: left;
+    word-wrap: break-word;
+    width: 87%;
+    color: #222;*/
+   
+    overflow: hidden;
+    background: none repeat scroll 0% 0% #F6F6F6;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #DDD #CCC #CCC #DDD;
+    box-shadow: 0px 1px 3px #DDD;
+    border-radius: 5px;
+    color: #222;
+	word-wrap: break-word;
+
+}
+
+.imggray{
+-webkit-filter: grayscale(100%); 
+-webkit-filter: grayscale(1); 
+filter: grayscale(100%); 
+filter:gray; 
 }

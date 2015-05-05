@@ -24,14 +24,13 @@
       <script src="assets/js/vendor/respond.min.js"></script>
     <![endif]-->
 <!--坑爹的html文本编辑器--start-->
-    <link href="umeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
-     <link href="umeditor/third-party/SyntaxHighlighter/shCoreDefault.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="umeditor/third-party/jquery-1.10.2.min.js"></script>
+  <link href="umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="umeditor/third-party/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="umeditor/ueditor.all.min.js"></script>
-<script type="text/javascript" src="umeditor/third-party/SyntaxHighlighter/shCore.js"></script> 
     <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
 <!--坑爹的html文本编辑器--end-->    
+
 
 </head>
 <body>
@@ -41,13 +40,13 @@
       <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01"> <span class="sr-only">Toggle navigation</span> </button>
-          <a class="navbar-brand" href="index.html">首页</a> </div>
+          <a class="navbar-brand" href="#">首页</a> </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
           <ul class="nav navbar-nav navbar-left">
-            <li><a class="active" href="channel.html">频道<span class="navbar-unread">1</span></a></li>
-            <li><a href="label.html">标签</a></li>
-            <li><a href="about.html">联系我们</a></li>
-            <li ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
+            <li><a class="active" href="#fakelink">核心<span class="navbar-unread">1</span></a></li>
+            <li><a href="#fakelink">扩展</a></li>
+            <li><a href="#fakelink">案例</a></li>
+            <li><a href="#fakelink">联系我们</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="#" role="search">
             <div class="form-group">
@@ -66,15 +65,15 @@
   </div>
   <!-- /row --> 
 </header>
-<div class="container" ms-controller="question">
+<div class="container">
   <div class="pt-40"></div>
   
   <!--以下为问题的标题--start-->
-  <h6>{{title}}</h6>
+  <h6>PHPer成长路上的一些困惑</h6>
   <!--以下为问题的标题--end-->
-  <p class="c-green l f-14">{{author}}</p>
+  <p class="c-green l f-14">xiaomo</p>
   <p class="l pl-10 f-14"><strong>24</strong></p>
-  <p class="l pl-10 c-999 f-14">{{time}}</p>
+  <p class="l pl-10 c-999 f-14">3天前提问</p>
   <div class="clearfix"></div>
   <div class="row b-t">
     <div class="col-sm-8 col-md-8 col-lg-8"><!--为左边核心部分-->
@@ -83,34 +82,48 @@
         <!--问题循环开始-->
         <div class="main-all-list-item">
           <div class="main-left-3thing">
-            <div class="main-left-inside text-c ">{{agree}}<br/>
+            <div class="main-left-inside text-c ">1<br/>
               <a href="#">赞同</a></div>
             <div class="main-left-inside text-c box-shadow  answer-color hidden-xs">☆<br/>
               <a href="#">采纳</a></div>
-            <div class="main-left-inside text-c  hidden-xs ">{{disagree}}<br/>
+            <div class="main-left-inside text-c  hidden-xs ">13<br/>
               <a href="#">反对</a></div>
           </div>
           <div class="main-right">
             <div class="main-right-same">
-              <div class="answer-left-content" >{{details | html}}</div>
+              <div class="answer-left-content">今天开始使用框架来进行开发，框架的手册也看了很大一部分，感觉没什么难度的！
+                但是当我创建一个应用后，我想写一个用户登录的页面的时候，我竟然迷茫了……不知所措！
+                
+                我不知道检查用户是否已经登录的代码，应该放在哪个目录下，不知道该如何组织代码！
+                
+                突然间，万念俱灰心已死，自己一生的技术梦，就像泡沫一样就此破灭！
+                我想，基础知识，只要肯用心肯努力，就一定可以学的好！
+                但是像这样，如何组织代码、组织代码结构，这些在没有师傅指导的情况下，自己该如何学习？
+                有哪些书籍和资料可以参考？
+                
+                以前，遇到问题，自己总是可以借助各种工具，查资料，去解决！但是这次，竟然不知道该怎么查，查什么……感觉自己好像找到了学习方向，可突然又非常迷茫，找不到前进的路……
+                
+                求各位大神、前辈，指点迷津！
+                
+                先谢过了！谢谢！</div>
             </div>
             <!--提问的相关信息--开始-->
             <table class="fw">
               <tbody>
                 <tr>
-                  <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="javascript:void(0);" onClick="show_textarea('comment_write');"  class="suggest-edit-post" title="">评论该问题</a></div></td>
+                  <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="javascript:void(0);" onClick="show_textarea('textarea-id');"  class="suggest-edit-post" title="">评论该问题</a></div></td>
                   <td class="post-signature c-999" align="right"><div class="user-info ">
-                      <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">{{time}}</span>前编辑</div>
+                      <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">19分钟</span>前编辑</div>
                       <div class="user-gravatar32"> </div>
                       <div class="user-details"> <br>
                       </div>
                     </div></td>
                   <td class="post-signature owner  c-999"><div class="user-info ">
-                      <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">{{time}}</span>提问</div>
+                      <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">1小时前</span>提问</div>
                       <div class="user-gravatar32"> <a href="#">
                         <div class="gravatar-wrapper-32"><img src="assets/img/demo/browser-author.jpg" alt="" height="32" width="32"></div>
                         </a> </div>
-                      <div class="user-details"> <a href="#">{{author}}</a><br>
+                      <div class="user-details"> <a href="#">xpf</a><br>
                         <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
                     </div></td>
                 </tr>
@@ -120,23 +133,18 @@
             <!--提问的相关信息--结束--> 
             
             <!--评论部分--开始-->
-            <div ms-repeat="comments">
-            	<div class="line" ></div>
-            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>{{el.comment | html}}<font color="#CCCCCC"><a href="#">评论该评论</a> {{el.time}}</font></div>
-           	</div>
+            <div class="line"></div>
+            <div class="commit"><a href="#">zengwei:</a>你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？你是猴子派来的救兵吗？<font color="#CCCCCC"><a href="#">评论该评论</a> 2015-04-24 00:15:30</font></div>
             <!--评论部分--结束--> 
-           <!--  <br>
             <div class="f-12" style="display:none" id="textarea-id">
             	<textarea class="textarea-class"></textarea>
-            	<br>
-            	<a href="javascript:alert('oo')">评论</a>
-            </div> -->
+            </div>
           </div>
           <div class="clearfix bb"></div>
           <!--问题循环结束--> 
           
           <!--回答--开始-->
-          <div class="main-all-list-item" ms-repeat="answers">
+          <div class="main-all-list-item">
             <div class="main-left-3thing">
               <div class="main-left-inside text-c ">999<br/>
                 <a href="#">赞同</a></div>
@@ -147,53 +155,48 @@
             </div>
             <div class="main-right">
               <div class="main-right-same">
-                <div class="answer-left-content">{{el.answer_description | html}}</div>
+                <div class="answer-left-content">你这傻B，学个屁php呀，还跟学java吧！！登录的部分：
+                  表单用post提交用户名和密码，先假设你在数据存的密码是通过用户名和密码MD5后得来的，把表单提交过来的用户名和密码MD5后和数据库对比，如果一样，就成功啦，然后创建一个session在所有的页面来维持登录状态，Session关掉页面就没有了，这时候就可以用cookie了，用法就不说了。
+                  
+                  看错了，关于文件组织的，看你用的什么框架应该有文档，都是MVC,八九不离十就是控制器，模型，视图，这些英文单词也很清楚啦</div>
               </div>
+              
               <!--提问的相关信息--开始-->
               <table class="fw">
                 <tbody>
                   <tr>
-                    <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="javascript:show_textarea('comment_write')" class="suggest-edit-post" title="">评论该回答</a></div></td>
+                    <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="#" class="suggest-edit-post" title="">评论该回答</a></div></td>
                     <td class="post-signature c-999" align="right"><div class="user-info ">
-                        <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">{{el.answer_time}}</span>前编辑</div>
+                        <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">45分钟</span>前编辑</div>
                         <div class="user-gravatar32"> </div>
                         <div class="user-details"> <br>
                         </div>
                       </div></td>
                     <td class="post-signature owner  c-999"><div class="user-info ">
-                        <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">{{el.answer_time}}</span>回答</div>
+                        <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">40分钟前</span>回答</div>
                         <div class="user-gravatar32"> <a href="#">
                           <div class="gravatar-wrapper-32"><img src="assets/img/demo/browser-pic-3.jpg" alt="" height="32" width="32"></div>
                           </a> </div>
-                        <div class="user-details"> <a href="#">{{el.username}}</a><br>
+                        <div class="user-details"> <a href="#">xiaomo</a><br>
                           <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
                       </div></td>
                   </tr>
                 </tbody>
               </table>
-              <div ms-repeat="el.comments">
-            	<div class="line" ></div>
-            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>{{el.comment | html}}<font color="#CCCCCC"><a href="#">评论该评论</a> {{el.time}}</font></div>
-           	</div>
               <!--提问的相关信息--结束--> 
               
               <!--提问信息--结束--> 
             </div>
-            
             <div class="clearfix bb"></div>
-            <!--回答循环结束-->
+            <!--问题循环结束-->
             <div class="clearfix"></div>
-            
-        
-      
+            <h7>您的答案</h7>
+            <script type="text/plain" id="myEditor" style="width:auto;height:240px;">
+    	<p>请在这里输入您的回答</p>
+			</script>
           </div>
           <!--new end--> 
-          <h6>您的回答</h6>
-            <script type="text/plain" id="myEditor" style="width:auto;height:200px;"></div>
-    					<p>请输入内容</p>
-			</script>
-			<br>
-			<button class="btn radius btn-success sd mt-10  mr-20" id="up_button" type="button" onclick="throwable_detail.addAnswer();">提交问题</button>
+          
         </div>
       </div>
     </div>
@@ -266,16 +269,15 @@
       </div>
     </div>
   </footer>
-  
-  <div id="comment_write" style="width:100%; display:none">
-    <nav class="navbar navbar-inverse navbar-fixed-bottom navbar-embossed" role="navigation">
+  	<div>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom navbar-embossed" style="display:show" role="navigation">
 	<div class="row">
 	 
 	<div class="col-xm-10 col-sm-10 col-md-10 col-lg-10">
-	<textarea class="ft-12" style="height:40px;line-height: 13px;width:98%"></textarea> 
+	<textarea class="ft-12" style="height:40px;line-height: 13px;width:100%"></textarea> 
 	</div>
 	<div class="col-xm-2  col-sm-2 col-md-2 col-lg-2">
-           <button type="button" class="btn btn-info l" style="width:80%">提交评论</button> 
+           <button type="button" class="btn btn-info l" style="width:100%">提交评论</button> 
 	</div>
 	 </div>
     </nav>
@@ -285,19 +287,11 @@
 </div>
 <script src="assets/js/vendor/jquery.min.js"></script> 
 <script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="js/avalon.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/throwable-base.js"></script>
-<script src="js/detail.js"></script>
 <script type="text/javascript">
-<!--ueditor初始化--开始-->
     var ue = UE.getEditor('myEditor');
-
 function show_textarea(id){
 $("#"+id).toggle();
 }
-
-SyntaxHighlighter.all();
 
 </script>
 </body>
