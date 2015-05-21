@@ -80,6 +80,7 @@ public class DateUtil {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static Date[] getCurrWeek() {
 		Date startDate = new Date(System.currentTimeMillis());
 		Date endDate = new Date(System.currentTimeMillis());
@@ -94,6 +95,7 @@ public class DateUtil {
 	 * 
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static Date[] getLastWeek() {
 		Date startDate = new Date(System.currentTimeMillis());
 		Date endDate = new Date(System.currentTimeMillis());

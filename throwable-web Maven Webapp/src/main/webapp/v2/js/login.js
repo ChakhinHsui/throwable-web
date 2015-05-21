@@ -22,7 +22,7 @@ $("#signin-form").submit(function(){
 	$.post("../user/login", jsonObject, function(result){
 		console.log(result);
 		if(1 == result.msgCode) {
-//			throwable_util.url.location("index.html");
+			throwable_util.url.location("index.html");
 		}else{
 			alert(result.errorMsg);
 		}
@@ -60,7 +60,7 @@ $("#register-form").submit(function(){
 	console.log(JSON.stringify(jsonObject));
 	$.post("../user/register", jsonObject, function(result){
 		if(result.msgCode == 1) {
-			throwable_util.url.location("login.html");
+			throwable_util.url.location("register.html");
 		}
 		console.log(JSON.stringify(result));
 	}, "json");

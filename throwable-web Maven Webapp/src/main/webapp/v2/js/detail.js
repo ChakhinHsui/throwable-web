@@ -8,6 +8,9 @@ var question_model = avalon.define({
 	agree: "",
 	disagree: "",
 	details: "",
+	qid: "",
+	userId: "",
+	image:"default.jpg",
 	comments: [],
 	answers: []
 });
@@ -57,7 +60,68 @@ var throwable_detail = {
 					throwable_util.url.location("register.html");
 				}
 			});
-		}
+		},
+		/**
+		 * 添加评论
+		 * @param belongid     评论所属id   最大的一层  问题id  回答id
+		 * @param userId       被评论的用户的id
+		 * @param belongType   评论所属类型  1评论给问题  2评论给答案
+		 * @param type         类型 1评论给问题和答案  2评论给评论
+		 * @param commentId    被评论的评论id
+		 */
+		openComment : function(belongid, userId, belongType, type, commentId) {
+			throwable_base.login.isLogin("", function(isLogin){
+				if(1 == isLogin) {
+					if(belongid == throwable_detail.temp['belongId'] && belongType == throwable_detail.temp['belongType'] && userId == throwable_detail.temp['toUserId'] && commentId == throwable_detail.temp['commentId'] ) {
+						console.log(belongid);
+						$("#comment_write").toggle();
+						throwable_detail.temp = {};
+						throwable_detail.togger = 1;
+						return;
+					}
+					throwable_detail.temp['belongId'] = belongid;
+					throwable_detail.temp['belongType'] = belongType;
+					throwable_detail.temp['toUserId'] = userId;
+					throwable_detail.temp['commentId'] = commentId;
+					var username = "";
+					if(type == 1) {
+						username = throwable_detail.users[belongType + "_" + belongid];
+					} else {
+						username = throwable_detail.users[belongType + "_" + commentId + "_" + belongid];
+					}
+					throwable_detail.temp['toUserName'] = username;
+					throwable_detail.temp['fromUserId'] = throwable_base.getIdFromCookie("throwable");
+					throwable_detail.temp['fromUserName'] = throwable_base.getUserNameFromCookie("throwable");
+					$("#ctoUserName").html("评论 @" + username + "");
+					if(throwable_detail.togger == 1) {
+						$("#comment_write").toggle();
+						throwable_detail.togger = 2;
+					}
+					console.log(throwable_detail.temp);
+				} 
+			});
+		},
+		addComment : function() {
+			var comment = $("#comment_write_area").val();
+			throwable_detail.temp["comment"] = comment;
+			$.post("../comment/addComment", throwable_detail.temp, function(result){
+				console.log(result);
+				if(1 == result.msgCode) {
+					$("#name").val("");
+					//清空富文本的内容
+					$("#comment_write_area").val("");
+					throwable_util.url.refresh();
+					throwable_detail.temp = {};
+				}
+			}, "json");
+		},
+		users : {
+			
+		},
+		temp : {
+			
+		},
+		togger : 1
 };
 
 $(document).ready(function(){
@@ -86,11 +150,28 @@ $(document).ready(function(){
 		question_model.agree = result.agrees;
 		question_model.disagree = result.degrees;
 		question_model.details = result.question_description;
-		question_model.comments = eval('(' + result.comments + ')');
+		question_model.qid = result.id;
+		question_model.userId = result.user_id;
+		question_model.image = !result.image ? question_model.image : result.image;
+		var comments = eval('(' + result.comments + ')');
+		question_model.comments = comments;
+		throwable_detail.users["1_" + result.id] = result.username;
+		for(var i = 0; i < comments.length; i++) {
+			throwable_detail.users["1_" + comments[i].id + "_" + comments[i].belongId] = comments[i].fromUserName;
+		}
 	}, "json");
 	
 	$.post("../answer/getAnswers", jsonObject, function(result){
-		question_model.answers = eval('(' + result.answers + ')');
+		var answers = eval('(' + result.answers + ')');
+		question_model.answers = answers;
+		for(var i = 0; i < answers.length; i++) {
+			throwable_detail.users["2_" + answers[i].id] = answers[i].username;
+			console.log(answers[i].comments);
+			for(var j = 0; j < answers[i].comments.length; j++) {
+				throwable_detail.users["2_" + answers[i].comments[j].id + "_" + answers[i].comments[j].belongId] = answers[i].comments[j].fromUserName;
+			}
+		}
+		console.log(throwable_detail.users);
 	}, "json");
 	$.post("../question/addViewer", 
 			jsonObject, 

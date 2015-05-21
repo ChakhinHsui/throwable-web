@@ -98,7 +98,7 @@
             <table class="fw">
               <tbody>
                 <tr>
-                  <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="javascript:void(0);" onClick="show_textarea('comment_write');"  class="suggest-edit-post" title="">评论该问题</a></div></td>
+                  <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a ms-href="javascript:throwable_detail.openComment({{qid}}, {{userId}}, 1, 1, 0);"  class="suggest-edit-post" title="">评论该问题</a></div></td>
                   <td class="post-signature c-999" align="right"><div class="user-info ">
                       <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">{{time}}</span>前编辑</div>
                       <div class="user-gravatar32"> </div>
@@ -108,7 +108,7 @@
                   <td class="post-signature owner  c-999"><div class="user-info ">
                       <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">{{time}}</span>提问</div>
                       <div class="user-gravatar32"> <a href="#">
-                        <div class="gravatar-wrapper-32"><img src="assets/img/demo/browser-author.jpg" alt="" height="32" width="32"></div>
+                        <div class="gravatar-wrapper-32"><img ms-src="../photo/{{image}}" alt="" height="32" width="32"></div>
                         </a> </div>
                       <div class="user-details"> <a href="#">{{author}}</a><br>
                         <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
@@ -122,7 +122,7 @@
             <!--评论部分--开始-->
             <div ms-repeat="comments">
             	<div class="line" ></div>
-            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>{{el.comment | html}}<font color="#CCCCCC"><a href="#">评论该评论</a> {{el.time}}</font></div>
+            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>&nbsp;&nbsp;{{el.comment}}&nbsp;&nbsp;<font color="#CCCCCC"><a ms-href="javascript:throwable_detail.openComment({{qid}},{{el.fromUserId}},1,2,{{el.id}});">评论该评论</a> {{el.time}}</font></div>
            	</div>
             <!--评论部分--结束--> 
            <!--  <br>
@@ -153,7 +153,7 @@
               <table class="fw">
                 <tbody>
                   <tr>
-                    <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a href="javascript:show_textarea('comment_write')" class="suggest-edit-post" title="">评论该回答</a></div></td>
+                    <td class="post-signature"><div class="post-menu"><a href="#" title="short permalink to this question" class="short-link" id="link-post-29799436">分享</a><span class="lsep">|</span><a ms-href="javascript:throwable_detail.openComment({{el.id}}, {{el.user_id}}, 2, 1, 0);" class="suggest-edit-post" title="">评论该回答</a></div></td>
                     <td class="post-signature c-999" align="right"><div class="user-info ">
                         <div class="user-action-time">在<span title="2015-04-22 14:22:52Z" class="relativetime">{{el.answer_time}}</span>前编辑</div>
                         <div class="user-gravatar32"> </div>
@@ -163,7 +163,7 @@
                     <td class="post-signature owner  c-999"><div class="user-info ">
                         <div class="user-action-time"><span title="2015-04-22 13:41:09Z" class="relativetime">{{el.answer_time}}</span>回答</div>
                         <div class="user-gravatar32"> <a href="#">
-                          <div class="gravatar-wrapper-32"><img src="assets/img/demo/browser-pic-3.jpg" alt="" height="32" width="32"></div>
+                          <div class="gravatar-wrapper-32"><img ms-src="../photo/{{el.image}}" alt="" height="32" width="32"></div>
                           </a> </div>
                         <div class="user-details"> <a href="#">{{el.username}}</a><br>
                           <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
@@ -173,7 +173,7 @@
               </table>
               <div ms-repeat="el.comments">
             	<div class="line" ></div>
-            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>{{el.comment | html}}<font color="#CCCCCC"><a href="#">评论该评论</a> {{el.time}}</font></div>
+            	<div class="commit" ><a href="#">{{el.fromUserName}}:</a>&nbsp;<a href="#">@{{el.toUserName}}</a>&nbsp;&nbsp;{{el.comment}} &nbsp;&nbsp;<font color="#CCCCCC"><a ms-href="javascript:throwable_detail.openComment({{el.belongId}}, {{el.fromUserId}}, 2, 2, {{el.id}});">评论该评论</a> {{el.time}}</font></div>
            	</div>
               <!--提问的相关信息--结束--> 
               
@@ -190,7 +190,7 @@
           <!--new end--> 
           <h6>您的回答</h6>
             <script type="text/plain" id="myEditor" style="width:auto;height:200px;"></div>
-    					<p>请输入内容</p>
+    					
 			</script>
 			<br>
 			<button class="btn radius btn-success sd mt-10  mr-20" id="up_button" type="button" onclick="throwable_detail.addAnswer();">提交问题</button>
@@ -270,12 +270,14 @@
   <div id="comment_write" style="width:100%; display:none">
     <nav class="navbar navbar-inverse navbar-fixed-bottom navbar-embossed" role="navigation">
 	<div class="row">
-	 
+	 <div>
+	 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="ctoUserName"></span></p>
+	 </div>
 	<div class="col-xm-10 col-sm-10 col-md-10 col-lg-10">
-	<textarea class="ft-12" style="height:40px;line-height: 13px;width:98%"></textarea> 
+	<textarea class="ft-12" style="height:40px;line-height: 13px;width:98%" id="comment_write_area"></textarea> 
 	</div>
 	<div class="col-xm-2  col-sm-2 col-md-2 col-lg-2">
-           <button type="button" class="btn btn-info l" style="width:80%">提交评论</button> 
+           <button type="button" class="btn btn-info l" onclick="throwable_detail.addComment();" style="width:80%">提交评论</button> 
 	</div>
 	 </div>
     </nav>

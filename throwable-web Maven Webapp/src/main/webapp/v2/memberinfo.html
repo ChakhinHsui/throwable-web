@@ -30,13 +30,13 @@
       <nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01"> <span class="sr-only">Toggle navigation</span> </button>
-          <a class="navbar-brand" href="#">首页</a> </div>
+          <a class="navbar-brand" href="index.html">首页</a> </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
           <ul class="nav navbar-nav navbar-left">
-            <li><a class="active" href="#fakelink">核心<span class="navbar-unread">1</span></a></li>
-            <li><a href="#fakelink">扩展</a></li>
-            <li><a href="#fakelink">案例</a></li>
-            <li><a href="#fakelink">联系我们</a></li>
+            <li><a class="active" href="channel.html">频道<span class="navbar-unread">1</span></a></li>
+            <li><a href="label.html">标签</a></li>
+            <li><a href="about.html">联系我们</a></li>
+            <li ms-controller="login_area" ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
           </ul>
           <form class="navbar-form navbar-right" action="#" role="search">
             <div class="form-group">
@@ -58,12 +58,13 @@
 <div class="container">
   <div class="pt-40"></div>
   <!--头像和个人简介--开始-->
-  <div class="row">
+  <div class="row" ms-controller="member_info">
     <div class="col-sm-4 col-md-6 col-lg-4"> 
       <!--头像图片区--start-->
-      <div class="l"> <img  alt="单击此处修改个人头像" height="160" class=" box-shadow" src="assets/img/demo/browser-pic-5.jpg"/>
-        <p class="pt-5"><strong><a href="#">JamsGostphi</a></strong></p>
+      <div class="l"> <img  alt="单击此处修改个人头像" height="160" class=" box-shadow" ms-src="../photo/{{image}}"/>
+        <p class="pt-5"><strong><a href="#">{{username}}</a></strong></p>
       </div>
+      <br>
       <!--头像图片区--end--> 
       <!--个人信息区--start-->
       <div class="ml-180"> 
@@ -84,23 +85,29 @@
     </div>
     <div class="col-sm-8 col-md-6 col-lg-8 prettyprint prettyprinted" >
       <div class="f-14 c-green" >
-        <p class="f-14 mb-5" >所在城市：广东省 深圳市</p>
-        <p class="f-14 mb-5">现任职位：希瓦科技有限公司 研发工程师</p>
-        <p class="f-14 mb-5">院校专业：西南大学 计算机应用技术</p>
-        <p class="f-14 mb-5">个人宣言：我跟你什么仇什么怨</p>
-        <p class="f-14 mb-5">注册时间：2014年12月11日</p>
+        <p class="f-14 mb-5" >所在城市：{{liveAddr}}</p>
+        <p class="f-14 mb-5">现任职位：{{nowJob}}</p>
+        <p class="f-14 mb-5">院校专业：{{graduateCollege}}</p>
+        <p class="f-14 mb-5">个人宣言：{{motto}}</p>
+        <p class="f-14 mb-5">个人兴趣：{{interest}}</p>
+         <p class="f-14 mb-5">个人兴趣：{{goodAt}}</p>
+        <p class="f-14 mb-5">注册时间：{{create_time}}</p>
       </div>
+      <div style="margin-left:580px;">
+    	<button class="btn radius radius btn-link" type="button" onclick="member_info.openModifyDialog();">编辑信息</button>
+    </div>
      
     </div>
   </div>
+  <br>
   <!--头像和个人简介--结束--> 
   <div class="clearfix"></div>
   <div class="row b-t">
     <div class="col-sm-4 col-md-6 col-lg-4"><!--为左边核心部分--> 
-		<div class="clearfix">
-     	<a href="#"><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-c border-without-top mr-0 pr-10" ><div class="f-30 c-green">1223</div><div class="c-gray">提问</div></div></a>
+		<div class="clearfix" ms-controller="member_info">
+     	<a href="#"><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-c border-without-top mr-0 pr-10" ><div class="f-30 c-green">{{askNum}}</div><div class="c-gray">提问</div></div></a>
         <a href="#"><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-c border-without-top mr-0 pr-10" ><div class="f-30 c-orange ">1223</div><div class="c-gray">赞同</div></div></a>
-             <a href="#"><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-c border-without-top mr-0 pr-10"><div class="f-30 c-blue">213</div><div class="c-gray">回答</div></div></a>
+             <a href="#"><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4  text-c border-without-top mr-0 pr-10"><div class="f-30 c-blue">{{answerNum}}</div><div class="c-gray">回答</div></div></a>
      </div>
      <!--每天贡献--开始-->
      <ul class="contribution clearfix border-all">
@@ -198,7 +205,7 @@
    
 	</ul>
     
-    <div id="myTabContent" class="tab-content">
+    <div id="myTabContent" class="tab-content" ms-controller="userQuestion">
    <div class="tab-pane fade   in active" id="act">
       
       <p class="f-14 pt-10 pb-10 border-bottom">
@@ -219,52 +226,28 @@
    </div>
    <div class="tab-pane fade" id="qus">
        <!--问题循环开始-->
-            <div class="main-all-list-item">
+            <div class="main-all-list-item" ms-repeat="question_list">
               <div class="main-left-3thing">
-                <div class="main-left-inside text-c ">1<br/>
+                <div class="main-left-inside text-c ">{{el.agrees}}<br/>
                   赞同</div>
-                <div class="main-left-inside text-c box-shadow answer-color">4<br/>
+                <div class="main-left-inside text-c box-shadow answer-color">{{el.answers}}<br/>
                   回答</div>
-                <div class="main-left-inside text-c ">13<br/>
+                <div class="main-left-inside text-c ">{{el.viewers}}<br/>
                   浏览</div>
               </div>
               <div class="main-right">
                 <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title">使用 sbt 的 eclipse 插件配置开发环境碰到的问题使用 sbt 的 eclipse 插件配置开发环境碰到的问题使用 sbt 的 eclipse 插件配置开到的问题</div>
+                  <div class="f-16 main-right-bottom-title">{{el.question_name}}</div>
                   </div>
                 <div class="main-right-same">
-                  <div class="main-right-top-left f-13 c-gray"><a href="#">xpf</a></div>
-                  <div class="main-right-top-left pl-10 f-13 c-gray">1分钟前回答</div>
-                   <a href="#"><span class="main-right-bottom-tag ml-10">java</span></a> 
-                  <a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a>
+                  <div class="main-right-top-left f-13 c-gray"><a href="#">{{el.username}}</a></div>
+                  <div class="main-right-top-left pl-10 f-13 c-gray">{{el.create_time}}</div>
+                   <!-- <a href="#"><span class="main-right-bottom-tag ml-10">java</span></a> --> 
+                 <!--  <a href="#" ms-repeat="el.labels"><span class="main-right-bottom-tag ml-10">{{el.labelName}}</span></a> -->
                 </div>
               </div>
-              </div>
               <div class="clearfix bb"></div>
-           <!--问题循环结束-->
-            <!--问题循环开始-->
-            <div class="main-all-list-item">
-              <div class="main-left-3thing">
-                <div class="main-left-inside text-c ">1<br/>
-                  赞同</div>
-                <div class="main-left-inside text-c box-shadow answer-color">4<br/>
-                  回答</div>
-                <div class="main-left-inside text-c ">13<br/>
-                  浏览</div>
               </div>
-              <div class="main-right">
-                <div class="main-right-same">
-                  <div class="f-16 main-right-bottom-title">使用 sbt 的 eclipse 插件配置开发环境碰到的问题使用 sbt 的 eclipse 插件配置开发环境碰到的问题使用 sbt 的 eclipse 插件配置开到的问题</div>
-                  </div>
-                <div class="main-right-same">
-                  <div class="main-right-top-left f-13 c-gray"><a href="#">xpf</a></div>
-                  <div class="main-right-top-left pl-10 f-13 c-gray">1分钟前回答</div>
-                   <a href="#"><span class="main-right-bottom-tag ml-10">java</span></a> 
-                  <a href="#"><span class="main-right-bottom-tag ml-10">插件</span></a>
-                </div>
-              </div>
-              </div>
-              <div class="clearfix bb"></div>
            <!--问题循环结束-->
       
       
@@ -321,6 +304,40 @@
    </div>
    
 </div>
+
+<!-- 弹窗代码  begin -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    	<div class="modal-dialog" style="width: 500px;">
+    		<div class="modal-content">	
+    			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        			<h4 class="modal-title" id="myModalLabel">编辑个人信息</h4>
+      			</div>
+      			<div class="modal-body" id="modal-body-context">
+      				
+      				<form id="user_extend_add" enctype="multipart/form-data" method="post" action="user/saveUserExtendInfo">
+      					 <input type="hidden" id="add_userId" name="userId" style="width: 100%;" />
+  						住址 <input type="text" name="live_address" id="add_live_location" style="width: 100%;" /><br>
+  						职位 <input type="text" name="now_job" id="add_now_job" style="width: 100%;" /><br>
+  						毕业院校<input type="text" name="graduate_school" id="add_graduate_school" style="width: 100%;" /><br>
+  						座右铭<input type="text" name="motto" id="add_motto" style="width: 100%;" /><br>
+  						兴趣<input type="text" name="interest" id="add_interest" style="width: 100%;" /><br>
+  						擅长<input type="text" name="goodAt" id="add_goodAt" style="width: 100%;" /><br><br>
+  						<input type="file" name="photo" id="photo" /><br>
+  						<input type="hidden" id="add_image" name="image" />
+  					</form>
+      			</div>
+      			<div class="modal-footer">
+      				<span id="sure-botton"></span>
+      				<button type="button" class="btn btn-default" data-dismiss="modal" onclick="member_info.ajaxUploadImage();">保存信息</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      			</div>
+    		</div><!-- /.modal-content -->
+  		</div>
+    </div>
+    
+    <div id="ajaxModal" class="modal hide fade" tabindex="-1" data-width="700"></div>
+<!-- 弹窗代码  end -->
     
     
 	<!--标签--结束-->
@@ -351,18 +368,14 @@
     </div>
   </footer>
 </div>
+</div>
 <script src="assets/js/vendor/jquery.min.js"></script> 
 <script src="assets/js/vendor/bootstrap.min.js"></script> 
-<script type="text/javascript">
-<!--ueditor初始化--开始-->
-    var ue = UE.getEditor('myEditor');
-//<!--ueditor初始化--结束-->
-//<!----评论显示、隐藏--开始-->
-function show_textarea(id){
-$("#"+id).toggle();
-}
-//<!----评论显示、隐藏--结束-->
+<script src="js/avalon.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/throwable-base.js"></script>
+<script src="js/ajaxfileupload.js"></script>
+<script src="js/memberInfo.js"></script>
 
-</script>
 </body>
 </html>

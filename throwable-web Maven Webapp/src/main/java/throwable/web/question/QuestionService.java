@@ -94,10 +94,10 @@ public class QuestionService {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map getPublicHotQuestion() {
+	public Map getPublicHotQuestion(int page, int count) {
 		Map map = null;
 		try{
-			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_HOT_QUESTION, thirftCommon.initParams(), 100);
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_HOT_QUESTION, thirftCommon.initParams("page",page,"count",count), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
 			}else{
@@ -114,10 +114,10 @@ public class QuestionService {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map getMostFocusQuestion() {
+	public Map getMostFocusQuestion(int page, int count) {
 		Map map = null;
 		try{
-			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_MOST_FOCUSED_QUESTION, thirftCommon.initParams(), 100);
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_GET_MOST_FOCUSED_QUESTION, thirftCommon.initParams("page",page,"count",count), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
 			}else{

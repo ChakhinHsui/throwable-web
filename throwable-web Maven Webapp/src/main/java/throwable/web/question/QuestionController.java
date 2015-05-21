@@ -61,8 +61,11 @@ public class QuestionController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/getPublicHotQuestion")
-	public Map getPublicHotQuestion() {
-		return questionService.getPublicHotQuestion();
+	public Map getPublicHotQuestion(int page, int count) {
+		if(page < 0 || count < 0) {
+			return BackTool.errorInfo("0200", "参数非法");
+		}
+		return questionService.getPublicHotQuestion(page, count);
 	}
 	
 	/**
@@ -72,8 +75,11 @@ public class QuestionController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/getMostFocusQuestion")
-	public Map getMostFocusQuestion() {
-		return questionService.getMostFocusQuestion();
+	public Map getMostFocusQuestion(int page, int count) {
+		if(page < 0 || count < 0) {
+			return BackTool.errorInfo("0200", "参数非法");
+		}
+		return questionService.getMostFocusQuestion(page, count);
 	}
 	
 	/**
