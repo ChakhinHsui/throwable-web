@@ -5,12 +5,14 @@ var question_model = avalon.define({
 	time: "",
 	focus: "",
 	collect:  "",
-	agree: "",
-	disagree: "",
+	agree: 0,
+	disagree: 0,
 	details: "",
 	qid: "",
 	userId: "",
 	image:"default.jpg",
+	solved:0,
+	solveText:"未解决",
 	comments: [],
 	answers: []
 });
@@ -72,6 +74,10 @@ var throwable_detail = {
 		openComment : function(belongid, userId, belongType, type, commentId) {
 			throwable_base.login.isLogin("", function(isLogin){
 				if(1 == isLogin) {
+					if(userId == throwable_base.getIdFromCookie("throwable")) {
+						alert("不能对自己进行评论");
+						return;
+					}
 					if(belongid == throwable_detail.temp['belongId'] && belongType == throwable_detail.temp['belongType'] && userId == throwable_detail.temp['toUserId'] && commentId == throwable_detail.temp['commentId'] ) {
 						console.log(belongid);
 						$("#comment_write").toggle();
@@ -98,7 +104,9 @@ var throwable_detail = {
 						throwable_detail.togger = 2;
 					}
 					console.log(throwable_detail.temp);
-				} 
+				} else {
+					alert("请先登陆");
+				}
 			});
 		},
 		addComment : function() {
@@ -115,6 +123,66 @@ var throwable_detail = {
 				}
 			}, "json");
 		},
+		agreeQuestion : function(qid) {
+			$.post("../question/agreeQuestion", 
+					{questionId:qid}, 
+					function(result){
+						console.log(result);
+						if(1 == result.msgCode) {
+							question_model.agree = parseInt(question_model.agree) + 1;
+							console.log(question_model.agree);
+						}
+					}, "json");
+		},
+		disAgreeQuestion : function(qid) {
+			$.post("../question/disagreeQuestion", 
+					{questionId:qid}, 
+					function(result){
+						if(1 == result.msgCode) {
+							question_model.disagree = parseInt(question_model.disagree) + 1;
+							console.log(question_model.disagree);
+						}
+					}, "json");
+		},
+		agreeAnswer : function(answerId) {
+			$.post("../answer/agreeAnswer", 
+					{answerId:answerId}, 
+					function(result){
+						if(1 == result.msgCode) {
+							var str = $(".a_a_" + answerId).html();
+							var temp = str.substring(0, str.indexOf("\<"));
+							var temp2 = str.substring(str.indexOf("\<"));
+							temp = parseInt(temp);
+							temp = temp + 1;
+							str = temp + temp2;
+							$(".a_a_" + answerId).html(str);
+						}
+					}, "json");
+		},
+		disagreeAnswer : function(answerId) {
+			$.post("../answer/disagreeAnswer", 
+					{answerId:answerId}, 
+					function(result){
+						if(1 == result.msgCode) {
+							var str = $(".a_d_" + answerId).html();
+							var temp = str.substring(0, str.indexOf("\<"));
+							var temp2 = str.substring(str.indexOf("\<"));
+							temp = parseInt(temp);
+							temp = temp + 1;
+							str = temp + temp2;
+							$(".a_d_" + answerId).html(str);
+						}
+					}, "json");
+		},
+		acceptAnswer : function(answerId) {
+			$.post("../answer/acceptAnswer", 
+					{questionId:question_model.qid,answerId:answerId}, 
+					function(result){
+						if(1 == result.msgCode) {
+							
+						}
+					}, "json");
+		},
 		users : {
 			
 		},
@@ -128,6 +196,8 @@ $(document).ready(function(){
 	throwable_base.login.isLogin("", function(isLogin){
 		if(1 == isLogin) {
 			login_area.text = throwable_base.getUserNameFromCookie("throwable");
+			var id = throwable_base.getIdFromCookie("throwable");
+			login_area.href = "memberinfo.html?id=" + id;
 		}
 	});
 	var questionId = throwable_util.url.getUrlParam("qid");
@@ -153,6 +223,10 @@ $(document).ready(function(){
 		question_model.qid = result.id;
 		question_model.userId = result.user_id;
 		question_model.image = !result.image ? question_model.image : result.image;
+		question_model.solved = result.solved;
+		if(result.solved == 1) {
+			question_model.solveText = "已解决";
+		}
 		var comments = eval('(' + result.comments + ')');
 		question_model.comments = comments;
 		throwable_detail.users["1_" + result.id] = result.username;
@@ -163,15 +237,28 @@ $(document).ready(function(){
 	
 	$.post("../answer/getAnswers", jsonObject, function(result){
 		var answers = eval('(' + result.answers + ')');
+		for(var i = 0; i < answers.length; i++) {
+			if(1 == question_model.solved || answers[0].correct_type == 1) {
+				answers[i].accptText = '采纳';
+				answers[i].class1 = 'c-gray';
+			} else {
+				answers[i].accptText = '<a href="javascript:void(0);" onclick="throwable_detail.acceptAnswer('+answers[i].id+')">采纳</a>';
+				answers[i].class1 = 'c-orange';
+				answers[i].class2 = 'a_' + answers[i].id;
+			}
+		}
+		if(1 == question_model.solved || answers[0].correct_type == 1) {
+			answers[0].accptText = '已采纳';
+			answers[0].class1 = 'c-green';
+		}
 		question_model.answers = answers;
+		console.log(answers);
 		for(var i = 0; i < answers.length; i++) {
 			throwable_detail.users["2_" + answers[i].id] = answers[i].username;
-			console.log(answers[i].comments);
 			for(var j = 0; j < answers[i].comments.length; j++) {
 				throwable_detail.users["2_" + answers[i].comments[j].id + "_" + answers[i].comments[j].belongId] = answers[i].comments[j].fromUserName;
 			}
 		}
-		console.log(throwable_detail.users);
 	}, "json");
 	$.post("../question/addViewer", 
 			jsonObject, 

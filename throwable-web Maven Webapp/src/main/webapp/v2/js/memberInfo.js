@@ -46,6 +46,7 @@ var member_info = {
 			});
 			throwable_util.subPubTool.subscribe("login", function(obj){
 				login_area.text = obj;
+				login_area.href = "#";
 			});
 			throwable_util.subPubTool.subscribe("login", function(obj){
 				member_model.username = obj;

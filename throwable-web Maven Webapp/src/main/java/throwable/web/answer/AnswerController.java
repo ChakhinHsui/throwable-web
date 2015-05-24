@@ -77,4 +77,50 @@ public class AnswerController {
 		}
 		return answerService.getUserAnswerNumber(userId);
 	}
+	
+	/**
+	 * 赞同答案
+	 * @param answerId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/agreeAnswer")
+	public Map agreeAnswer(long answerId) {
+		if(answerId < 1) {
+			return BackTool.errorInfo("030301", "参数错误");
+		}
+		return answerService.agreeAnswer(answerId);
+	}
+	
+	/**
+	 * 反对答案
+	 * @param answerId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/disagreeAnswer")
+	public Map disagreeAnswer(long answerId) {
+		if(answerId < 1) {
+			return BackTool.errorInfo("030301", "参数错误");
+		}
+		return answerService.disagreeAnswer(answerId);
+	}
+	
+	/**
+	 * 接受答案
+	 * @param questionId
+	 * @param answerId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	@Ok("json")
+	@At("/acceptAnswer")
+	public Map acceptAnswer(long questionId, long answerId) {
+		if(questionId < 1 || answerId < 1) {
+			return BackTool.errorInfo("030301", "参数错误");
+		} 
+		return answerService.acceptAnswer(questionId, answerId);
+	}
 }

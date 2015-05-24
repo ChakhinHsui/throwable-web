@@ -230,8 +230,13 @@ var throwable_index = {
 			}
 		},
 		change10Pag : function(type, min, max) {
+			var temp = throwable_index.totalNum - (throwable_index.count * (min - 1));
+			if(temp % throwable_index.count == 0) {
+				temp = parseInt(temp / throwable_index.count);
+			} else {
+				temp = parseInt(temp / throwable_index.count) + 1;
+			}
 			if(type == 1) {
-				var temp = parseInt((throwable_index.totalNum - (throwable_index.count * (min - 1))) / throwable_index.count);
 				throwable_index.NewPaginationValue.oneClicks = temp >= 10 ? 10 : temp;
 				throwable_index.NewPaginationValue.minClicks = min - 1;
 				throwable_index.NewPaginationValue.maxClicks = min - 1 + throwable_index.NewPaginationValue.oneClicks;
@@ -241,7 +246,6 @@ var throwable_index = {
 				return;
 			}
 			if(type == 2) {
-				var temp = parseInt((throwable_index.totalNum - (throwable_index.count * (min - 1))) / throwable_index.count);
 				throwable_index.HotPaginationValue.oneClicks = temp >= 10 ? 10 : temp;
 				throwable_index.HotPaginationValue.minClicks = min - 1;
 				throwable_index.HotPaginationValue.maxClicks = min - 1 + throwable_index.HotPaginationValue.oneClicks;
@@ -250,7 +254,6 @@ var throwable_index = {
 				return;
 			}
 			if(type == 3){
-				var temp = parseInt((throwable_index.totalNum - (throwable_index.count * (min - 1))) / throwable_index.count);
 				throwable_index.MostFocusPaginationValue.oneClicks = temp >= 10 ? 10 : temp;
 				throwable_index.MostFocusPaginationValue.minClicks = min - 1;
 				throwable_index.MostFocusPaginationValue.maxClicks = min - 1 + throwable_index.MostFocusPaginationValue.oneClicks;
@@ -260,7 +263,7 @@ var throwable_index = {
 			}
 		},
 		totalNum : 0,  //所有问题总记录
-		count : 1,   //每页显示的记录
+		count : 15,   //每页显示的记录
 		page : 1,     //当前第几页
 		totalPage : 0,  //总页数
 		oneClicks:10,  //分页中单个按钮个数

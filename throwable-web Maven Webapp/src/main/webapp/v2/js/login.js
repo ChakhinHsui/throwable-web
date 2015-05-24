@@ -4,6 +4,14 @@ var login_area = avalon.define({
 	text: "登陆"
 });
 
+$("document").ready(function(){
+	throwable_base.login.isLogin("", function(isLogin){
+		if(1 == isLogin) {
+			throwable_util.url.location("index.html");
+		}
+	});
+});
+
 $("#signin-form").submit(function(){
 	if(!$("#login-name").val()) {
 		alert("输入用户名");

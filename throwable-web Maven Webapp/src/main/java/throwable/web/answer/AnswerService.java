@@ -11,6 +11,7 @@ import throwable.server.framework.rpc.ResultCode;
 import throwable.server.framework.rpc.ResultMsg;
 import throwable.web.utils.BackTool;
 import throwable.web.utils.api.ThirftCommon;
+import throwable.web.utils.api.ThriftCallTool;
 
 @IocBean
 public class AnswerService {
@@ -19,6 +20,8 @@ public class AnswerService {
 	private ClientPools thriftPools;
 	@Inject
 	private ThirftCommon thirftCommon;
+	@Inject
+	private ThriftCallTool serverCall;
 	
 	@SuppressWarnings("rawtypes")
 	public Map addAnswer(int question_id, String answer_abstract, String answer_description, int user_id){
@@ -89,5 +92,67 @@ public class AnswerService {
 		}
 		System.out.println(map);
 		return map;
+	}
+	
+	/**
+	 * 赞同答案
+	 * @param answerId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map agreeAnswer(long answerId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("answerId", answerId);
+		ResultMsg resultMsg = serverCall.baseCall("/answer/agreeAnswer", params);
+		params.clear();
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			params.put("msgCode", resultMsg.errorCode);
+			params.put("errorMsg", resultMsg.retMsg);
+		} else {
+			params.put("msgCode", 1);
+		}
+		return params;
+	}
+	
+	/**
+	 * 不赞同答案
+	 * @param answerId
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map disagreeAnswer(long answerId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("answerId", answerId);
+		ResultMsg resultMsg = serverCall.baseCall("/answer/disagreeAnswer", params);
+		params.clear();
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			params.put("msgCode", resultMsg.errorCode);
+			params.put("errorMsg", resultMsg.retMsg);
+		} else {
+			params.put("msgCode", 1);
+		}
+		return params;
+	}
+	
+	/**
+	 * 接受答案
+	 * @param questionId  问题id
+	 * @param answerId    答案id
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public Map acceptAnswer(long questionId, long answerId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("questionId", questionId);
+		params.put("answerId", answerId);
+		ResultMsg resultMsg = serverCall.baseCall("/answer/acceptAnswer", params);
+		params.clear();
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			params.put("msgCode", resultMsg.errorCode);
+			params.put("errorMsg", resultMsg.retMsg);
+		} else {
+			params.put("msgCode", 1);
+		}
+		return params;
 	}
 }

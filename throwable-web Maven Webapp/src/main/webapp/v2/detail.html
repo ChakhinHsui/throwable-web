@@ -84,11 +84,11 @@
         <div class="main-all-list-item">
           <div class="main-left-3thing">
             <div class="main-left-inside text-c ">{{agree}}<br/>
-              <a href="#">赞同</a></div>
+              <a ms-href="javascript:throwable_detail.agreeQuestion({{qid}});">赞同</a></div>
             <div class="main-left-inside text-c box-shadow  answer-color hidden-xs">☆<br/>
-              <a href="#">采纳</a></div>
+              {{solveText}}</div>
             <div class="main-left-inside text-c  hidden-xs ">{{disagree}}<br/>
-              <a href="#">反对</a></div>
+              <a ms-href="javascript:throwable_detail.disAgreeQuestion({{qid}});">反对</a></div>
           </div>
           <div class="main-right">
             <div class="main-right-same">
@@ -138,12 +138,12 @@
           <!--回答--开始-->
           <div class="main-all-list-item" ms-repeat="answers">
             <div class="main-left-3thing">
-              <div class="main-left-inside text-c ">999<br/>
-                <a href="#">赞同</a></div>
-              <div class="main-left-inside text-c box-shadow  answer-color hidden-xs c-orange">☆<br/>
-                <a href="#">采纳</a></div>
-              <div class="main-left-inside text-c  hidden-xs ">1<br/>
-                <a href="#">反对</a></div>
+              <div ms-class="main-left-inside text-c a_a_{{el.id}}" >{{el.agrees}}<br/>
+                <a ms-href="javascript:throwable_detail.agreeAnswer({{el.id}})">赞同</a></div>
+              <div ms-class="main-left-inside text-c box-shadow  answer-color hidden-xs {{el.class1}} {{el.class2}}">☆<br/>
+                {{el.accptText | html}}</div>
+              <div ms-class="main-left-inside text-c hidden-xs a_d_{{el.id}} ">{{el.disagrees}}<br/>
+                <a ms-href="javascript:throwable_detail.disagreeAnswer({{el.id}})">反对</a></div>
             </div>
             <div class="main-right">
               <div class="main-right-same">
@@ -189,11 +189,11 @@
           </div>
           <!--new end--> 
           <h6>您的回答</h6>
-            <script type="text/plain" id="myEditor" style="width:auto;height:200px;"></div>
+            <script type="text/plain" id="myEditor" style="width:99%;height:200px;"></div>
     					
 			</script>
 			<br>
-			<button class="btn radius btn-success sd mt-10  mr-20" id="up_button" type="button" onclick="throwable_detail.addAnswer();">提交问题</button>
+			<button class="btn radius btn-success sd mt-10  mr-20" id="up_button" type="button" onclick="throwable_detail.addAnswer();">回答问题</button>
         </div>
       </div>
     </div>
@@ -300,7 +300,13 @@ $("#"+id).toggle();
 }
 
 SyntaxHighlighter.all();
-
+function Click() {
+	var str = $(".a_17").html(); 
+	console.log(str);
+	console.log(str.indexOf("\<"));
+	var temp = str.substring(0, str.indexOf("\<"));
+	console.log(temp);
+}
 </script>
 </body>
 </html>
