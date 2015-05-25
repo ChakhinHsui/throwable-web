@@ -117,10 +117,10 @@ public class AnswerController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/acceptAnswer")
-	public Map acceptAnswer(long questionId, long answerId) {
-		if(questionId < 1 || answerId < 1) {
+	public Map acceptAnswer(long questionId, long answerId, long userId) {
+		if(questionId < 1 || answerId < 1 || userId < 1) {
 			return BackTool.errorInfo("030301", "参数错误");
 		} 
-		return answerService.acceptAnswer(questionId, answerId);
+		return answerService.acceptAnswer(questionId, answerId, userId);
 	}
 }

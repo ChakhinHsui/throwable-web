@@ -175,9 +175,11 @@ var throwable_detail = {
 					}, "json");
 		},
 		acceptAnswer : function(answerId) {
+			var userId = throwable_base.getIdFromCookie("throwable");
 			$.post("../answer/acceptAnswer", 
-					{questionId:question_model.qid,answerId:answerId}, 
+					{questionId:question_model.qid,answerId:answerId,userId:userId}, 
 					function(result){
+						console.log(result);
 						if(1 == result.msgCode) {
 							
 						}

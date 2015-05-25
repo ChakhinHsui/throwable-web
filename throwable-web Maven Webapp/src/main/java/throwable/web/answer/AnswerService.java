@@ -141,10 +141,11 @@ public class AnswerService {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map acceptAnswer(long questionId, long answerId) {
+	public Map acceptAnswer(long questionId, long answerId, long userId) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("questionId", questionId);
 		params.put("answerId", answerId);
+		params.put("userId", userId);
 		ResultMsg resultMsg = serverCall.baseCall("/answer/acceptAnswer", params);
 		params.clear();
 		if(ResultCode.SUCCESS != resultMsg.retCode) {
