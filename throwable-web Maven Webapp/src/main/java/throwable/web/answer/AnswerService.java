@@ -43,10 +43,10 @@ public class AnswerService {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public Map getAnswerByQuestionId(int questionId){
+	public Map getAnswerByQuestionId(long questionId, long userId){
 		Map map = null;
 		try{
-			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.A_GET_ANSWER, thirftCommon.initParams("questionId", questionId), 100);
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.A_GET_ANSWER, thirftCommon.initParams("questionId", questionId, "userId", userId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map = msg.getRetMap();
 			}else{
@@ -100,9 +100,10 @@ public class AnswerService {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map agreeAnswer(long answerId) {
+	public Map agreeAnswer(long answerId, long userId) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("answerId", answerId);
+		params.put("userId", userId);
 		ResultMsg resultMsg = serverCall.baseCall("/answer/agreeAnswer", params);
 		params.clear();
 		if(ResultCode.SUCCESS != resultMsg.retCode) {
@@ -120,9 +121,10 @@ public class AnswerService {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Map disagreeAnswer(long answerId) {
+	public Map disagreeAnswer(long answerId, long userId) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("answerId", answerId);
+		params.put("userId", userId);
 		ResultMsg resultMsg = serverCall.baseCall("/answer/disagreeAnswer", params);
 		params.clear();
 		if(ResultCode.SUCCESS != resultMsg.retCode) {

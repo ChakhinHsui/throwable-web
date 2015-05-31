@@ -62,5 +62,19 @@ var throwable_base = {
 				return null;
 			}
 			return JSON.parse(str).username;
+		},
+		initUserArea : function(userId, userName) {
+			var str = '<a href="about.html" class="btn dropdown-toggle" id="dropdownMenu3" data-toggle="dropdown" aria-expanded="false">'+userName+'<span class="caret"></span></a>';
+			str += '<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu3">';
+			str += '<li role="presentation" class="dropdown-header" style="color:white"><a href="memberinfo.html?id='+userId+'">个人主页</a></li>';
+			str += '<li role="presentation" class="dropdown-header" style="color:white"><a href="">消息中心 <span class="badge">42</span></a></li>';
+			str += '<li role="presentation" class="dropdown-header" style="color:white"><a href="javascript:void(0);" onclick="throwable_base.logout();">退出</a></li></ul>';
+			return str;
+		},
+		logout : function() {
+			$.post("../user/logout", {}, function(result){
+				throwable_util.cookie.deleteCookie("throwable");
+				throwable_util.url.refresh();
+			}, "json");
 		}
 };

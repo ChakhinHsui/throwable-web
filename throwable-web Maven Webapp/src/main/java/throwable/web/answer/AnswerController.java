@@ -43,11 +43,11 @@ public class AnswerController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/getAnswers")
-	public Map getAnswerByQuestionId(@Param("questionId") int questionId){
+	public Map getAnswerByQuestionId(@Param("questionId") int questionId, long userId){
 		if(questionId < 0){
 			return BackTool.errorInfo("030201", "问题id不合法");
 		}
-		return answerService.getAnswerByQuestionId(questionId);
+		return answerService.getAnswerByQuestionId(questionId, userId);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -86,11 +86,11 @@ public class AnswerController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/agreeAnswer")
-	public Map agreeAnswer(long answerId) {
-		if(answerId < 1) {
+	public Map agreeAnswer(long answerId, long userId) {
+		if(answerId < 1 || userId < 1) {
 			return BackTool.errorInfo("030301", "参数错误");
 		}
-		return answerService.agreeAnswer(answerId);
+		return answerService.agreeAnswer(answerId, userId);
 	}
 	
 	/**
@@ -101,11 +101,11 @@ public class AnswerController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/disagreeAnswer")
-	public Map disagreeAnswer(long answerId) {
-		if(answerId < 1) {
+	public Map disagreeAnswer(long answerId, long userId) {
+		if(answerId < 1 || userId < 1) {
 			return BackTool.errorInfo("030301", "参数错误");
 		}
-		return answerService.disagreeAnswer(answerId);
+		return answerService.disagreeAnswer(answerId, userId);
 	}
 	
 	/**

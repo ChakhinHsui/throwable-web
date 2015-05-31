@@ -250,10 +250,10 @@ public class QuestionService {
 	}
 	
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Map agreeQuestion(int questionId) {
+	public Map agreeQuestion(long questionId, long userId) {
 		Map map = new HashMap();
 		try{
-			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_AGREE_QUESTION, thirftCommon.initParams("questionId", questionId), 100);
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_AGREE_QUESTION, thirftCommon.initParams("questionId", questionId, "userId", userId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map.put("msgCode", 1);
 				map.put("number", msg.retMsg);
@@ -267,10 +267,10 @@ public class QuestionService {
 	}
 	
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Map disagreeQuestion(int questionId) {
+	public Map disagreeQuestion(long questionId, long userId) {
 		Map map = new HashMap();
 		try{
-			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_DISAGREE_QUESTION, thirftCommon.initParams("questionId", questionId), 100);
+			ResultMsg msg = thirftCommon.getResult(thriftPools, ThirftCommon.Q_DISAGREE_QUESTION, thirftCommon.initParams("questionId", questionId, "userId", userId), 100);
 			if(msg.retCode.getValue() == ResultCode.SUCCESS.getValue()){
 				map.put("msgCode", 1);
 				map.put("number", msg.retMsg);
@@ -345,7 +345,7 @@ public class QuestionService {
 		}
 		Map map = new HashMap();
 		map.put("msgCode", 1);
-		map.put("total", Integer.parseInt(resultMsg.retMsg));
+		map.put("total", resultMsg.retMap);
 		return map;
 	}
 	
@@ -367,5 +367,27 @@ public class QuestionService {
 		}
 		resultMsg.retMap.put("msgCode", "1");
 		return resultMsg.retMap;
+	}
+	
+	/**
+	 * 查询相似问题
+	 * @param questionId
+	 * @return
+	 */
+	@SuppressWarnings({"rawtypes"})
+	public Map querySameQuestions(long questionId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("questionId", questionId);
+		ResultMsg resultMsg = serverCall.baseCall("/questionApi/querySameQuestion", params);
+		if(null == resultMsg) {
+			return BackTool.errorInfo("120015", "调用服务器出错");
+		}
+		if(ResultCode.SUCCESS != resultMsg.retCode) {
+			return BackTool.errorInfo(resultMsg.errorCode, resultMsg.retMsg);
+		}
+		Map<String, Object> retMap = new HashMap<String, Object>();
+		retMap.put("msgCode", "1");
+		retMap.put("questions", resultMsg.retList);
+		return retMap;
 	}
 }

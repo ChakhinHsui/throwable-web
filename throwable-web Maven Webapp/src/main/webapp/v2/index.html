@@ -34,7 +34,7 @@
             <li><a class="active" href="channel.html">频道<span class="navbar-unread">1</span></a></li>
             <li><a href="label.html">标签</a></li>
             <li><a href="about.html">联系我们</a></li>
-            <li ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
+            <li ms-controller="login_area"><!-- <a ms-href="{{href}}">{{text}}</a> -->{{newText | html}}</li>
           </ul>
           <form class="navbar-form navbar-right" action="#" role="search">
             <div class="form-group">
@@ -277,7 +277,7 @@
       <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">最新热门</a> </div>
       <div class="pt-5 pb-5 f-16 mt-5 mb-5" ms-repeat="new_hot_list">
         <div>
-          <div class="c-orange right-hot-title"><a ms-href="detail.html?qid={{el.id}}">{{el.question_name}}</a></div>
+          <div class="c-green right-hot-title"><a ms-href="detail.html?qid={{el.id}}">{{el.question_name}}</a></div>
           <div class="f-12 c-999 right-hot-title">{{el.answers}}&nbsp;回应</div>
         </div>
       </div>
@@ -315,8 +315,8 @@
 <script src="assets/js/vendor/jquery.min.js"></script> 
 <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script src="js/utils.js"></script>
+<script type="text/javascript" src="js/throwable-base.js"></script>
 <script src="js/avalon.js"></script>
 <script src="js/index.js"></script>
-<script type="text/javascript" src="js/throwable-base.js"></script>
 </body>
 </html>

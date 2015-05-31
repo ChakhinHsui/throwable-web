@@ -13,14 +13,20 @@ var question_model = avalon.define({
 	image:"default.jpg",
 	solved:0,
 	solveText:"未解决",
+	agreeText:"赞同",
+	disagreeText:"反对",
+	userAsks:0,
+	userAnswers:0,
 	comments: [],
-	answers: []
+	answers: [],
+	sameQuestions: []
 });
 
 var login_area = avalon.define({
 	$id: "login_area",
 	href: "register.html",
-	text: "登陆"
+	text: "登陆",
+	newText : '<a href="register.html">登陆</a>'
 });
 
 var throwable_detail = {
@@ -124,66 +130,106 @@ var throwable_detail = {
 			}, "json");
 		},
 		agreeQuestion : function(qid) {
-			$.post("../question/agreeQuestion", 
-					{questionId:qid}, 
-					function(result){
-						console.log(result);
-						if(1 == result.msgCode) {
-							question_model.agree = parseInt(question_model.agree) + 1;
-							console.log(question_model.agree);
-						}
-					}, "json");
+			throwable_base.login.isLogin("", function(isLogin){
+				if(1 == isLogin) {
+					$.post("../question/agreeQuestion", 
+							{questionId:qid, userId:throwable_base.getIdFromCookie("throwable")}, 
+							function(result){
+								console.log(result);
+								if(1 == result.msgCode) {
+									question_model.agree = parseInt(question_model.agree) + 1;
+									console.log(question_model.agree);
+								}
+							}, "json");
+				} else {
+					alert("请先登陆");
+				}
+			});
+			
 		},
 		disAgreeQuestion : function(qid) {
-			$.post("../question/disagreeQuestion", 
-					{questionId:qid}, 
-					function(result){
-						if(1 == result.msgCode) {
-							question_model.disagree = parseInt(question_model.disagree) + 1;
-							console.log(question_model.disagree);
-						}
-					}, "json");
+			throwable_base.login.isLogin("", function(isLogin){
+				if(1 == isLogin) {
+					$.post("../question/disagreeQuestion", 
+							{questionId:qid, userId:throwable_base.getIdFromCookie("throwable")}, 
+							function(result){
+								if(1 == result.msgCode) {
+									question_model.disagree = parseInt(question_model.disagree) + 1;
+									console.log(question_model.disagree);
+								}
+							}, "json");
+				} else {
+					alert("请先登陆");
+				}
+			});
 		},
 		agreeAnswer : function(answerId) {
-			$.post("../answer/agreeAnswer", 
-					{answerId:answerId}, 
-					function(result){
-						if(1 == result.msgCode) {
-							var str = $(".a_a_" + answerId).html();
-							var temp = str.substring(0, str.indexOf("\<"));
-							var temp2 = str.substring(str.indexOf("\<"));
-							temp = parseInt(temp);
-							temp = temp + 1;
-							str = temp + temp2;
-							$(".a_a_" + answerId).html(str);
-						}
-					}, "json");
+			throwable_base.login.isLogin("", function(isLogin){
+				if(1 == isLogin) {
+					$.post("../answer/agreeAnswer", 
+							{answerId:answerId,userId:throwable_base.getIdFromCookie("throwable")}, 
+							function(result){
+								if(1 == result.msgCode) {
+									var str = $(".a_a_" + answerId).html();
+									var temp = str.substring(0, str.indexOf("\<"));
+									var temp2 = str.substring(str.indexOf("\<"));
+									temp = parseInt(temp);
+									temp = temp + 1;
+									str = temp + temp2;
+									$(".a_a_" + answerId).html(str);
+								}
+							}, "json");
+				} else {
+					alert("请先登陆");
+				}
+			});
 		},
 		disagreeAnswer : function(answerId) {
-			$.post("../answer/disagreeAnswer", 
-					{answerId:answerId}, 
-					function(result){
-						if(1 == result.msgCode) {
-							var str = $(".a_d_" + answerId).html();
-							var temp = str.substring(0, str.indexOf("\<"));
-							var temp2 = str.substring(str.indexOf("\<"));
-							temp = parseInt(temp);
-							temp = temp + 1;
-							str = temp + temp2;
-							$(".a_d_" + answerId).html(str);
-						}
-					}, "json");
+			throwable_base.login.isLogin("", function(isLogin){
+				if(1 == isLogin) {
+					$.post("../answer/disagreeAnswer", 
+							{answerId:answerId,userId:throwable_base.getIdFromCookie("throwable")}, 
+							function(result){
+								if(1 == result.msgCode) {
+									var str = $(".a_d_" + answerId).html();
+									var temp = str.substring(0, str.indexOf("\<"));
+									var temp2 = str.substring(str.indexOf("\<"));
+									temp = parseInt(temp);
+									temp = temp + 1;
+									str = temp + temp2;
+									$(".a_d_" + answerId).html(str);
+								}
+							}, "json");
+				} else {
+					alert("请先登陆");
+				}
+			});
 		},
 		acceptAnswer : function(answerId) {
-			var userId = throwable_base.getIdFromCookie("throwable");
-			$.post("../answer/acceptAnswer", 
-					{questionId:question_model.qid,answerId:answerId,userId:userId}, 
-					function(result){
-						console.log(result);
-						if(1 == result.msgCode) {
-							
-						}
-					}, "json");
+			throwable_base.login.isLogin("", function(isLogin){
+				if(1 == isLogin) {
+					var userId = throwable_base.getIdFromCookie("throwable");
+					$.post("../answer/acceptAnswer", 
+							{questionId:question_model.qid,answerId:answerId,userId:userId}, 
+							function(result){
+								console.log(result);
+								if(1 == result.msgCode) {
+									throwable_util.url.refresh();
+								} else {
+									alert(result.errorMsg);
+								}
+							}, "json");
+				} else {
+					alert("请先登陆");
+				}
+			});
+		},
+		getIndexFromId : function(id) {
+			for(var index = 0; index < answer_id_index; index++) {
+				if(id == answer_id_index[index]) {
+					return index;
+				}
+			}
 		},
 		users : {
 			
@@ -197,9 +243,8 @@ var throwable_detail = {
 $(document).ready(function(){
 	throwable_base.login.isLogin("", function(isLogin){
 		if(1 == isLogin) {
-			login_area.text = throwable_base.getUserNameFromCookie("throwable");
 			var id = throwable_base.getIdFromCookie("throwable");
-			login_area.href = "memberinfo.html?id=" + id;
+			login_area.newText = throwable_base.initUserArea(id, throwable_base.getUserNameFromCookie("throwable"));
 		}
 	});
 	var questionId = throwable_util.url.getUrlParam("qid");
@@ -226,8 +271,23 @@ $(document).ready(function(){
 		question_model.userId = result.user_id;
 		question_model.image = !result.image ? question_model.image : result.image;
 		question_model.solved = result.solved;
+		question_model.userAsks = result.asks;
+		question_model.userAnswers = result.answers;
 		if(result.solved == 1) {
 			question_model.solveText = "已解决";
+		}
+		if(result.user_question_relation) {
+			if(result.user_question_relation == '1') {
+				question_model.agreeText = '已赞同';
+				question_model.disagreeText = '反对';
+			} else {
+				console.log(result.user_question_relation);
+				question_model.agreeText = '赞同';
+				question_model.disagreeText = '已反对';
+			}
+		} else {
+			question_model.agreeText = '<a href="javascript:throwable_detail.agreeQuestion('+result.id+');">赞同</a>';
+			question_model.disagreeText = '<a href="javascript:throwable_detail.disAgreeQuestion('+result.id+');">反对</a>';
 		}
 		var comments = eval('(' + result.comments + ')');
 		question_model.comments = comments;
@@ -238,6 +298,7 @@ $(document).ready(function(){
 	}, "json");
 	
 	$.post("../answer/getAnswers", jsonObject, function(result){
+		console.log(result);
 		var answers = eval('(' + result.answers + ')');
 		for(var i = 0; i < answers.length; i++) {
 			if(1 == question_model.solved || answers[0].correct_type == 1) {
@@ -247,6 +308,18 @@ $(document).ready(function(){
 				answers[i].accptText = '<a href="javascript:void(0);" onclick="throwable_detail.acceptAnswer('+answers[i].id+')">采纳</a>';
 				answers[i].class1 = 'c-orange';
 				answers[i].class2 = 'a_' + answers[i].id;
+			}
+			if(answers[i].user_answer_relation) {
+				if(answers[i].user_answer_relation == 1) {
+					answers[i].agreeText = "已赞同";
+					answers[i].disagreeText = "反对";
+				} else {
+					answers[i].agreeText = "赞同";
+					answers[i].disagreeText = "已反对";
+				}
+			} else {
+				answers[i].agreeText = '<a href="javascript:throwable_detail.agreeAnswer('+answers[i].id+')">赞同</a>';
+				answers[i].disagreeText = '<a href="javascript:throwable_detail.disagreeAnswer('+answers[i].id+')">反对</a>';
 			}
 		}
 		if(1 == question_model.solved || answers[0].correct_type == 1) {
@@ -267,6 +340,14 @@ $(document).ready(function(){
 			function(result){
 				
 			}, "json");
+	$.post("../question/querySameQuestions", jsonObject, function(result){
+		if(result.msgCode == 1) {
+			for(var i = 0; i < result.questions.length; i++) {
+				result.questions[i] = eval('(' + result.questions[i] + ')');
+			}
+			question_model.sameQuestions = result.questions;
+		}
+	}, "json");
 });
 
 

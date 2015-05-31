@@ -164,4 +164,14 @@ public class UserController {
 		}
 		return userService.saveUserExtendInfo(userId, live_address, now_job, graduate_school, motto, interest, goodAt, photo);
 	}
+	
+	/**
+	 * 登出
+	 * @param httpSession
+	 */
+	@Ok("json")
+	@At("/logout")
+	public void logout(HttpSession httpSession) {
+		LoginTool.deleteSession(httpSession);
+	}
 }

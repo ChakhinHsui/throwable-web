@@ -47,7 +47,7 @@
             <li><a class="active" href="channel.html">频道<span class="navbar-unread">1</span></a></li>
             <li><a href="label.html">标签</a></li>
             <li><a href="about.html">联系我们</a></li>
-            <li ms-controller="login_area"><a ms-href="{{href}}">{{text}}</a></li>
+            <li ms-controller="login_area"><!-- <a ms-href="{{href}}">{{text}}</a> -->{{newText | html}}</li>
           </ul>
           <form class="navbar-form navbar-right" action="#" role="search">
             <div class="form-group">
@@ -84,11 +84,11 @@
         <div class="main-all-list-item">
           <div class="main-left-3thing">
             <div class="main-left-inside text-c ">{{agree}}<br/>
-              <a ms-href="javascript:throwable_detail.agreeQuestion({{qid}});">赞同</a></div>
+              <!-- <a ms-href="javascript:throwable_detail.agreeQuestion({{qid}});">赞同</a> -->{{agreeText | html}}</div>
             <div class="main-left-inside text-c box-shadow  answer-color hidden-xs">☆<br/>
               {{solveText}}</div>
             <div class="main-left-inside text-c  hidden-xs ">{{disagree}}<br/>
-              <a ms-href="javascript:throwable_detail.disAgreeQuestion({{qid}});">反对</a></div>
+              <!-- <a ms-href="javascript:throwable_detail.disAgreeQuestion({{qid}});">反对</a> -->{{disagreeText | html}}</div>
           </div>
           <div class="main-right">
             <div class="main-right-same">
@@ -111,7 +111,7 @@
                         <div class="gravatar-wrapper-32"><img ms-src="../photo/{{image}}" alt="" height="32" width="32"></div>
                         </a> </div>
                       <div class="user-details"> <a href="#">{{author}}</a><br>
-                        <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
+                        <span class="reputation-score" title="reputation score " dir="ltr">回答{{userAnswers}}</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问{{userAsks}}</span></span> </div>
                     </div></td>
                 </tr>
               </tbody>
@@ -139,11 +139,11 @@
           <div class="main-all-list-item" ms-repeat="answers">
             <div class="main-left-3thing">
               <div ms-class="main-left-inside text-c a_a_{{el.id}}" >{{el.agrees}}<br/>
-                <a ms-href="javascript:throwable_detail.agreeAnswer({{el.id}})">赞同</a></div>
+                <!-- <a ms-href="javascript:throwable_detail.agreeAnswer({{el.id}})">赞同</a> -->{{el.agreeText | html}}</div>
               <div ms-class="main-left-inside text-c box-shadow  answer-color hidden-xs {{el.class1}} {{el.class2}}">☆<br/>
                 {{el.accptText | html}}</div>
               <div ms-class="main-left-inside text-c hidden-xs a_d_{{el.id}} ">{{el.disagrees}}<br/>
-                <a ms-href="javascript:throwable_detail.disagreeAnswer({{el.id}})">反对</a></div>
+                <!-- <a ms-href="javascript:throwable_detail.disagreeAnswer({{el.id}})">反对</a> -->{{el.disagreeText | html}}</div>
             </div>
             <div class="main-right">
               <div class="main-right-same">
@@ -166,7 +166,7 @@
                           <div class="gravatar-wrapper-32"><img ms-src="../photo/{{el.image}}" alt="" height="32" width="32"></div>
                           </a> </div>
                         <div class="user-details"> <a href="#">{{el.username}}</a><br>
-                          <span class="reputation-score" title="reputation score " dir="ltr">回答9</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问2</span></span> </div>
+                          <span class="reputation-score" title="reputation score " dir="ltr">回答{{el.answers}}</span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">提问{{el.asks}}</span></span> </div>
                       </div></td>
                   </tr>
                 </tbody>
@@ -203,40 +203,10 @@
       
       <!--相似问题-->
       <div class="pt-5 pb-5 f-20 mt-15 pb-5 l22" > <a href="#">相似问题</a> </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
+      <div class="pt-5 pb-5 f-16 mt-5 mb-5" ms-repeat="sameQuestions">
         <div>
-          <div class=" c-green right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-green right-hot-title"><a href="#">sqlalchemy 如何调用有返回值的mysql存储过程</a></div>
-          <div class="f-12 c-999 right-hot-title">10&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-green right-hot-title"><a href="#">MSATA和SATA3的固态硬盘 大家一般用的哪种？</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-green right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-green right-hot-title"><a href="#">CABasicAnimation旋转view，设置anchorPoint的，view会向上浮动一段距离再旋转。</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
-        </div>
-      </div>
-      <div class="pt-5 pb-5 f-16 mt-5 mb-5">
-        <div>
-          <div class="c-green right-hot-title"><a href="#">还有没类似hype和google web designer的web交互设计工具</a></div>
-          <div class="f-12 c-999 right-hot-title">2&nbsp;回应</div>
+          <div class=" c-green right-hot-title"><a ms-href="detail.html?qid={{el.id}}">{{el.question_name}}</a></div>
+          <div class="f-12 c-999 right-hot-title">{{el.answers}}&nbsp;回应</div>
         </div>
       </div>
     </div>

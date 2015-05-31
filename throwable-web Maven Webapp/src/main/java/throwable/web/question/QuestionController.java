@@ -204,11 +204,11 @@ public class QuestionController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/agreeQuestion")
-	public Map agreeQuestion(int questionId) {
-		if(questionId < 1) {
+	public Map agreeQuestion(long questionId, long userId) {
+		if(questionId < 1 || userId < 1) {
 			return BackTool.errorInfo("0200", "问题id不合法");
 		}
-		return questionService.agreeQuestion(questionId);
+		return questionService.agreeQuestion(questionId, userId);
 	}
 	
 	/**
@@ -219,11 +219,11 @@ public class QuestionController {
 	@SuppressWarnings("rawtypes")
 	@Ok("json")
 	@At("/disagreeQuestion")
-	public Map disagreeQuestion(int questionId) {
-		if(questionId < 1) {
+	public Map disagreeQuestion(long questionId, long userId) {
+		if(questionId < 1 || userId < 1) {
 			return BackTool.errorInfo("0200", "问题id不合法");
 		}
-		return questionService.disagreeQuestion(questionId);
+		return questionService.disagreeQuestion(questionId, userId);
 	}
 	
 	/**
@@ -256,5 +256,20 @@ public class QuestionController {
 			return BackTool.errorInfo("0200", "参数不正确");
 		}
 		return questionService.collectQuestion(userId, questionId);
+	}
+	
+	/**
+	 * 查询相似问题
+	 * @param questionId
+	 * @return
+	 */
+	@Ok("json")
+	@At("/querySameQuestions")
+	@SuppressWarnings("rawtypes")
+	public Map querySameQuestions(long questionId) {
+		if(questionId < 1) {
+			return BackTool.errorInfo("0200", "参数不正确");
+		}
+		return questionService.querySameQuestions(questionId);
 	}
 }

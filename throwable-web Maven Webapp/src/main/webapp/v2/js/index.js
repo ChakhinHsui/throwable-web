@@ -12,9 +12,9 @@ var right_show_model = avalon.define("right-index", function(vm){
 var login_area = avalon.define({
 	$id: "login_area",
 	href: "register.html",
-	text: "登陆"
+	text: "登陆",
+	newText : '<a href="register.html">登陆</a>'
 });
-
 
 
 var throwable_index = {
@@ -42,6 +42,9 @@ var throwable_index = {
 		},
 		publish : function(channel, obj) {
 			throwable_util.subPubTool.publish(channel, obj);
+		},
+		logout : function() {
+			
 		},
 		getNewQuestion : function(page, count) {
 			$.post("../question/getPublicQuestionPage", 
@@ -87,9 +90,68 @@ var throwable_index = {
 					{}, 
 					function(result){
 						if(result.msgCode == 1) {
-							throwable_index.initAllValue(result.total, throwable_index.count);
+							console.log(result);
+//							throwable_index.initAllValue(result.total, throwable_index.count);
+							throwable_index.initAllValue2(result.total.newTotal, result.total.newTotal, result.total.MostFocusTotal, throwable_index.count);
 						}
 					}, "json");
+		},
+		initAllValue2 : function(newTotalNum, hotTotalNum, mostFocusTotalNum, count) {
+			throwable_index.initNewValue(newTotalNum, count);
+			throwable_index.initHotValue(hotTotalNum, count);
+			throwable_index.initMostFocusValue(mostFocusTotalNum, count);
+			throwable_index.publish("init", 10);
+		},
+		initNewValue : function(totalNum, count) {
+			throwable_index.NewPaginationValue.totalNum = totalNum;
+			if(totalNum % count == 0) {
+				throwable_index.NewPaginationValue.totalPage = parseInt(totalNum / count);
+			} else {
+				throwable_index.NewPaginationValue.totalPage = parseInt(totalNum / count) + 1;
+			}
+			throwable_index.NewPaginationValue.oneClicks = throwable_index.NewPaginationValue.totalPage >= 10 ? 10 : throwable_index.NewPaginationValue.totalPage;
+			if(throwable_index.NewPaginationValue.totalPage % 10 == 0) {
+				throwable_index.NewPaginationValue.tenClicks = parseInt(throwable_index.NewPaginationValue.totalPage / 10);
+			} else {
+				throwable_index.NewPaginationValue.tenClicks = parseInt(throwable_index.NewPaginationValue.totalPage / 10) + 1;
+			}
+			throwable_index.NewPaginationValue.minClicks = 0;
+			throwable_index.NewPaginationValue.maxClicks = throwable_index.NewPaginationValue.oneClicks;
+			throwable_index.NewPaginationValue.nowClicks = throwable_index.NewPaginationValue.minClicks;
+		},
+		initHotValue : function(totalNum, count) {
+			throwable_index.HotPaginationValue.totalNum = totalNum;
+			if(totalNum % count == 0) {
+				throwable_index.HotPaginationValue.totalPage = parseInt(totalNum / count);
+			} else {
+				throwable_index.HotPaginationValue.totalPage = parseInt(totalNum / count) + 1;
+			}
+			throwable_index.HotPaginationValue.oneClicks = throwable_index.HotPaginationValue.totalPage >= 10 ? 10 : throwable_index.HotPaginationValue.totalPage;
+			if(throwable_index.HotPaginationValue.totalPage % 10 == 0) {
+				throwable_index.HotPaginationValue.tenClicks = parseInt(throwable_index.HotPaginationValue.totalPage / 10);
+			} else {
+				throwable_index.HotPaginationValue.tenClicks = parseInt(throwable_index.HotPaginationValue.totalPage / 10) + 1;
+			}
+			throwable_index.HotPaginationValue.minClicks = 0;
+			throwable_index.HotPaginationValue.maxClicks = throwable_index.HotPaginationValue.oneClicks;
+			throwable_index.HotPaginationValue.nowClicks = throwable_index.HotPaginationValue.minClicks;
+		},
+		initMostFocusValue : function(totalNum, count) {
+			throwable_index.MostFocusPaginationValue.totalNum = totalNum;
+			if(totalNum % count == 0) {
+				throwable_index.MostFocusPaginationValue.totalPage = parseInt(totalNum / count);
+			} else {
+				throwable_index.MostFocusPaginationValue.totalPage = parseInt(totalNum / count) + 1;
+			}
+			throwable_index.MostFocusPaginationValue.oneClicks = throwable_index.MostFocusPaginationValue.totalPage >= 10 ? 10 : throwable_index.MostFocusPaginationValue.totalPage;
+			if(throwable_index.MostFocusPaginationValue.totalPage % 10 == 0) {
+				throwable_index.MostFocusPaginationValue.tenClicks = parseInt(throwable_index.MostFocusPaginationValue.totalPage / 10);
+			} else {
+				throwable_index.MostFocusPaginationValue.tenClicks = parseInt(throwable_index.MostFocusPaginationValue.totalPage / 10) + 1;
+			}
+			throwable_index.MostFocusPaginationValue.minClicks = 0;
+			throwable_index.MostFocusPaginationValue.maxClicks = throwable_index.MostFocusPaginationValue.oneClicks;
+			throwable_index.MostFocusPaginationValue.nowClicks = throwable_index.MostFocusPaginationValue.minClicks;
 		},
 		//初始化所有的分页插件
 		initAllValue : function(totalNum, count) {
@@ -230,13 +292,13 @@ var throwable_index = {
 			}
 		},
 		change10Pag : function(type, min, max) {
-			var temp = throwable_index.totalNum - (throwable_index.count * (min - 1));
-			if(temp % throwable_index.count == 0) {
-				temp = parseInt(temp / throwable_index.count);
-			} else {
-				temp = parseInt(temp / throwable_index.count) + 1;
-			}
 			if(type == 1) {
+				var temp = throwable_index.NewPaginationValue.totalNum - (throwable_index.count * (min - 1));
+				if(temp % throwable_index.count == 0) {
+					temp = parseInt(temp / throwable_index.count);
+				} else {
+					temp = parseInt(temp / throwable_index.count) + 1;
+				}
 				throwable_index.NewPaginationValue.oneClicks = temp >= 10 ? 10 : temp;
 				throwable_index.NewPaginationValue.minClicks = min - 1;
 				throwable_index.NewPaginationValue.maxClicks = min - 1 + throwable_index.NewPaginationValue.oneClicks;
@@ -246,6 +308,12 @@ var throwable_index = {
 				return;
 			}
 			if(type == 2) {
+				var temp = throwable_index.HotPaginationValue.totalNum - (throwable_index.count * (min - 1));
+				if(temp % throwable_index.count == 0) {
+					temp = parseInt(temp / throwable_index.count);
+				} else {
+					temp = parseInt(temp / throwable_index.count) + 1;
+				}
 				throwable_index.HotPaginationValue.oneClicks = temp >= 10 ? 10 : temp;
 				throwable_index.HotPaginationValue.minClicks = min - 1;
 				throwable_index.HotPaginationValue.maxClicks = min - 1 + throwable_index.HotPaginationValue.oneClicks;
@@ -254,6 +322,12 @@ var throwable_index = {
 				return;
 			}
 			if(type == 3){
+				var temp = throwable_index.MostFocusPaginationValue.totalNum - (throwable_index.count * (min - 1));
+				if(temp % throwable_index.count == 0) {
+					temp = parseInt(temp / throwable_index.count);
+				} else {
+					temp = parseInt(temp / throwable_index.count) + 1;
+				}
 				throwable_index.MostFocusPaginationValue.oneClicks = temp >= 10 ? 10 : temp;
 				throwable_index.MostFocusPaginationValue.minClicks = min - 1;
 				throwable_index.MostFocusPaginationValue.maxClicks = min - 1 + throwable_index.MostFocusPaginationValue.oneClicks;
@@ -272,6 +346,9 @@ var throwable_index = {
 		maxClicks:10,   //分页中最大的那个按钮序号
 		nowClicks:1,     //分页按钮当前位置
 		NewPaginationValue : {
+			totalNum:0,    //新问题的总记录
+			totalPage:0,    //总页数
+			count:15,       //每页显示的记录
 			page : 1,     //当前第几页
 			oneClicks:10,  //分页中单个按钮个数
 			tenClicks:1,   //分页中最后一个选择1-10 11-20的个数
@@ -280,6 +357,9 @@ var throwable_index = {
 			nowClicks:1,     //分页按钮当前位置
 		},
 		HotPaginationValue : {
+			totalNum:0,    //新问题的总记录
+			totalPage:0,    //总页数
+			count:15,       //每页显示的记录
 			page : 1,     //当前第几页
 			oneClicks:10,  //分页中单个按钮个数
 			tenClicks:1,   //分页中最后一个选择1-10 11-20的个数
@@ -288,6 +368,9 @@ var throwable_index = {
 			nowClicks:1,     //分页按钮当前位置
 		},
 		MostFocusPaginationValue : {
+			totalNum:0,    //新问题的总记录
+			totalPage:0,    //总页数
+			count:15,       //每页显示的记录
 			page : 1,     //当前第几页
 			oneClicks:10,  //分页中单个按钮个数
 			tenClicks:1,   //分页中最后一个选择1-10 11-20的个数
@@ -327,8 +410,7 @@ $(document).ready(function(){
 			}, "json");
 	throwable_base.login.isLogin("", function(isLogin){
 		if(1 == isLogin) {
-			login_area.href = "memberinfo.html?id=" + throwable_base.getIdFromCookie("throwable");
-			login_area.text = throwable_base.getUserNameFromCookie("throwable");
+			login_area.newText = throwable_base.initUserArea(throwable_base.getIdFromCookie("throwable"), throwable_base.getUserNameFromCookie("throwable"));
 		}
 	});
 });

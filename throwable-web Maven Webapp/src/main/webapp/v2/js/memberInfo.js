@@ -16,7 +16,8 @@ var member_model = avalon.define({
 var login_area = avalon.define({
 	$id: "login_area",
 	href: "register.html",
-	text: "登陆"
+	text: "登陆",
+	newText : '<a href="register.html">登陆</a>'
 });
 
 var user_question_model =  avalon.define("userQuestion", function(vm){
@@ -135,6 +136,9 @@ $(document).ready(function(){
 			member_info.publish("login", username);
 			member_info.getBaseUserInfo(userId);
 			member_info.getUserQuestion(userId);
+			login_area.newText = throwable_base.initUserArea(userId, username);
+		} else {
+			throwable_util.url.location("register.html");
 		}
 	});
 });
