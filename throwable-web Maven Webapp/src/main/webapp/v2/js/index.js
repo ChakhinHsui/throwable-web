@@ -410,7 +410,9 @@ $(document).ready(function(){
 			}, "json");
 	throwable_base.login.isLogin("", function(isLogin){
 		if(1 == isLogin) {
-			login_area.newText = throwable_base.initUserArea(throwable_base.getIdFromCookie("throwable"), throwable_base.getUserNameFromCookie("throwable"));
+			login_area.newText = throwable_base.initUserArea(throwable_base.getIdFromCookie("throwable"), throwable_base.getUserNameFromCookie("throwable"), "");
+			notice.subscribe();
+			notice.connect(notice.url, throwable_base.getIdFromCookie("throwable"), 100, 1);
 		}
 	});
 });
