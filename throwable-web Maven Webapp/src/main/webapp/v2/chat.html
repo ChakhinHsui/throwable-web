@@ -8,32 +8,89 @@
     <meta name="content-type" content="text/html; charset=UTF-8">
     
     <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	
+	<link rel="stylesheet" href="chat/message.css">
+	<link rel="stylesheet" href="chat/bootstrap/css/bootstrap.min.css">
+    <script src="chat/jquery.min.js"></script>
 
   </head>
   
   <body>
-    	<div style="width:100%; height:750px; margin:0 auto;">
-    		<div style="width: 78%; height:100%; background:#eefefe; float: left;">
-    			<div style="width:100%; height:600px;" id="showArea">
-    				
-    			</div>
-    			<hr>
-    			<div style="width:100%; height:150px;">
-    				<form id="speakForm">
-    					<input style="width:100%;height:70%" id="speakArea" /><br><br>
-    					<input type="button" value="发送" onclick="send();" />
-    				</form>
-    			</div>
-    		</div>
-    		
-    		<div style="width: 20%; height:100%; background:#eefefe; float: right;">
-    		
-    		</div>
-    	</div>
-    	
-    	<script src="js/socket.io.js"></script>
-	<script src="js/jquery-1.7.2.min.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/chat.js"></script>
-  </body>
+
+	<div class="container" style="">
+		<div>
+			<h2>Java在线聊天室</h2>
+			<h3>在这里你可以在线解惑</h3>
+		</div>
+		<div class="col-sm-9">
+			<div class="message-history" id="main_win">
+				<div class="message-reply">
+					<div class="message-time">2014-2-21 9:32:57</div>
+					<div class="message-info">
+						<div class="user-info">
+							<img class="user-avatar" src="chat/images/user_a.jpg">
+						</div>
+						<div class="message-content-box">
+							<div class="arrow"></div>
+							<div class="item-pics-box">
+								<a class="ui-link" href="#"> <img class="item-pic"
+									src="chat/images/item_1.jpg">
+								</a>
+							</div>
+							<div class="message-content">这个东西不错呀！</div>
+						</div>
+					</div>
+				</div>
+				<div class="message-receive">
+					<div class="message-time">2014-2-21 9:32:57</div>
+					<div class="message-info">
+						<div class="user-info">
+							<img class="user-avatar" src="chat/images/user_b.gif">
+						</div>
+						<div class="message-content-box">
+							<div class="arrow"></div>
+							<div class="item-pics-box">
+								<a class="ui-link" href="#"> <img class="item-pic"
+									src="chat/images/item_1.jpg">
+								</a>
+							</div>
+							<div class="message-content">Good football</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="send-message">
+				<span class="send-msg-btn">发送</span>
+				<div class="message-input-box">
+					<input name="content" type="text" class="message-input"
+						placeholder="输入私信内容">
+				</div>
+			</div>
+		</div>
+		<h3>在线用户</h3>
+		<div class="col-sm-3"
+			style="border-radius: 5px; border: 2px solid #EEE;">
+			<div class="col-md-1 item-pics-box">
+				<a class="ui-link" href="#"> <img class="item-pic"
+					src="chat/images/item_1.jpg">
+				</a>
+			</div>
+			<div class="col-md-1 item-pics-box">
+				<a class="ui-link" href="#"> <img class="item-pic"
+					src="chat/images/item_1.jpg">
+				</a>
+			</div>
+		</div>
+
+	</div>
+	<br>
+	<hr>
+	<footer class="blog-footer">
+		<p>版权所有 ? Seava工作室</p>
+	</footer>
+	<script src="chat/message.js" charset="utf-8"></script>
+	<script src="chat/socket.io.js"></script>
+	<script src="js/utils.js"></script>
+
+</body>
 </html>

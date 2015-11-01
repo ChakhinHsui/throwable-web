@@ -59,32 +59,28 @@
   <div class="pt-40"></div>
   
   <!--以下为问题的标题--start-->
-  <h6>Throwable在线交流</h6>
+  <h6>Throwable在线交流房间</h6>
   <!--以下为问题的标题--end-->
   <div class="line"></div>
   <div class="clearfix"></div>
   
   <!--头像和个人简介--开始-->
   <div class="row">
-    <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12"> 
-     <ul class="contribution clearfix border-all">
-     	<li class="roomcard" title="JAVA">
-        	<div class=" f-16 c-orange">JAVA</div>
-            <div class=" f-12 c-999">主要的上課內容將以哲學中之各學門為介的對依照的對依照紹的對依照...</div>
+    <div class="col-xm-12 col-sm-12 col-md-12 col-lg-12" ms-controller="rooms"> 
+     <ul class="contribution clearfix border-all" >
+     	<li class="roomcard" ms-repeat="room_list" ms-title={{el.roomName}} >
+        	<div class=" f-16 c-orange">{{el.roomName}}</div>
+            <div class=" f-12 c-999">{{el.description}}...</div>
             <div class="line"></div>
-            <div class=" f-14" >人数：<font color="green">12</font>人</div>
-            <div class=" f-14" >消息：<font color="green">1322</font>条</div>
-            <div class=" f-14" >活动时间：<font color="green">22</font>秒前</div>
+            <div class=" f-14" >人数：<font color="green">{{el.factCount}}</font>人</div>
+            <div class=" f-14" >消息：<font color="green">{{el.speakCount}}</font>条</div>
+            <div class=" f-14" >活动时间：<font color="green">{{el.activeTime}}</font></div>
             <div >
-            	 <button type="button" class="btn btn-info  btn-xs l" style="width:100%">加入讨论</button> 
-                  <button type="button" class="btn btn-primary  btn-xs l" style="width:100%">查看信息</button> 
+            <br>
+            	 <a class="btn btn-info  btn-xs l" style="width:100%" ms-href = "chatinside.html?roomId={{el.roomId}}">加入讨论</a> 
+                <!--  <a class="btn btn-primary  btn-xs l" style="width:100%">查看信息</a>  -->
             </div>
         </li>
-        <li class="roomcard" title="Android"></li>
-        <li class="roomcard" title="Hadoop"></li>
-        <li class="roomcard" title="JAVA"></li>
-        <li class="roomcard" title="Android"></li>
-        <li class="roomcard" title="Hadoop"></li>
       </ul>
     
     </div>
@@ -117,8 +113,11 @@
 </div>
 <script src="assets/js/vendor/jquery.min.js"></script> 
 <script src="assets/js/vendor/bootstrap.min.js"></script> 
+<script src="js/avalon.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/throwable-base.js"></script>
+<script src="js/room.js"></script> 
 <script type="text/javascript">
-    var ue = UE.getEditor('myEditor');
 
 function show_textarea(id){
 $("#"+id).toggle();

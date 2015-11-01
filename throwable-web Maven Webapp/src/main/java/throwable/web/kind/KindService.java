@@ -52,6 +52,7 @@ public class KindService {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<Map> list = serverCall.call2ListObj(apiDirUtil.getValue(ThirftCommon.KIND_QUERYALL), params, Map.class);
 		Map map = new HashMap();
+		map.put("msgCode", 1);
 		map.put("kinds", list);
 		return map;
 	}
